@@ -1,0 +1,6 @@
+{
+  "name": "Misty Indumentaria Femenina",
+  "description": "Landing institucional de indumentaria femenina contemporánea. Venta minorista y despachos mayoristas directos a todo el país.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
