@@ -211,7 +211,7 @@ export const brandConfig: BrandConfig = {
     tagline: "Moda versátil que acompaña tu ritmo de vida",
     niche: "Venta Mayorista y Minorista",
     statusBadgeText: "Nueva Temporada · Mayorista & Minorista",
-    logoUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCN1XO2Jt5YL5BDQ7QGU4aR--atiN2bkUg9rSLoy4FioWfVkfp0u9AB3TepeYuim1QHvf_UUHDEITb3KAq3LgdDDsyLddSmttIihKnwzEDZC08Ab1xS8eAvua3B_oCJk1MJ7TZeSgKnTBN5Xr0wmBgdpDZ9lHmSALTqpyxt3MntRF4uaXY_4WILNzmIk-a_7W1tQiEcNGfXcc-cKO7x1cz2p3KZyzsUBxU3YJbZkoFK3rIRHK85YTu1UmJ8rSg8pnDPMQ",
+    logoUrl: "/assets/logo/logo.png",
   },
   typography: {
     headings: "Playfair Display, serif",
@@ -263,7 +263,7 @@ export const brandConfig: BrandConfig = {
       hoursSaturdays: "Sábados: 08:30 a 13:30 hs",
       transitInfo: "Fácil acceso en colectivos y subte Línea A. Estacionamiento comercial disponible en la zona.",
       googleMapsUrl: "https://maps.google.com/?q=Av.+Avellaneda+2840+Flores+Buenos+Aires",
-      mapImageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuBL9v1TMwPlIBqxvJ_eZWA1maXkQDzim2nraOZuhOdSwRdZdy8RACB2iJaqQ9J9-TJ5f1e5NHTBefxVzTlng1kaRbjolZHR5C0Y24p6WdFqJIFLydJWZxwxwrTMHo0MDfYH8K6WRiTrboEerIawawMvf0nIo_II-M3KysA9KTmhB343eRYUTcSPlyXBgikIShhVw3uLM2ae8I0rNVDun0238mZRJnciB-RARsuVHVZZ9eXMhp_Skra_",
+      mapImageSrc: "/assets/misc/showroom-map.png",
       mapImageFallback: showroomMapPreview,
       buttonText: "Cómo llegar",
     },
@@ -289,7 +289,7 @@ export const brandConfig: BrandConfig = {
     headline: "Moda versátil que acompaña tu ritmo de vida",
     subheadline: "Prendas contemporáneas con excelente relación precio–calidad. Diseñadas para renovar tu guardarropa y potenciar tu negocio o estilo diario.",
     backgroundImage: {
-      src: "https://lh3.googleusercontent.com/aida-public/AB6AXuCm76E96_6zmoqIPwFNLHVroBvtU2VgRgq9nsSD0akgHWx22oZtc_NJGkBL-MQTvCmU8RQxeRIgz3RP3q0FrvD9RMUAwdMLMWDkpYGZu4aFVDuc60jyLzGdh6IZ8aF97_6-r2QaqKAZW9m5c7HKuP_OVN2GHYBwMn-wsjSbty1yyfB-fS4JFcLGuouzeP2AptvPxHPmue72EuVfVNFuyaSxm3CVEUAnghJ4WvA3Fx57IXTOkWn4MLVA",
+      src: "/assets/hero/hero-1.jpg",
       fallback: manifestoShowroom,
       alt: "Editorial lookbook de campaña Misty con modelos en showroom contemporáneo",
     },
@@ -328,14 +328,14 @@ export const brandConfig: BrandConfig = {
     title: "Diseño actual para todos los días",
     description: "En Misty creemos en una moda simple, auténtica y pensada para acompañar tu día a día. Creamos prendas actuales, cómodas y bien confeccionadas, con una buena relación entre calidad y precio, para que renovar tu guardarropa sea fácil y accesible.",
     look1: {
-      src: "https://lh3.googleusercontent.com/aida-public/AB6AXuCcg6bgTSwmwbhp0fTfQBKTsQuaeNnpIKicIBZocS1Z-EESa7JAVFlyB1iVUqKS1ZN6YxnOs7_ou73R61Inl4DatCIt_QjzmrOJNFYOMF1XAfyQHJdZs7sigwIRFjyMvDaXrQVt0lVb40v-cEHtCKj_laYCQvRTaEG7flYi1IEE097aBSSwJvmZE3wYop-4bnCrmjIvcvpFHzEXe6Cg79w7dOvKTzcOUmMVj8YMSnYyzdzZTYETFX7y",
+      src: "/assets/misc/sobre-marca-1.jpg",
       fallback: heroWomanBlazer,
       alt: "Modelo Misty luciendo blazer terracota elegante y top neutro",
       badgeCategory: "Look 01 · Sastrería Relajada",
       badgeTitle: "Lino & Gabardina Premium",
     },
     look2: {
-      src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDj1s7nvBZ761kLAOJK1AHRRrjrcLpoj2fu8DjpZv1pVvbfyVpIaJYox57H9QHvKwTxrPlcD-lRqZa17WyA9FecD7mbISAlvtCGQ8EKNH5Fso_69Qi-tBSM3VZZX3Ci9r_gVLKtB3WJlMyJ5KHKO-JlGwV_IMF65gGxsc3mBX0JPcV7akCU4i3K6tv1Jfg3eYHE0jBjrulTKfn05zay41VuvPAA5cXc2Pd-DCer_umlB2j3s3kKEsfp",
+      src: "/assets/misc/sobre-marca-2.jpg",
       fallback: heroWomanKnitwear,
       alt: "Detalle de tejido artesanal suave y pantalones contemporáneos",
       badgeCategory: "Detalles Nobles",
