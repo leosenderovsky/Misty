@@ -238,15 +238,15 @@ export const brandConfig: BrandConfig = {
   },
   contact: {
     whatsapp: {
-      number: "5491158249102",
-      display: "+54 9 11 5824-9102",
+      number: "5491140008800",
+      display: "+54 9 11 4000-8800",
       defaultMessage: "¡Hola Misty! Quisiera consultar por sus prendas y conocer el catálogo.",
       wholesaleMessage: "¡Hola Misty! Me interesa solicitar la lista de precios mayorista y el catálogo en PDF.",
       retailMessage: "¡Hola Misty! Me gustaría consultar por prendas minoristas y asesoramiento de talles.",
     },
     instagram: {
       handle: "@misty.indumentaria",
-      url: "https://instagram.com/misty.indumentaria",
+      url: "https://instagram.com/misty-indumentaria",
       badge: "Comunidad Activa",
       description: "Mirá las prendas en movimiento, looks cotidianos, reviews de clientas y novedades semanales.",
       buttonText: "Ver comunidad & novedades",
@@ -325,8 +325,8 @@ export const brandConfig: BrandConfig = {
   },
   essenceSection: {
     eyebrow: "Nuestra Esencia",
-    title: "Diseño contemporáneo que democratiza las tendencias reales",
-    description: "Misty nació para ofrecer moda genuina, actual y sin artificios. Creemos en prendas que no solo lucen extraordinarias en un catálogo, sino que abrazan tu cotidianeidad con telas confortables, confección rigurosa y valores justos para que renovarte sea un placer accesible.",
+    title: "Diseño actual para todos los días",
+    description: "En Misty creemos en una moda simple, auténtica y pensada para acompañar tu día a día. Creamos prendas actuales, cómodas y bien confeccionadas, con una buena relación entre calidad y precio, para que renovar tu guardarropa sea fácil y accesible.",
     look1: {
       src: "https://lh3.googleusercontent.com/aida-public/AB6AXuCcg6bgTSwmwbhp0fTfQBKTsQuaeNnpIKicIBZocS1Z-EESa7JAVFlyB1iVUqKS1ZN6YxnOs7_ou73R61Inl4DatCIt_QjzmrOJNFYOMF1XAfyQHJdZs7sigwIRFjyMvDaXrQVt0lVb40v-cEHtCKj_laYCQvRTaEG7flYi1IEE097aBSSwJvmZE3wYop-4bnCrmjIvcvpFHzEXe6Cg79w7dOvKTzcOUmMVj8YMSnYyzdzZTYETFX7y",
       fallback: heroWomanBlazer,
