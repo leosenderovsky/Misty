@@ -4,6 +4,8 @@
  */
 
 import React from 'react';
+// DEMO ONLY — borrar este import y esta línea, más PrototypeBanner.tsx
+// y demoBanner.config.ts, para pasar este proyecto a un cliente real
 import { PrototypeBanner } from './components/PrototypeBanner';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';

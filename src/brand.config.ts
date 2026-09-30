@@ -24,10 +24,6 @@ export interface ImageAsset {
 }
 
 export interface BrandConfig {
-  demoDisclaimer: {
-    companyName: string;
-    link: string;
-  };
   identity: {
     name: string;
     legalName: string;
@@ -209,10 +205,6 @@ export interface BrandConfig {
 }
 
 export const brandConfig: BrandConfig = {
-  demoDisclaimer: {
-    companyName: "[EMPRESA]",
-    link: "#",
-  },
   identity: {
     name: "Misty",
     legalName: "Misty Indumentaria",
