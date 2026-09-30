@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
   const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.defaultMessage);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-[#f4f8fa]/90 backdrop-blur-md shadow-[0_4px_20px_-2px_rgba(22,39,46,0.06)] border-b border-[#d5e3e8]/60 transition-all">
+    <header className="fixed top-[var(--prototype-banner-height,2rem)] left-0 w-full z-50 bg-[#f4f8fa]/90 backdrop-blur-md shadow-[0_4px_20px_-2px_rgba(22,39,46,0.06)] border-b border-[#d5e3e8]/60 transition-all">
       <div className="h-20 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-6">
         
         {/* Brand with vertical divider and tagline */}

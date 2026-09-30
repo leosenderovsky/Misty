@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { PrototypeBanner } from './components/PrototypeBanner';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { QuickWholesaleStrip } from './components/QuickWholesaleStrip';
@@ -16,6 +17,7 @@ import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
 export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-[#f4f8fa] text-[#16272e] selection:bg-[#acedff] selection:text-[#16272e]">
+      <PrototypeBanner />
       {/* 1. Header Minimalista & Chic con Marca y CTA */}
       <Header />
 
