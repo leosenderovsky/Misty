@@ -21,13 +21,19 @@ export interface ImageAsset {
 export interface BrandConfig {
   identity: {
     name: string;
-    tagline: string;
     niche: string;
     logoUrl: string;
+    faviconUrl: string;
+    appleTouchIconUrl: string;
+  };
+  seo: {
+    titleSuffix: string;
+    description: string;
   };
   typography: {
     headings: string;
     body: string;
+    stylesheetUrl: string;
   };
   theme: {
     primary: string;              // #2b6473 - Deep oceanic petrol teal
@@ -62,7 +68,6 @@ export interface BrandConfig {
       buttonText: string;
     };
     email: {
-      address: string;
       display: string;
     };
     showroom: {
@@ -72,7 +77,6 @@ export interface BrandConfig {
       hoursWeekdays: string;
       hoursSaturdays: string;
       mapImageSrc: string;
-      mapImageFallback?: string;
       buttonText: string;
     };
   };
@@ -183,13 +187,19 @@ export interface BrandConfig {
 export const brandConfig: BrandConfig = {
   identity: {
     name: "Misty",
-    tagline: "Moda versátil que acompaña tu ritmo de vida",
     niche: "Venta Mayorista y Minorista",
     logoUrl: "/assets/logo/logo.png",
+    faviconUrl: "/assets/logo/favicon-32.png",
+    appleTouchIconUrl: "/assets/logo/apple-touch-icon.png",
+  },
+  seo: {
+    titleSuffix: "Indumentaria Femenina & Showroom",
+    description: "Prendas modernas diseñadas para acompañar tu rutina con telas de excelente textura, confección minuciosa y la calidez de un trato persona a persona. Showroom Flores y envíos a todo el país.",
   },
   typography: {
     headings: "Playfair Display, serif",
     body: "DM Sans, sans-serif",
+    stylesheetUrl: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap",
   },
   theme: {
     primary: "#2b6473",
@@ -224,7 +234,6 @@ export const brandConfig: BrandConfig = {
       buttonText: "Ver comunidad & novedades",
     },
     email: {
-      address: "ventas@misty.com.ar",
       display: "ventas@misty.com.ar",
     },
     showroom: {
@@ -259,7 +268,7 @@ export const brandConfig: BrandConfig = {
     backgroundImage: {
       src: "/assets/hero/hero-1.jpg",
       fallback: "/assets/misc/sobre-marca-1.jpg",
-      alt: "Editorial lookbook de campaña Misty con modelos en showroom contemporáneo",
+      alt: "Editorial lookbook de campaña con modelos en showroom contemporáneo",
     },
     primaryCta: {
       label: "Escribinos por WhatsApp",
@@ -294,11 +303,11 @@ export const brandConfig: BrandConfig = {
   essenceSection: {
     eyebrow: "Nuestra Esencia",
     title: "Diseño actual para todos los días",
-    description: "En Misty creemos en una moda simple, auténtica y pensada para acompañar tu día a día. Creamos prendas actuales, cómodas y bien confeccionadas, con una buena relación entre calidad y precio, para que renovar tu guardarropa sea fácil y accesible.",
+    description: "Creemos en una moda simple, auténtica y pensada para acompañar tu día a día. Creamos prendas actuales, cómodas y bien confeccionadas, con una buena relación entre calidad y precio, para que renovar tu guardarropa sea fácil y accesible.",
     look1: {
       src: "/assets/misc/sobre-marca-1.jpg",
       fallback: "/assets/hero/hero-1.jpg",
-      alt: "Modelo Misty luciendo blazer terracota elegante y top neutro",
+      alt: "Modelo luciendo blazer terracota elegante y top neutro",
       badgeCategory: "Look 01 · Sastrería Relajada",
       badgeTitle: "Lino & Gabardina Premium",
     },

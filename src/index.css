@@ -3,23 +3,23 @@
 @theme inline {
   --font-serif: var(--brand-font-headings);
   --font-sans: var(--brand-font-body);
-  --color-primary: var(--brand-primary);
-  --color-primary-hover: var(--brand-primary-hover);
-  --color-secondary: var(--brand-secondary);
-  --color-secondary-dark: var(--brand-secondary-dark);
-  --color-secondary-container: var(--brand-secondary-container);
-  --color-secondary-fixed: var(--brand-secondary-fixed);
-  --color-surface: var(--brand-surface);
-  --color-surface-dim: var(--brand-surface-dim);
-  --color-surface-container-low: var(--brand-surface-container-low);
-  --color-surface-container: var(--brand-surface-container);
-  --color-surface-container-high: var(--brand-surface-container-high);
-  --color-surface-container-highest: var(--brand-surface-container-highest);
-  --color-surface-bright: var(--brand-surface-bright);
-  --color-on-surface: var(--brand-on-surface);
-  --color-on-surface-variant: var(--brand-on-surface-variant);
-  --color-outline: var(--brand-outline);
-  --color-outline-variant: var(--brand-outline-variant);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-hover: var(--brand-primary-hover);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-secondary-dark: var(--brand-secondary-dark);
+  --color-brand-secondary-container: var(--brand-secondary-container);
+  --color-brand-secondary-fixed: var(--brand-secondary-fixed);
+  --color-brand-surface: var(--brand-surface);
+  --color-brand-surface-dim: var(--brand-surface-dim);
+  --color-brand-surface-container-low: var(--brand-surface-container-low);
+  --color-brand-surface-container: var(--brand-surface-container);
+  --color-brand-surface-container-high: var(--brand-surface-container-high);
+  --color-brand-surface-container-highest: var(--brand-surface-container-highest);
+  --color-brand-surface-bright: var(--brand-surface-bright);
+  --color-brand-on-surface: var(--brand-on-surface);
+  --color-brand-on-surface-variant: var(--brand-on-surface-variant);
+  --color-brand-outline: var(--brand-outline);
+  --color-brand-outline-variant: var(--brand-outline-variant);
 }
 
 @layer base {

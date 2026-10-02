@@ -14,6 +14,45 @@ for (const [name, value] of Object.entries(brandConfig.theme)) {
 root.style.setProperty('--brand-font-headings', brandConfig.typography.headings);
 root.style.setProperty('--brand-font-body', brandConfig.typography.body);
 
+const fontStylesheet = document.head.querySelector<HTMLLinkElement>('link[data-brand-fonts]');
+if (!fontStylesheet) {
+  throw new Error('Missing brand font stylesheet link');
+}
+fontStylesheet.href = brandConfig.typography.stylesheetUrl;
+
+const siteUrl = import.meta.env.VITE_SITE_URL?.trim() || window.location.origin;
+const canonicalUrl = new URL(window.location.pathname, siteUrl).href;
+const socialImageUrl = new URL(brandConfig.hero.backgroundImage.src, siteUrl).href;
+const pageTitle = `${brandConfig.identity.name} — ${brandConfig.seo.titleSuffix}`;
+
+document.title = pageTitle;
+
+function setMetaContent(selector: string, content: string): void {
+  const meta = document.head.querySelector<HTMLMetaElement>(selector);
+  if (!meta) {
+    throw new Error(`Missing metadata element: ${selector}`);
+  }
+  meta.content = content;
+}
+
+setMetaContent('meta[name="description"]', brandConfig.seo.description);
+setMetaContent('meta[property="og:title"]', pageTitle);
+setMetaContent('meta[property="og:description"]', brandConfig.seo.description);
+setMetaContent('meta[property="og:image"]', socialImageUrl);
+setMetaContent('meta[property="og:url"]', canonicalUrl);
+
+const favicon = document.head.querySelector<HTMLLinkElement>('link[rel="icon"]');
+const appleTouchIcon = document.head.querySelector<HTMLLinkElement>('link[rel="apple-touch-icon"]');
+const canonicalLink = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+
+if (!favicon || !appleTouchIcon || !canonicalLink) {
+  throw new Error('Missing favicon or canonical link element');
+}
+
+favicon.href = new URL(brandConfig.identity.faviconUrl, siteUrl).href;
+appleTouchIcon.href = new URL(brandConfig.identity.appleTouchIconUrl, siteUrl).href;
+canonicalLink.href = canonicalUrl;
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

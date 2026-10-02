@@ -40,6 +40,8 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           src={brandConfig.identity.logoUrl}
           alt={brandConfig.identity.name}
           className={`${heights[size]} object-contain shrink-0`}
+          width={512}
+          height={130}
           onError={() => setImgError(true)}
         />
       ) : (
@@ -93,11 +95,11 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       )}
 
       {showTagline && (
-        <div className="hidden sm:flex flex-col border-l border-outline-variant/60 pl-3">
-          <span className="font-serif text-[19px] tracking-tight text-on-surface leading-none">
+        <div className="hidden sm:flex flex-col border-l border-brand-outline-variant/60 pl-3">
+          <span className="font-serif text-[19px] tracking-tight text-brand-on-surface leading-none">
             {brandConfig.identity.name}
           </span>
-          <span className="text-[10.5px] uppercase tracking-wider text-secondary mt-0.5 font-bold">
+          <span className="text-[10.5px] uppercase tracking-wider text-brand-secondary mt-0.5 font-bold">
             {brandConfig.identity.niche}
           </span>
         </div>

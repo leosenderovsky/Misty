@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
   const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.defaultMessage);
 
   return (
-    <header className="sticky top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-md border-b border-surface-container-highest/60 transition-all">
+    <header className="sticky top-0 w-full z-50 bg-brand-surface/90 backdrop-blur-md shadow-md border-b border-brand-surface-container-highest/60 transition-all">
       <div className="h-20 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-6">
         
         {/* Brand with vertical divider and tagline */}
@@ -29,7 +29,7 @@ export const Header: React.FC = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors py-1 px-3 rounded-full hover:bg-surface-container"
+              className="text-sm font-medium text-brand-on-surface-variant hover:text-brand-primary transition-colors py-1 px-3 rounded-full hover:bg-brand-surface-container"
             >
               {link.label}
             </a>
@@ -42,7 +42,7 @@ export const Header: React.FC = () => {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-primary text-white text-xs sm:text-sm font-semibold shadow-md hover:bg-secondary active:scale-95 transition-all"
+            className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-brand-primary text-white text-xs sm:text-sm font-semibold shadow-md hover:bg-brand-secondary active:scale-95 transition-all"
           >
             <MessageCircle className="w-4 h-4 shrink-0" />
             <span className="hidden sm:inline">{brandConfig.navigation.ctaButtonText}</span>
@@ -50,14 +50,14 @@ export const Header: React.FC = () => {
           </a>
 
           {/* User / Profile Icon Badge */}
-          <div className="w-8 h-8 rounded-full bg-secondary-container text-secondary-dark flex items-center justify-center shrink-0 shadow-xs">
+          <div className="w-8 h-8 rounded-full bg-brand-secondary-container text-brand-secondary-dark flex items-center justify-center shrink-0 shadow-xs">
             <User className="w-4 h-4" />
           </div>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl text-on-surface hover:bg-surface-container transition-colors ml-1"
+            className="md:hidden p-2 rounded-xl text-brand-on-surface hover:bg-brand-surface-container transition-colors ml-1"
             aria-expanded={mobileMenuOpen}
             aria-label="Abrir menú"
           >
@@ -69,14 +69,14 @@ export const Header: React.FC = () => {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-surface-container-highest bg-surface-bright px-5 pt-3 pb-6 space-y-4 shadow-lg animate-in slide-in-from-top-2">
+        <div className="md:hidden border-t border-brand-surface-container-highest bg-brand-surface-bright px-5 pt-3 pb-6 space-y-4 shadow-lg animate-in slide-in-from-top-2">
           <nav className="flex flex-col space-y-2">
             {brandConfig.navigation.links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-xl text-base font-medium text-on-surface hover:bg-surface-container hover:text-primary transition-colors"
+                className="px-3 py-2 rounded-xl text-base font-medium text-brand-on-surface hover:bg-brand-surface-container hover:text-brand-primary transition-colors"
               >
                 {link.label}
               </a>
