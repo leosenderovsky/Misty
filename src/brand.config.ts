@@ -10,11 +10,6 @@
  * textos, colores, imágenes, canales y enlaces directamente desde aquí.
  */
 
-import heroWomanBlazer from './assets/images/hero_woman_blazer_1790508633209.jpg';
-import heroWomanKnitwear from './assets/images/hero_woman_knitwear_1790508644652.jpg';
-import manifestoShowroom from './assets/images/manifesto_showroom_1790508658455.jpg';
-import showroomMapPreview from './assets/images/showroom_map_preview_1790508671635.jpg';
-
 export interface ImageAsset {
   src: string;
   alt: string;
@@ -26,10 +21,8 @@ export interface ImageAsset {
 export interface BrandConfig {
   identity: {
     name: string;
-    legalName: string;
     tagline: string;
     niche: string;
-    statusBadgeText: string;
     logoUrl: string;
   };
   typography: {
@@ -61,11 +54,9 @@ export interface BrandConfig {
       display: string;            // "+54 9 11 5824-9102"
       defaultMessage: string;
       wholesaleMessage: string;
-      retailMessage: string;
     };
     instagram: {
       handle: string;             // "@misty.indumentaria"
-      url: string;                // "https://instagram.com/misty.indumentaria"
       badge: string;
       description: string;
       buttonText: string;
@@ -80,8 +71,6 @@ export interface BrandConfig {
       addressDisplay: string;
       hoursWeekdays: string;
       hoursSaturdays: string;
-      transitInfo: string;
-      googleMapsUrl: string;
       mapImageSrc: string;
       mapImageFallback?: string;
       buttonText: string;
@@ -160,27 +149,16 @@ export interface BrandConfig {
       buttonText: string;
     };
     instagramCard: {
-      badge: string;
       title: string;
-      description: string;
-      buttonText: string;
     };
     showroomCard: {
-      badge: string;
       title: string;
-      addressLine1: string;
-      addressLine2: string;
       hoursLabel: string;
-      hoursWeekdays: string;
-      hoursSaturdays: string;
-      buttonText: string;
     };
     mapCallout: {
       eyebrow: string;
-      title: string;
       description: string;
       buttonText: string;
-      pinLabel: string;
     };
   };
   wholesaleCallout: {
@@ -193,8 +171,6 @@ export interface BrandConfig {
     brandDescription: string;
     trustBadge: string;
     showroomTitle: string;
-    showroomAddresses: string[];
-    showroomHours: string[];
     channelsTitle: string;
     legalTitle: string;
     legalNotice: string;
@@ -207,10 +183,8 @@ export interface BrandConfig {
 export const brandConfig: BrandConfig = {
   identity: {
     name: "Misty",
-    legalName: "Misty Indumentaria",
     tagline: "Moda versátil que acompaña tu ritmo de vida",
     niche: "Venta Mayorista y Minorista",
-    statusBadgeText: "Nueva Temporada · Mayorista & Minorista",
     logoUrl: "/assets/logo/logo.png",
   },
   typography: {
@@ -242,11 +216,9 @@ export const brandConfig: BrandConfig = {
       display: "+54 9 11 4000-8800",
       defaultMessage: "¡Hola Misty! Quisiera consultar por sus prendas y conocer el catálogo.",
       wholesaleMessage: "¡Hola Misty! Me interesa solicitar la lista de precios mayorista y el catálogo en PDF.",
-      retailMessage: "¡Hola Misty! Me gustaría consultar por prendas minoristas y asesoramiento de talles.",
     },
     instagram: {
       handle: "@misty.indumentaria",
-      url: "https://instagram.com/misty-indumentaria",
       badge: "Comunidad Activa",
       description: "Mirá las prendas en movimiento, looks cotidianos, reviews de clientas y novedades semanales.",
       buttonText: "Ver comunidad & novedades",
@@ -261,10 +233,7 @@ export const brandConfig: BrandConfig = {
       addressDisplay: "Av. Avellaneda 2840, Local 12",
       hoursWeekdays: "Lun a Vie: 08:00 a 17:00 hs",
       hoursSaturdays: "Sábados: 08:30 a 13:30 hs",
-      transitInfo: "Fácil acceso en colectivos y subte Línea A. Estacionamiento comercial disponible en la zona.",
-      googleMapsUrl: "https://maps.google.com/?q=Av.+Avellaneda+2840+Flores+Buenos+Aires",
       mapImageSrc: "/assets/misc/showroom-map.png",
-      mapImageFallback: showroomMapPreview,
       buttonText: "Cómo llegar",
     },
   },
@@ -281,7 +250,6 @@ export const brandConfig: BrandConfig = {
       "Envíos a todo el país por expreso y correo",
       "Atención directa persona a persona",
       "Precios competitivos sin intermediarios",
-      "Showroom en Av. Avellaneda (Flores)",
     ],
   },
   hero: {
@@ -290,7 +258,7 @@ export const brandConfig: BrandConfig = {
     subheadline: "Prendas contemporáneas con excelente relación precio–calidad. Diseñadas para renovar tu guardarropa y potenciar tu negocio o estilo diario.",
     backgroundImage: {
       src: "/assets/hero/hero-1.jpg",
-      fallback: manifestoShowroom,
+      fallback: "/assets/misc/sobre-marca-1.jpg",
       alt: "Editorial lookbook de campaña Misty con modelos en showroom contemporáneo",
     },
     primaryCta: {
@@ -329,14 +297,14 @@ export const brandConfig: BrandConfig = {
     description: "En Misty creemos en una moda simple, auténtica y pensada para acompañar tu día a día. Creamos prendas actuales, cómodas y bien confeccionadas, con una buena relación entre calidad y precio, para que renovar tu guardarropa sea fácil y accesible.",
     look1: {
       src: "/assets/misc/sobre-marca-1.jpg",
-      fallback: heroWomanBlazer,
+      fallback: "/assets/hero/hero-1.jpg",
       alt: "Modelo Misty luciendo blazer terracota elegante y top neutro",
       badgeCategory: "Look 01 · Sastrería Relajada",
       badgeTitle: "Lino & Gabardina Premium",
     },
     look2: {
       src: "/assets/misc/sobre-marca-2.jpg",
-      fallback: heroWomanKnitwear,
+      fallback: "/assets/misc/sobre-marca-1.jpg",
       alt: "Detalle de tejido artesanal suave y pantalones contemporáneos",
       badgeCategory: "Detalles Nobles",
       badgeTitle: "Tejidos & Texturas",
@@ -398,27 +366,16 @@ export const brandConfig: BrandConfig = {
       buttonText: "Chatear con asesoras",
     },
     instagramCard: {
-      badge: "Comunidad Activa",
       title: "Instagram Oficial",
-      description: "Mirá las prendas en movimiento, looks cotidianos, reviews de clientas y novedades semanales.",
-      buttonText: "Ver comunidad & novedades",
     },
     showroomCard: {
-      badge: "Punto de Venta",
       title: "Showroom Comercial",
-      addressLine1: "Av. Avellaneda 2840, Local 12",
-      addressLine2: "Flores, CABA (Centro Mayorista).",
       hoursLabel: "Horarios de Atención:",
-      hoursWeekdays: "Lun a Vie: 08:00 a 17:00 hs",
-      hoursSaturdays: "Sábados: 08:30 a 13:30 hs",
-      buttonText: "Cómo llegar",
     },
     mapCallout: {
       eyebrow: "Ubicación Estratégica",
-      title: "Showroom en el corazón textil de Flores",
       description: "Fácil acceso en colectivos y subte Línea A. Estacionamiento comercial disponible en la zona.",
       buttonText: "Abrir en Google Maps",
-      pinLabel: "Av. Avellaneda 2840, Local 12",
     },
   },
   wholesaleCallout: {
@@ -431,13 +388,6 @@ export const brandConfig: BrandConfig = {
     brandDescription: "Indumentaria femenina con identidad contemporánea, disponible para pedidos por menor y curvas mayoristas.",
     trustBadge: "Canal Mayorista & Minorista",
     showroomTitle: "Atención & Showroom",
-    showroomAddresses: [
-      "Av. Avellaneda y Nazca (Flores) / Showroom Palermo Soho, CABA",
-    ],
-    showroomHours: [
-      "Lunes a Viernes: 8:00 a 17:00 hs",
-      "Sábados: 9:00 a 14:00 hs",
-    ],
     channelsTitle: "Contacto Directo",
     legalTitle: "Información Legal",
     legalNotice: "Este sitio web corresponde a una demostración institucional con fines conceptuales y de portfolio. Toda marca y productos referenciados forman parte de un prototipo de diseño.",
@@ -446,6 +396,24 @@ export const brandConfig: BrandConfig = {
     variantTag: "Variante A · Editorial Lookbook · Diseño y Desarrollo de Arquitectura Web Frontend",
   },
 };
+
+export function getInstagramUrl(): string {
+  return `https://instagram.com/${brandConfig.contact.instagram.handle.replace(/^@/, "")}`;
+}
+
+export function getShowroomAddressText(): string {
+  return brandConfig.contact.showroom.addressDisplay;
+}
+
+export function getShowroomMapsUrl(): string {
+  const address = `${getShowroomAddressText()}, Flores, Buenos Aires`;
+  return `https://maps.google.com/?q=${encodeURIComponent(address)}`;
+}
+
+export function getShowroomHoursText(): string[] {
+  const { hoursWeekdays, hoursSaturdays } = brandConfig.contact.showroom;
+  return [hoursWeekdays, hoursSaturdays];
+}
 
 /**
  * Función auxiliar para generar el enlace dinámico a WhatsApp

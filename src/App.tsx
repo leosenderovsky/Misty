@@ -18,7 +18,7 @@ import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
 
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#f4f8fa] text-[#16272e] selection:bg-[#acedff] selection:text-[#16272e]">
+    <div className="min-h-screen flex flex-col bg-surface text-on-surface selection:bg-secondary-fixed selection:text-on-surface">
       <PrototypeBanner />
       {/* 1. Header Minimalista & Chic con Marca y CTA */}
       <Header />

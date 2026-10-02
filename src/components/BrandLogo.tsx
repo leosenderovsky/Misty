@@ -28,10 +28,10 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     lg: 'h-12 w-auto max-w-[220px]',
   };
 
-  const ribbonDark = isLight ? '#acedff' : brandConfig.theme.primary;
-  const ribbonMid = isLight ? '#ffffff' : '#3d7887';
-  const ribbonLight = isLight ? '#d2ecf4' : '#a3cfdb';
-  const textColor = isLight ? '#ffffff' : brandConfig.theme.primary;
+  const ribbonDark = isLight ? 'var(--brand-secondary-fixed)' : brandConfig.theme.primary;
+  const ribbonMid = isLight ? 'var(--brand-surface-bright)' : 'var(--brand-secondary)';
+  const ribbonLight = isLight ? 'var(--brand-secondary-container)' : 'var(--brand-secondary-container)';
+  const textColor = isLight ? 'var(--brand-surface-bright)' : brandConfig.theme.primary;
 
   return (
     <div className={`inline-flex items-center gap-3 select-none ${className}`}>
@@ -68,7 +68,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
             />
             <path
               d="M48 38 C56 22 66 16 73 20 C78 24 75 36 68 47 C60 60 52 68 45 66 C42 65 42 56 48 38 Z"
-              fill="#ffffff"
+              fill="white"
               opacity="0.85"
             />
             <path
@@ -93,11 +93,11 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       )}
 
       {showTagline && (
-        <div className="hidden sm:flex flex-col border-l border-[#c0cdd2]/60 pl-3">
-          <span className="font-serif text-[19px] tracking-tight text-[#16272e] leading-none">
+        <div className="hidden sm:flex flex-col border-l border-outline-variant/60 pl-3">
+          <span className="font-serif text-[19px] tracking-tight text-on-surface leading-none">
             {brandConfig.identity.name}
           </span>
-          <span className="text-[10.5px] uppercase tracking-wider text-[#468a9b] mt-0.5 font-bold">
+          <span className="text-[10.5px] uppercase tracking-wider text-secondary mt-0.5 font-bold">
             {brandConfig.identity.niche}
           </span>
         </div>

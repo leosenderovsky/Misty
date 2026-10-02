@@ -1,30 +1,32 @@
 @import "tailwindcss";
 
-@theme {
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --color-primary: #2b6473;
-  --color-primary-container: #1d4b57;
-  --color-secondary: #1d4b57;
-  --color-secondary-container: #d7eef5;
-  --color-secondary-fixed: #c8ebf5;
-  --color-surface: #f7fafb;
-  --color-surface-container-low: #f1f6f8;
-  --color-surface-container: #ecf3f6;
-  --color-surface-container-high: #e4edf1;
-  --color-surface-container-highest: #dce8ec;
-  --color-surface-container-lowest: #ffffff;
-  --color-on-surface: #16272e;
-  --color-on-surface-variant: #495b62;
-  --color-outline: #788f98;
-  --color-outline-variant: #cfdce0;
+@theme inline {
+  --font-serif: var(--brand-font-headings);
+  --font-sans: var(--brand-font-body);
+  --color-primary: var(--brand-primary);
+  --color-primary-hover: var(--brand-primary-hover);
+  --color-secondary: var(--brand-secondary);
+  --color-secondary-dark: var(--brand-secondary-dark);
+  --color-secondary-container: var(--brand-secondary-container);
+  --color-secondary-fixed: var(--brand-secondary-fixed);
+  --color-surface: var(--brand-surface);
+  --color-surface-dim: var(--brand-surface-dim);
+  --color-surface-container-low: var(--brand-surface-container-low);
+  --color-surface-container: var(--brand-surface-container);
+  --color-surface-container-high: var(--brand-surface-container-high);
+  --color-surface-container-highest: var(--brand-surface-container-highest);
+  --color-surface-bright: var(--brand-surface-bright);
+  --color-on-surface: var(--brand-on-surface);
+  --color-on-surface-variant: var(--brand-on-surface-variant);
+  --color-outline: var(--brand-outline);
+  --color-outline-variant: var(--brand-outline-variant);
 }
 
 @layer base {
   html {
-    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
-    color: #16272e;
-    background-color: #f7fafb;
+    font-family: var(--brand-font-body);
+    color: var(--brand-on-surface);
+    background-color: var(--brand-surface);
     scroll-behavior: smooth;
   }
 }
