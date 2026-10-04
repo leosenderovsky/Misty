@@ -22,7 +22,11 @@ fontStylesheet.href = brandConfig.typography.stylesheetUrl;
 
 const siteUrl = import.meta.env.VITE_SITE_URL?.trim() || window.location.origin;
 const canonicalUrl = new URL(window.location.pathname, siteUrl).href;
-const socialImageUrl = new URL(brandConfig.hero.backgroundImage.src, siteUrl).href;
+const socialImageMeta = document.head.querySelector<HTMLMetaElement>('meta[property="og:image"]');
+if (!socialImageMeta) {
+  throw new Error('Missing metadata element: meta[property="og:image"]');
+}
+const socialImageUrl = new URL(socialImageMeta.content, siteUrl).href;
 const pageTitle = `${brandConfig.identity.name} — ${brandConfig.seo.titleSuffix}`;
 
 document.title = pageTitle;
@@ -40,6 +44,7 @@ setMetaContent('meta[property="og:title"]', pageTitle);
 setMetaContent('meta[property="og:description"]', brandConfig.seo.description);
 setMetaContent('meta[property="og:image"]', socialImageUrl);
 setMetaContent('meta[property="og:url"]', canonicalUrl);
+setMetaContent('meta[name="twitter:image"]', socialImageUrl);
 
 const favicon = document.head.querySelector<HTMLLinkElement>('link[rel="icon"]');
 const appleTouchIcon = document.head.querySelector<HTMLLinkElement>('link[rel="apple-touch-icon"]');

@@ -29,6 +29,7 @@ export interface BrandConfig {
   seo: {
     titleSuffix: string;
     description: string;
+    socialImage: string;
   };
   typography: {
     headings: string;
@@ -76,7 +77,7 @@ export interface BrandConfig {
       addressDisplay: string;
       hoursWeekdays: string;
       hoursSaturdays: string;
-      mapImageSrc: string;
+      googleMapsUrl?: string;
       buttonText: string;
     };
   };
@@ -195,6 +196,7 @@ export const brandConfig: BrandConfig = {
   seo: {
     titleSuffix: "Indumentaria Femenina & Showroom",
     description: "Prendas modernas diseñadas para acompañar tu rutina con telas de excelente textura, confección minuciosa y la calidez de un trato persona a persona. Showroom Flores y envíos a todo el país.",
+    socialImage: "/assets/misc/og-image.jpg",
   },
   typography: {
     headings: "Playfair Display, serif",
@@ -242,7 +244,7 @@ export const brandConfig: BrandConfig = {
       addressDisplay: "Av. Avellaneda 2840, Local 12",
       hoursWeekdays: "Lun a Vie: 08:00 a 17:00 hs",
       hoursSaturdays: "Sábados: 08:30 a 13:30 hs",
-      mapImageSrc: "/assets/misc/showroom-map.png",
+      googleMapsUrl: "https://maps.google.com/?q=Av.%20Avellaneda%202840%2C%20Local%2012%2C%20Flores%2C%20Buenos%20Aires",
       buttonText: "Cómo llegar",
     },
   },
@@ -415,6 +417,10 @@ export function getShowroomAddressText(): string {
 }
 
 export function getShowroomMapsUrl(): string {
+  if (brandConfig.contact.showroom.googleMapsUrl) {
+    return brandConfig.contact.showroom.googleMapsUrl;
+  }
+
   const address = `${getShowroomAddressText()}, Flores, Buenos Aires`;
   return `https://maps.google.com/?q=${encodeURIComponent(address)}`;
 }
