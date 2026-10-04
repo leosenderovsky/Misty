@@ -30,6 +30,9 @@ export const Hero: React.FC = () => {
           className="hidden"
           width={brandConfig.hero.backgroundImage.width}
           height={brandConfig.hero.backgroundImage.height}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
       </div>
 

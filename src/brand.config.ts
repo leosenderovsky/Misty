@@ -10,6 +10,8 @@
  * textos, colores, imágenes, canales y enlaces directamente desde aquí.
  */
 
+import { getDemoLegend } from './demoBanner.config.ts';
+
 export interface ImageAsset {
   src: string;
   alt: string;
@@ -407,7 +409,7 @@ export const brandConfig: BrandConfig = {
     legalTitle: "Información Legal",
     legalNotice: "Este sitio web corresponde a una demostración institucional con fines conceptuales y de portfolio. Toda marca y productos referenciados forman parte de un prototipo de diseño.",
     copyrightText: "© 2026 Misty Indumentaria. Todos los derechos reservados.",
-    demonstrationDisclaimer: "Marca y contenido de ejemplo — prototipo de demostración de sender.ia",
+    demonstrationDisclaimer: getDemoLegend(),
     variantTag: "Variante A · Editorial Lookbook · Diseño y Desarrollo de Arquitectura Web Frontend",
   },
 };

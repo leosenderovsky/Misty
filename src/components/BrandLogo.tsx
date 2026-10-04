@@ -42,6 +42,9 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           className={`${heights[size]} object-contain shrink-0`}
           width={512}
           height={130}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           onError={() => setImgError(true)}
         />
       ) : (
