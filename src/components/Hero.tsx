@@ -28,8 +28,8 @@ export const Hero: React.FC = () => {
           alt={brandConfig.hero.backgroundImage.alt}
           onError={() => setBgError(true)}
           className="hidden"
-          width={512}
-          height={286}
+          width={brandConfig.hero.backgroundImage.width}
+          height={brandConfig.hero.backgroundImage.height}
         />
       </div>
 

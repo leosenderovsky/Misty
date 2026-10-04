@@ -6,6 +6,11 @@ import sharp from 'sharp';
 const assetsDirectory = fileURLToPath(new URL('../public/assets/', import.meta.url));
 const strict = process.argv.includes('--strict');
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif']);
+// The image generator delivers up to ~1376 px; a higher minimum requires upscaling.
+const IMAGE_RULES = {
+  heroMinimumWidth: 1280,
+  portraitMinimumWidth: 800,
+};
 
 async function listImages(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -31,7 +36,7 @@ for (const imageUrl of await listImages(assetsDirectory)) {
   if (!isHero && !isPortrait) continue;
 
   const { width, height } = await sharp(imageUrl).metadata();
-  const minimumWidth = isHero ? 1600 : 800;
+  const minimumWidth = isHero ? IMAGE_RULES.heroMinimumWidth : IMAGE_RULES.portraitMinimumWidth;
   if (width && width < minimumWidth) {
     warnings.push({ relativePath, width, height, minimumWidth });
   }

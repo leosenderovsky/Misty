@@ -10,7 +10,12 @@
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
     "make:icons": "node scripts/make-icons.mjs",
-    "check:images": "node scripts/check-images.mjs"
+    "check:images": "node scripts/check-images.mjs",
+    "check:images:strict": "node scripts/check-images.mjs --strict",
+    "check:logo": "node scripts/check-logo.mjs",
+    "make:logo-png": "node scripts/make-logo-png.mjs",
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "make:og": "node scripts/make-og-image.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
