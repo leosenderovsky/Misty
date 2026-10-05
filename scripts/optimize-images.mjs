@@ -15,11 +15,16 @@ for (const rule of imageRules) {
   const imagePath = path.join(projectRoot, rule.relativePath);
   const relativeAssetPath = path.relative(path.join(projectRoot, 'public/assets'), imagePath);
   const originalPath = path.join(originalsDirectory, relativeAssetPath);
-  await mkdir(path.dirname(originalPath), { recursive: true });
   try {
     await stat(originalPath);
   } catch (error) {
     if (error.code !== 'ENOENT') throw error;
+    const imageInfo = await stat(imagePath);
+    if (imageInfo.size <= rule.maxBytes) {
+      console.log(`${rule.relativePath}: ya optimizada (${(imageInfo.size / 1024).toFixed(1)} KB).`);
+      continue;
+    }
+    await mkdir(path.dirname(originalPath), { recursive: true });
     await copyFile(imagePath, originalPath);
   }
 

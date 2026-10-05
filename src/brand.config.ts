@@ -15,6 +15,8 @@ import { getDemoLegend } from './demoBanner.config.ts';
 export interface ImageAsset {
   src: string;
   alt: string;
+  width: number;
+  height: number;
   fallback?: string;
   badgeCategory?: string;
   badgeTitle?: string;
@@ -316,6 +318,8 @@ export const brandConfig: BrandConfig = {
       src: "/assets/misc/sobre-marca-1.jpg",
       fallback: "/assets/hero/hero-1.jpg",
       alt: "Modelo luciendo blazer terracota elegante y top neutro",
+      width: 896,
+      height: 1200,
       badgeCategory: "Look 01 · Sastrería Relajada",
       badgeTitle: "Lino & Gabardina Premium",
     },
@@ -323,6 +327,8 @@ export const brandConfig: BrandConfig = {
       src: "/assets/misc/sobre-marca-2.jpg",
       fallback: "/assets/misc/sobre-marca-1.jpg",
       alt: "Detalle de tejido artesanal suave y pantalones contemporáneos",
+      width: 896,
+      height: 1200,
       badgeCategory: "Detalles Nobles",
       badgeTitle: "Tejidos & Texturas",
     },

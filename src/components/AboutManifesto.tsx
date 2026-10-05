@@ -54,8 +54,8 @@ export const AboutManifesto: React.FC = () => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="lazy"
                 decoding="async"
-                width={382}
-                height={512}
+                width={brandConfig.essenceSection.look1.width}
+                height={brandConfig.essenceSection.look1.height}
                 referrerPolicy="no-referrer"
               />
               <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-brand-surface-bright/95 backdrop-blur-md shadow-sm border border-brand-surface-container-highest">
@@ -116,8 +116,8 @@ export const AboutManifesto: React.FC = () => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="lazy"
                 decoding="async"
-                width={382}
-                height={512}
+                width={brandConfig.essenceSection.look2.width}
+                height={brandConfig.essenceSection.look2.height}
                 referrerPolicy="no-referrer"
               />
               <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-brand-surface-bright/95 backdrop-blur-md shadow-sm border border-brand-surface-container-highest">

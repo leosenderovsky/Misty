@@ -17,7 +17,18 @@ const report = (name, passed, detail) => {
   console.log(`${passed ? 'PASS' : 'FAIL'}: ${name} — ${detail}`);
 };
 
-const [svg, fileInfo] = await Promise.all([readFile(logoPath, 'utf8'), stat(logoPath)]);
+let svg;
+let fileInfo;
+try {
+  [svg, fileInfo] = await Promise.all([readFile(logoPath, 'utf8'), stat(logoPath)]);
+} catch (error) {
+  if (error.code === 'ENOENT') {
+    console.error('No hay public/assets/logo/logo.svg. Falta vectorizar el logo: ver docs/IMAGENES.md');
+    process.exit(1);
+  }
+  throw error;
+}
+
 const viewBoxMatch = /\bviewBox=["']\s*(-?[\d.]+)[,\s]+(-?[\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)\s*["']/i.exec(svg);
 if (!viewBoxMatch) {
   throw new Error(`No se pudo leer un viewBox válido en ${logoPath}`);

@@ -14,5 +14,5 @@ Después de reemplazarlo, ejecutar `npm run check:logo`. Cuando pase esa validac
 
 ## Optimización y redes sociales
 
-- `npm run images:optimize` conserva los originales en `.image-originals/` (ignorados por Git) y comprime hero y retratos con mozjpeg sin cambiar sus dimensiones. Las siguientes ejecuciones parten de esos originales y producen el mismo resultado.
+- `npm run images:optimize` conserva en `.image-originals/` (ignorado por Git) las imágenes que superan el peso objetivo y las comprime con mozjpeg sin cambiar sus dimensiones. Si falta el original y la imagen actual ya cumple el objetivo, informa que ya está optimizada y no la copia ni la modifica; si lo supera, guarda primero esa imagen como original y luego la comprime. Cuando existe el original, las ejecuciones vuelven a generarse desde él.
 - `npm run make:og` crea `public/assets/misc/og-image.jpg`, recortando el centro del hero a 1200 × 630 px y limitando el archivo a 200 KB.

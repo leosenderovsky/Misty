@@ -10,3 +10,12 @@ Para adaptar este sitio a otro cliente:
 - Revisá las dimensiones con `npm run check:images` (o `npm run check:images -- --strict` para fallar ante imágenes por debajo del mínimo); el informe está en `docs/IMAGENES.md`.
 
 Validá los cambios con `npm run lint` y `npm run build`.
+
+## Scripts de imágenes y logo
+
+- `npm run check:images`: informa si las imágenes hero y retratos cumplen las dimensiones mínimas.
+- `npm run check:images:strict`: valida las mismas dimensiones y termina con error si alguna no cumple.
+- `npm run check:logo`: valida el SVG del logo, incluido fondo, colores, transparencia y peso.
+- `npm run make:logo-png`: genera `public/assets/logo/logo.png` desde el SVG validado.
+- `npm run images:optimize`: optimiza hero y retratos sin cambiar sus dimensiones; conserva originales cuando hace falta recomprimir.
+- `npm run make:og`: genera la imagen Open Graph de 1200 × 630 px a partir del hero.
