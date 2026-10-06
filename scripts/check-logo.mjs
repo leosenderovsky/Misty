@@ -23,8 +23,8 @@ try {
   [svg, fileInfo] = await Promise.all([readFile(logoPath, 'utf8'), stat(logoPath)]);
 } catch (error) {
   if (error.code === 'ENOENT') {
-    console.error('No hay public/assets/logo/logo.svg. Falta vectorizar el logo: ver docs/IMAGENES.md');
-    process.exit(1);
+    console.log('Sin logo.svg: se usa logo.png (opcional)');
+    process.exit(0);
   }
   throw error;
 }

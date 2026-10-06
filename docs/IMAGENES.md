@@ -4,13 +4,18 @@
 
 - `npm run check:images` informa las imágenes hero de menos de 1280 px y los retratos `sobre-marca-*` de menos de 800 px.
 - `npm run check:images:strict` aplica las mismas reglas y termina con error si encuentra alguna. El generador de imágenes entrega hasta aproximadamente 1376 px; elevar el mínimo del hero exige reescalar.
-- `npm run check:logo` valida transparencia, ausencia de una placa de fondo, los dos tonos teal de marca y un máximo de 30 KB para el SVG.
+- `npm run check:icons` compara favicon-32.png y apple-touch-icon.png con la generación actual, y comprueba que el Apple touch icon mida 180 × 180 px y sea opaco.
+- `npm run check:logo` solo valida transparencia, ausencia de una placa de fondo, los dos tonos teal de marca y un máximo de 30 KB cuando existe `logo.svg`; sin SVG informa que se usa `logo.png` (opcional) y termina correctamente.
 
 ## Logo vectorial
 
-El SVG actual está apartado en `docs/pendiente/logo.svg.invalido`; el sitio continúa usando `public/assets/logo/logo.png`. El dueño debe vectorizar el `logo.png` con Vectorizer.ai o con «Calco de imagen» de Illustrator en modo color y con 2 a 3 colores. El resultado debe tener fondo transparente y guardarse como `public/assets/logo/logo.svg`.
+`public/assets/logo/logo.png` es el logo vigente del sitio. `logo.svg` es opcional: mientras no exista, el sitio continúa usando el PNG y `npm run check:logo` termina correctamente con un mensaje informativo. El SVG anterior está apartado en `docs/pendiente/logo.svg.invalido`; si se decide vectorizar el logo actual, el resultado debe tener fondo transparente y guardarse como `public/assets/logo/logo.svg`.
 
-Después de reemplazarlo, ejecutar `npm run check:logo`. Cuando pase esa validación, `npm run make:logo-png` genera `public/assets/logo/logo.png` a 1600 × 406 px con fondo transparente. El generador valida primero el SVG y actualiza únicamente ese PNG.
+Solo cuando exista `logo.svg`, ejecutar `npm run check:logo` para validarlo. Si pasa, `npm run make:logo-png` genera `public/assets/logo/logo.png` a 1600 × 406 px con fondo transparente y mantiene su comportamiento actual: valida primero el SVG y actualiza únicamente ese PNG.
+
+## Iconos
+
+`npm run make:icons` genera `favicon-32.png` y `apple-touch-icon.png` desde el emblema de `logo.png`. `npm run check:icons` verifica que ambos coincidan con la generación actual y que `apple-touch-icon.png` mida 180 × 180 px y sea opaco. Si están desactualizados, ejecutá `npm run make:icons`.
 
 ## Optimización y redes sociales
 
