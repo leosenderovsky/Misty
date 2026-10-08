@@ -111,7 +111,10 @@ Las variables de esta tabla están declaradas en `.env.example`.
 | `VITE_DEMO_BRAND_NAME` | `src/demoBanner.config.ts` | No | Nombre que muestra el banner de demo; vacío deja el texto genérico. |
 | `VITE_DEMO_BRAND_URL` | `src/demoBanner.config.ts` | No | Enlace del nombre en el banner; se acepta solo HTTP o HTTPS válido. |
 
-Para metadatos de build, Vite resuelve la URL en este orden: `VITE_SITE_URL`, `DEPLOY_PRIME_URL`, `URL` y, si ninguna tiene valor, una cadena vacía. En el navegador, si esa URL queda vacía, `src/main.tsx` usa el origen actual de la página.
+Para metadatos de build, Vite prioriza `VITE_SITE_URL`. Si no está definida,
+usa `URL` en producción de Netlify y `DEPLOY_PRIME_URL` en deploy previews o
+branch deploys; si no hay URL disponible, usa una cadena vacía. En el navegador,
+si esa URL queda vacía, `src/main.tsx` usa el origen actual de la página.
 
 ## Modo demo
 
@@ -123,9 +126,25 @@ Al entregar a un cliente real, borrá `src/components/PrototypeBanner.tsx` y `sr
 
 - Comando de build: `npm run build`.
 - Carpeta de publicación: `dist`.
-- `VITE_SITE_URL` es opcional; Netlify aporta `DEPLOY_PRIME_URL` para deploy previews o `URL` para el sitio.
+- `VITE_SITE_URL` es opcional; en producción Netlify se usa `URL`, y en deploy previews o branch deploys se prioriza `DEPLOY_PRIME_URL`.
 - `VITE_DEMO_BRAND_NAME` y `VITE_DEMO_BRAND_URL` son opcionales y solo configuran el banner de demo.
 - Si cambiás variables `VITE_*`, volvé a desplegar para que se reflejen en el build.
+- `public/_headers` configura cabeceras de seguridad básicas para el sitio.
+
+## Verificar un deploy
+
+Cada build publica `build-info.json` en la raíz de `dist`, con el commit, rama,
+contexto, URL pública y su fuente, fecha de build e indicadores booleanos de las
+variables de demo. No contiene los valores de esas variables. El `<head>` de
+`index.html` también incluye el meta `build-commit` con los primeros siete
+caracteres del commit publicado.
+
+Para comparar el deploy con el commit actual de `main` y comprobar que la imagen
+Open Graph y la URL canonical responden correctamente:
+
+```bash
+npm run verify:deploy -- https://<sitio>.netlify.app
+```
 
 ## Antes de entregar
 
