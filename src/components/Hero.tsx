@@ -9,7 +9,7 @@ import { brandConfig, getWhatsAppUrl } from '../brand.config';
 
 export const Hero: React.FC = () => {
   const [bgError, setBgError] = useState(false);
-  const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.messages.default);
+  const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.defaultMessage);
 
   const bgSrc = bgError && brandConfig.hero.backgroundImage.fallback
     ? brandConfig.hero.backgroundImage.fallback

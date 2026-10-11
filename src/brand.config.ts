@@ -4,13 +4,13 @@
  * 
  * BRAND CONFIGURATION WRAPPER
  * 
- * Este archivo es un envoltorio limpio sobre los datos JSON en src/data/brand.json
- * Solo agrega campos dinámicos que no pueden vivir en JSON.
- * SIN mapeos de compatibilidad, SIN valores escritos a mano.
+ * Este archivo es un envoltorio sobre los datos JSON en src/data/brand.json
+ * Mantiene la interfaz original para compatibilidad con todos los componentes existentes
+ * Agrega campos y funciones auxiliares que no pueden vivir en JSON
  */
 
 import { getDemoLegend } from './demoBanner.config.ts';
-import rawBrandData from './data/brand.json' with { type: 'json' };
+import rawBrandData from './data/brand.json';
 import type { BrandConfig } from './generated/brand.types.ts';
 
 export interface ImageAsset {
@@ -23,11 +23,54 @@ export interface ImageAsset {
   badgeTitle?: string;
 }
 
+// Datos base cargados desde JSON + campos virtuales
+const baseConfig = rawBrandData as unknown as BrandConfig;
+
 // Configuración final exportada con campos dinámicos
 export const brandConfig: BrandConfig = {
-  ...rawBrandData,
+  ...baseConfig,
+
+  // Campos para compatibilidad con API antigua - mapeo
+  identity: {
+    ...baseConfig.identity,
+    logoUrl: baseConfig.logo.src,
+    faviconUrl: baseConfig.logo.favicon32,
+    appleTouchIconUrl: baseConfig.logo.appleTouchIcon,
+    iconCrop: baseConfig.logo.iconCrop,
+  },
+
+  contact: {
+    ...baseConfig.contact,
+    whatsapp: {
+      ...baseConfig.contact.whatsapp,
+      defaultMessage: baseConfig.contact.whatsapp.messages.default,
+      wholesaleMessage: baseConfig.contact.whatsapp.messages.wholesale,
+    },
+    instagram: {
+      ...baseConfig.contact.instagram,
+    },
+    email: {
+      display: baseConfig.contact.email,
+    },
+    showroom: {
+      title: baseConfig.contactSection.showroomCard.title,
+      badge: 'Flores, Buenos Aires',
+      addressDisplay: baseConfig.contact.address.full,
+      hoursWeekdays: baseConfig.contact.hours.lines[0],
+      hoursSaturdays: baseConfig.contact.hours.lines[1],
+      googleMapsUrl: baseConfig.contact.address.mapsUrl,
+      buttonText: baseConfig.contactSection.mapCallout.buttonText,
+    },
+  },
+
+  typography: {
+    ...baseConfig.typography,
+    headings: baseConfig.typography.headingFont,
+    body: baseConfig.typography.bodyFont,
+  },
+
   footer: {
-    ...rawBrandData.footer,
+    ...baseConfig.footer,
     demonstrationDisclaimer: getDemoLegend(),
   },
 };
