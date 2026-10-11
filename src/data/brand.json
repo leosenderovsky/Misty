@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "site": "misty",
+  "demo": {
+    "showPrototypeBanner": true
+  },
+  "identity": {
+    "name": "Misty",
+    "niche": "Indumentaria femenina contemporánea"
+  },
+  "logo": {
+    "src": "/assets/logo/logo.svg",
+    "favicon32": "/assets/logo/favicon-32x32.png",
+    "appleTouchIcon": "/assets/logo/apple-touch-icon.png",
+    "alt": "Misty",
+    "iconCrop": {
+      "left": 0.1,
+      "top": 0.05,
+      "width": 0.8,
+      "height": 0.9
+    }
+  },
+  "seo": {
+    "titleSuffix": " | Misty Indumentaria",
+    "description": "Indumentaria femenina con identidad contemporánea. Mayorista y minorista. Showroom en Flores, Buenos Aires.",
+    "socialImage": "/assets/og/social.jpg"
+  },
+  "typography": {
+    "headingFont": "Inter",
+    "bodyFont": "Inter",
+    "stylesheetUrl": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+  },
+  "theme": {
+    "primary": "#2b6473",
+    "primaryHover": "#1d4b57",
+    "secondary": "#468a9b",
+    "secondaryDark": "#1d4b57",
+    "secondaryContainer": "#d2ecf4",
+    "secondaryFixed": "#acedff",
+    "surface": "#f4f8fa",
+    "surfaceDim": "#d9e8ed",
+    "surfaceContainerLow": "#eef5f8",
+    "surfaceContainer": "#e8f1f5",
+    "surfaceContainerHigh": "#dfecef",
+    "surfaceContainerHighest": "#d5e3e8",
+    "surfaceBright": "#ffffff",
+    "onSurface": "#16272e",
+    "onSurfaceVariant": "#3e5258",
+    "outline": "#607a82",
+    "outlineVariant": "#c0cdd2"
+  },
+  "contact": {
+    "whatsapp": {
+      "number": "5491140008800",
+      "display": "+54 9 11 4000-8800",
+      "messages": {
+        "default": "Hola Misty! Quería consultar por disponibilidad de productos.",
+        "wholesale": "Hola! Quisiera recibir la lista de precios mayorista y condiciones de compra."
+      }
+    },
+    "instagram": {
+      "handle": "@misty.indumentaria",
+      "url": "https://instagram.com/misty.indumentaria",
+      "badge": "Seguinos",
+      "description": "Mirá todos nuestros modelos, lanzamientos y novedades directamente en nuestro perfil oficial.",
+      "buttonText": "Ver Instagram"
+    },
+    "email": "hola@misty.com.ar",
+    "address": {
+      "full": "Av. Avellaneda 2840",
+      "city": "Flores, Buenos Aires",
+      "mapsUrl": "",
+      "transitInfo": "Fácil acceso en colectivos y subte Línea A. Estacionamiento comercial disponible en la zona."
+    },
+    "hours": {
+      "lines": [
+        "Lunes a Viernes: 09:00 - 18:00 hs",
+        "Sábados: 10:00 - 14:00 hs"
+      ]
+    }
+  },
+  "navigation": {
+    "links": [
+      {
+        "label": "Nosotras",
+        "href": "#nosotras"
+      },
+      {
+        "label": "Cómo Comprar",
+        "href": "#como-comprar"
+      },
+      {
+        "label": "Contacto",
+        "href": "#contacto"
+      }
+    ],
+    "ctaButtonText": "Consultar por WhatsApp",
+    "ctaButtonTextMobile": "WhatsApp"
+  },
+  "marquee": {
+    "items": [
+      "✓ Envíos a todo el país",
+      "✓ Atención personalizada",
+      "✓ Precios mayoristas",
+      "✓ Stock permanente",
+      "✓ Showroom en CABA"
+    ]
+  },
+  "hero": {
+    "eyebrowBadge": "Nueva Colección Otoño-Invierno 2026",
+    "headline": "Indumentaria pensada para tu día a día",
+    "subheadline": "Diseños atemporales, cortes que favorecen y tejidos premium para usar todos los días. Para mujeres que buscan comodidad sin renunciar al estilo.",
+    "backgroundImage": {
+      "src": "/assets/hero/hero-main.jpg",
+      "alt": "Modelo usando conjunto Misty",
+      "width": 1920,
+      "height": 1080
+    },
+    "primaryCta": {
+      "label": "Ver Catálogo Mayorista"
+    },
+    "secondaryCta": {
+      "label": "Ver Showroom"
+    }
+  },
+  "quickWholesaleBar": {
+    "enabled": true,
+    "text": "¿Sos emprendedora? Recibí la lista de precios mayorista →",
+    "buttonText": "Solicitar Aquí"
+  },
+  "essenceSection": {
+    "eyebrowBadge " : "Nuestra Marca",
+    "title": "Hecho con intención",
+    "subtitle": "Creamos prendas que se convierten en tus favoritas. Sin tendencias pasajeras, sin excesos. Solo ropa que funciona, que dura y que te hace sentir bien.",
+    "pillars": [
+      {
+        "iconType": "fabric",
+        "title": "Calidad Premium",
+        "description": "Todos nuestros tejidos son seleccionados uno por uno para garantizar durabilidad, confort y terminación perfecta en cada prenda."
+      },
+      {
+        "iconType": "sizing",
+        "title": "Talles Reales",
+        "description": "No usamos talles estándar. Nuestras prendas se ajustan a cuerpos reales, con medidas probadas y adaptadas a mujeres argentinas."
+      },
+      {
+        "iconType": "ethic",
+        "title": "Producción Transparente",
+        "description": "Fabricamos 100% en Buenos Aires, en talleres con condiciones laborales dignas y seguimiento diario de todo el proceso."
+      }
+    ]
+  },
+  "processSection": {
+    "eyebrowBadge": "Cómo Trabajamos",
+    "title": "Tu pedido en 3 pasos",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Elegí tus prendas",
+        "description": "Recibí el catálogo completo actualizado, con fotos reales, precios y disponibilidad de stock por talle y color.",
+        "iconType": "catalog"
+      },
+      {
+        "number": "02",
+        "title": "Armá tu pedido",
+        "description": "Indicanos cantidades por referencia, arma tu bulto o compra unidades sueltas según tu conveniencia.",
+        "iconType": "chat"
+      },
+      {
+        "number": "03",
+        "title": "Despacho Inmediato",
+        "description": "Empaquetamos con extremo cuidado y despachamos por expreso, encomienda o retiro directo en showroom.",
+        "iconType": "mail"
+      }
+    ]
+  },
+  "contactSection": {
+    "eyebrowBadge": "Canales de Atención",
+    "title": "Estamos cerca tuyo",
+    "subtitle": "Contactanos a través del medio que más cómodo te resulte. Estamos a un mensaje de distancia para resolver dudas, pasar presupuestos y tomar pedidos.",
+    "whatsappCard": {
+      "badge": "Canal Principal",
+      "title": "WhatsApp Directo",
+      "description": "Atención inmediata para listas de precios, consultas mayoristas y pedidos minoristas.",
+      "buttonText": "Chatear con asesoras"
+    },
+    "instagramCard": {
+      "title": "Instagram Oficial"
+    },
+    "showroomCard": {
+      "title": "Showroom Comercial",
+      "hoursLabel": "Horarios de Atención:"
+    },
+    "mapCallout": {
+      "eyebrow": "Ubicación Estratégica",
+      "description": "Fácil acceso en colectivos y subte Línea A. Estacionamiento comercial disponible en la zona.",
+      "buttonText": "Abrir en Google Maps"
+    }
+  },
+  "wholesaleCallout": {
+    "badge": "Canal Exclusivo para Emprendedoras",
+    "title": "¿Tenés local o vendés online?",
+    "description": "Consultá hoy mismo por WhatsApp para recibir la lista de precios mayorista actualizada, condiciones de compra mínima por bulto y el catálogo en PDF para empezar a vender de inmediato.",
+    "buttonText": "Solicitar Catálogo Mayorista"
+  },
+  "footer": {
+    "brandDescription": "Indumentaria femenina con identidad contemporánea, disponible para pedidos por menor y curvas mayoristas.",
+    "trustBadge": "Canal Mayorista & Minorista",
+    "showroomTitle": "Atención & Showroom",
+    "channelsTitle": "Contacto Directo",
+    "legalTitle": "Información Legal",
+    "legalNotice": "Este sitio web corresponde a una demostración institucional con fines conceptuales y de portfolio. Toda marca y productos referenciados forman parte de un prototipo de diseño.",
+    "copyrightText": "© 2026 Misty Indumentaria. Todos los derechos reservados.",
+    "variantTag": "Variante A · Editorial Lookbook · Diseño y Desarrollo de Arquitectura Web Frontend"
+  }
+}
