@@ -7,7 +7,7 @@ Stack: React, TypeScript, Vite y Tailwind CSS.
 
 ## Cómo empezar
 
-El proyecto no declara una versión de Node en `package.json`.
+El proyecto declara Node `^20.19.0 || >=22.12.0` en `package.json`; `.nvmrc` usa Node 22.
 
 ```bash
 npm install
@@ -87,6 +87,8 @@ Usá estas rutas para las imágenes actuales; reemplazalas y actualizá sus dato
 | `public/assets/logo/apple-touch-icon.png` | Ícono para dispositivos Apple. | 180 × 180 px y opaco. |
 
 El SVG del logo es opcional: hoy no existe public/assets/logo/logo.svg y el sitio usa el PNG.
+
+`make:icons` recorta el logo al contenido visible y detecta automáticamente el primer hueco horizontal que separa el emblema de la palabra. Si el logo de un cliente no tiene ese hueco o necesita un ajuste manual, definí `brandConfig.identity.iconCrop` con `{ left, top, width, height }`: son fracciones de 0 a 1 aplicadas sobre el logo ya recortado al contenido visible.
 
 | Comando | Qué hace |
 |---|---|

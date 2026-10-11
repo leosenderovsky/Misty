@@ -13,6 +13,149 @@ if (!backgroundMatch) {
 }
 const backgroundRgb = backgroundMatch[1].match(/.{2}/g).map((channel) => Number.parseInt(channel, 16));
 
+const transparentBackground = { r: 0, g: 0, b: 0, alpha: 0 };
+
+function assertFractionCrop(crop) {
+  const fields = ['left', 'top', 'width', 'height'];
+  for (const field of fields) {
+    if (!Number.isFinite(crop[field]) || crop[field] < 0 || crop[field] > 1) {
+      throw new Error(`identity.iconCrop.${field} must be a fraction from 0 to 1`);
+    }
+  }
+  if (crop.width <= 0 || crop.height <= 0) {
+    throw new Error('identity.iconCrop width and height must be greater than 0');
+  }
+  if (crop.left + crop.width > 1 || crop.top + crop.height > 1) {
+    throw new Error('identity.iconCrop must stay inside the trimmed logo bounds');
+  }
+}
+
+function findAlphaBounds(data, info) {
+  let minX = info.width;
+  let minY = info.height;
+  let maxX = -1;
+  let maxY = -1;
+
+  for (let y = 0; y < info.height; y += 1) {
+    for (let x = 0; x < info.width; x += 1) {
+      if (data[(y * info.width + x) * info.channels + 3] > 0) {
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
+      }
+    }
+  }
+
+  if (maxX === -1) {
+    throw new Error('Logo has no visible pixels to extract an emblem from');
+  }
+
+  return {
+    left: minX,
+    top: minY,
+    width: maxX - minX + 1,
+    height: maxY - minY + 1,
+  };
+}
+
+async function trimToAlpha(input) {
+  const { data, info } = await sharp(input).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  return findAlphaBounds(data, info);
+}
+
+async function extractEmblem(logoPath) {
+  const flattenedLogo = sharp(logoPath).ensureAlpha().png();
+  const logoBuffer = await flattenedLogo.toBuffer();
+  const trim = await trimToAlpha(logoBuffer);
+  const trimmedLogo = await sharp(logoBuffer).extract(trim).png().toBuffer();
+  const iconCrop = brandConfig.identity.iconCrop;
+
+  if (iconCrop) {
+    assertFractionCrop(iconCrop);
+    return sharp(trimmedLogo)
+      .extract({
+        left: Math.round(trim.width * iconCrop.left),
+        top: Math.round(trim.height * iconCrop.top),
+        width: Math.max(1, Math.round(trim.width * iconCrop.width)),
+        height: Math.max(1, Math.round(trim.height * iconCrop.height)),
+      })
+      .png()
+      .toBuffer();
+  }
+
+  const { data, info } = await sharp(trimmedLogo).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const columnHasContent = Array.from({ length: info.width }, (_, x) => {
+    for (let y = 0; y < info.height; y += 1) {
+      if (data[(y * info.width + x) * info.channels + 3] > 0) return true;
+    }
+    return false;
+  });
+  const minimumGapWidth = Math.ceil(info.width * 0.03);
+  let emblemWidth = info.width;
+  let gapStart = -1;
+
+  for (let x = 0; x <= columnHasContent.length; x += 1) {
+    if (x < columnHasContent.length && !columnHasContent[x]) {
+      if (gapStart === -1) gapStart = x;
+      continue;
+    }
+
+    if (gapStart !== -1) {
+      const gapWidth = x - gapStart;
+      if (gapStart > 0 && gapWidth >= minimumGapWidth) {
+        emblemWidth = gapStart;
+        break;
+      }
+      gapStart = -1;
+    }
+  }
+
+  const emblem = await sharp(trimmedLogo)
+    .extract({ left: 0, top: 0, width: emblemWidth, height: info.height })
+    .png()
+    .toBuffer();
+  const emblemTrim = await trimToAlpha(emblem);
+  return sharp(emblem).extract(emblemTrim).png().toBuffer();
+}
+
+async function renderIcon(emblem, size, paddingRatio) {
+  const padding = Math.floor(size * paddingRatio);
+  const transparentIcon = await sharp({
+    create: {
+      width: size,
+      height: size,
+      channels: 4,
+      background: transparentBackground,
+    },
+  })
+    .composite([
+      {
+        input: await sharp(emblem)
+          .resize(size - padding * 2, size - padding * 2, {
+            fit: 'contain',
+            background: transparentBackground,
+          })
+          .png()
+          .toBuffer(),
+        gravity: 'centre',
+      },
+    ])
+    .png()
+    .toBuffer();
+
+  return sharp(transparentIcon)
+    .flatten({
+      background: {
+        r: backgroundRgb[0],
+        g: backgroundRgb[1],
+        b: backgroundRgb[2],
+      },
+    })
+    .png()
+    .toBuffer();
+}
+
 export async function generateIcons() {
   const logo = sharp(logoPath);
   const { width, height } = await logo.metadata();
@@ -20,34 +163,9 @@ export async function generateIcons() {
     throw new Error(`Logo is too small to extract its emblem: ${width}x${height}`);
   }
 
-  const emblem = await logo
-    .extract({
-      left: Math.round(width * 0.085),
-      top: Math.round(height * 0.08),
-      width: Math.round(width * 0.29),
-      height: Math.round(height * 0.84),
-    })
-    .resize(132, 132, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
-    .png()
-    .toBuffer();
-
-  const appleTouchIcon = await sharp({
-    create: {
-      width: 180,
-      height: 180,
-      channels: 4,
-      background: {
-        r: backgroundRgb[0],
-        g: backgroundRgb[1],
-        b: backgroundRgb[2],
-        alpha: 1,
-      },
-    },
-  })
-    .composite([{ input: emblem, gravity: 'centre' }])
-    .png()
-    .toBuffer();
-  const favicon = await sharp(appleTouchIcon).resize(32, 32).png().toBuffer();
+  const emblem = await extractEmblem(logoPath);
+  const appleTouchIcon = await renderIcon(emblem, 180, 0.08);
+  const favicon = await renderIcon(emblem, 32, 0.06);
 
   return {
     'favicon-32.png': favicon,

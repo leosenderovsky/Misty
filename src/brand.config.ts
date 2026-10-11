@@ -29,6 +29,16 @@ export interface BrandConfig {
     logoUrl: string;
     faviconUrl: string;
     appleTouchIconUrl: string;
+    /**
+     * Recorte manual opcional del emblema para favicon y Apple touch icon.
+     * Las fracciones se aplican sobre el logo ya recortado al contenido visible.
+     */
+    iconCrop?: {
+      left: number;
+      top: number;
+      width: number;
+      height: number;
+    };
   };
   seo: {
     titleSuffix: string;
