@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Configuración de Marca",
+  "description": "Todos los datos editables para una instancia del prototipo Tienda ON!",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "site",
+    "demo",
+    "identity",
+    "logo",
+    "seo",
+    "typography",
+    "theme",
+    "contact",
+    "navigation",
+    "hero",
+    "essenceSection",
+    "processSection",
+    "contactSection",
+    "wholesaleCallout",
+    "footer"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1,
+      "title": "Versión del esquema"
+    },
+    "site": {
+      "type": "string",
+      "const": "misty",
+      "title": "Identificador de sitio"
+    },
+    "demo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "showPrototypeBanner": { "type": "boolean" }
+      },
+      "required": ["showPrototypeBanner"]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "niche": { "type": "string" }
+      },
+      "required": ["name", "niche"]
+    },
+    "logo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "src": { "type": "string" },
+        "favicon32": { "type": "string" },
+        "appleTouchIcon": { "type": "string" },
+        "alt": { "type": "string" },
+        "iconCrop": {
+          "type": "object",
+          "properties": {
+            "left": { "type": "number" },
+            "top": { "type": "number" },
+            "width": { "type": "number" },
+            "height": { "type": "number" }
+          },
+          "required": ["left", "top", "width", "height"]
+        }
+      },
+      "required": ["src", "favicon32", "appleTouchIcon", "alt"]
+    }
+  }
+}
+
