@@ -8,7 +8,7 @@ import { Store, Download } from 'lucide-react';
 import { brandConfig, getWhatsAppUrl } from '../brand.config';
 
 export const QuickWholesaleStrip: React.FC = () => {
-  const waWholesaleUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.wholesaleMessage);
+  const waWholesaleUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.messages.wholesale);
 
   return (
     <section className="w-full bg-brand-surface-container py-6 px-4 sm:px-6 lg:px-8 border-y border-brand-surface-container-highest/60">

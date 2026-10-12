@@ -35,10 +35,10 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
   return (
     <div className={`inline-flex items-center gap-3 select-none ${className}`}>
-      {brandConfig.identity.logoUrl && !imgError ? (
+      {brandConfig.logo.src && !imgError ? (
         <img
-          src={brandConfig.identity.logoUrl}
-          alt={brandConfig.identity.name}
+          src={brandConfig.logo.src}
+          alt={brandConfig.logo.alt || brandConfig.identity.name}
           className={`${heights[size]} object-contain shrink-0`}
           width={512}
           height={130}

@@ -15,7 +15,7 @@ import {
 import { BrandLogo } from './BrandLogo';
 
 export const Footer: React.FC = () => {
-  const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.defaultMessage);
+  const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.messages.default);
   const showroomHours = getShowroomHoursText();
 
   return (
@@ -83,7 +83,7 @@ export const Footer: React.FC = () => {
             </a>
             <div className="text-xs sm:text-sm text-brand-on-surface-variant flex items-center gap-2 mt-0.5">
               <Mail className="w-4 h-4 text-brand-primary shrink-0" />
-              <span>{brandConfig.contact.email.display}</span>
+              <span>{brandConfig.contact.email}</span>
             </div>
           </div>
 

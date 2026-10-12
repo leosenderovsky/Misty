@@ -4,9 +4,13 @@
  */
 
 import React from 'react';
+import { brandConfig } from '../brand.config';
 import { demoBannerConfig, getValidDemoBannerLink } from '../demoBanner.config';
 
 export const PrototypeBanner: React.FC = () => {
+  if (!brandConfig.demo?.showPrototypeBanner) {
+    return null;
+  }
   const companyName = demoBannerConfig.companyName === '[EMPRESA]' ? '' : demoBannerConfig.companyName;
   const link = companyName ? getValidDemoBannerLink(demoBannerConfig.link) : null;
 

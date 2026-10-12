@@ -10,7 +10,7 @@ import { BrandLogo } from './BrandLogo';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.defaultMessage);
+  const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.messages.default);
 
   return (
     <header className="sticky top-0 w-full z-50 bg-brand-surface/90 backdrop-blur-md shadow-md border-b border-brand-surface-container-highest/60 transition-all">

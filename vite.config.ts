@@ -120,8 +120,8 @@ function brandMetadataPlugin(siteUrl: string, socialImage: string): Plugin {
       ? new URL(socialImage, siteUrl).href
       : socialImage,
     __BRAND_CANONICAL__: canonicalUrl,
-    __BRAND_FAVICON_32__: brandConfig.identity.faviconUrl,
-    __BRAND_APPLE_ICON__: brandConfig.identity.appleTouchIconUrl,
+    __BRAND_FAVICON_32__: brandConfig.logo.favicon32,
+    __BRAND_APPLE_ICON__: brandConfig.logo.appleTouchIcon,
     __BRAND_FONT_STYLESHEET__: brandConfig.typography.stylesheetUrl,
   };
 

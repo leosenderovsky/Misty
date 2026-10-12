@@ -8,7 +8,7 @@ import { Send } from 'lucide-react';
 import { brandConfig, getWhatsAppUrl } from '../brand.config';
 
 export const WholesaleBanner: React.FC = () => {
-  const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.wholesaleMessage);
+  const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.messages.wholesale);
 
   return (
     <section className="w-full py-12 px-4 sm:px-6 lg:px-8 bg-brand-surface">

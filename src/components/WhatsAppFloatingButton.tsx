@@ -9,7 +9,7 @@ import { brandConfig, getWhatsAppUrl } from '../brand.config';
 
 export const WhatsAppFloatingButton: React.FC = () => {
   const [showTooltip, setShowTooltip] = useState(true);
-  const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.defaultMessage);
+  const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.messages.default);
 
   return (
     <div className="fixed bottom-5 right-5 z-40 flex items-center gap-3">

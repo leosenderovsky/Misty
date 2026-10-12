@@ -1,0 +1,1521 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BrandConfig",
+  "description": "Configuración editable de la marca y de los textos del sitio.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "site",
+    "demo",
+    "identity",
+    "logo",
+    "seo",
+    "typography",
+    "theme",
+    "contact",
+    "navigation",
+    "hero",
+    "quickWholesaleBar",
+    "essenceSection",
+    "processSection",
+    "contactSection",
+    "wholesaleCallout",
+    "footer"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "title": "Versión del esquema",
+      "description": "Versión del formato de este archivo. No lo cambies a mano.",
+      "x-group": "Marca",
+      "x-widget": "number"
+    },
+    "site": {
+      "type": "string",
+      "title": "Identificador del sitio",
+      "description": "Nombre interno del prototipo o del cliente (minúsculas, sin espacios).",
+      "x-group": "Marca",
+      "x-widget": "text"
+    },
+    "demo": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Demostración",
+      "description": "Opciones del prototipo de demostración.",
+      "x-group": "Marca",
+      "required": ["showPrototypeBanner"],
+      "properties": {
+        "showPrototypeBanner": {
+          "type": "boolean",
+          "title": "Mostrar aviso de prototipo",
+          "description": "Si está activo, el sitio muestra la franja que aclara que es un prototipo. En un cliente real se quita el banner.",
+          "x-group": "Marca",
+          "x-widget": "boolean"
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Identidad",
+      "description": "Nombre comercial y rubro.",
+      "x-group": "Marca",
+      "required": ["name", "niche"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Nombre de la marca",
+          "description": "Nombre que se muestra en el logo, el título de la página y los avisos.",
+          "x-group": "Marca",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Misty"]
+        },
+        "niche": {
+          "type": "string",
+          "title": "Rubro",
+          "description": "Frase corta que describe el negocio (por ejemplo, venta mayorista y minorista).",
+          "x-group": "Marca",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Venta Mayorista y Minorista"]
+        },
+        "iconCrop": {
+          "type": "object",
+          "additionalProperties": false,
+          "title": "Recorte del emblema",
+          "description": "Recorte opcional del logo para generar el favicon. Las cifras van de 0 a 1 sobre el logo ya recortado al contenido visible.",
+          "x-group": "Imágenes",
+          "required": ["left", "top", "width", "height"],
+          "properties": {
+            "left": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "title": "Izquierda",
+              "description": "Desplazamiento izquierdo del recorte (fracción de 0 a 1).",
+              "x-group": "Imágenes",
+              "x-widget": "number"
+            },
+            "top": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "title": "Arriba",
+              "description": "Desplazamiento superior del recorte (fracción de 0 a 1).",
+              "x-group": "Imágenes",
+              "x-widget": "number"
+            },
+            "width": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1,
+              "title": "Ancho",
+              "description": "Ancho del recorte (fracción de 0 a 1).",
+              "x-group": "Imágenes",
+              "x-widget": "number"
+            },
+            "height": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1,
+              "title": "Alto",
+              "description": "Alto del recorte (fracción de 0 a 1).",
+              "x-group": "Imágenes",
+              "x-widget": "number"
+            }
+          }
+        }
+      }
+    },
+    "logo": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Logo e íconos",
+      "description": "Archivos del logo, favicon e ícono para dispositivos Apple.",
+      "x-group": "Imágenes",
+      "required": ["src", "favicon32", "appleTouchIcon", "alt"],
+      "properties": {
+        "src": {
+          "type": "string",
+          "title": "Archivo del logo",
+          "description": "Ruta pública del logo en PNG con fondo transparente.",
+          "x-group": "Imágenes",
+          "x-widget": "image",
+          "x-exampleData": true,
+          "examples": ["/assets/logo/logo.png"],
+          "x-asset": {
+            "path": "public/assets/logo/logo.png",
+            "minWidth": 190,
+            "ratio": "libre",
+            "maxKB": 120
+          }
+        },
+        "favicon32": {
+          "type": "string",
+          "title": "Favicon",
+          "description": "Ícono de 32 × 32 píxeles que aparece en la pestaña del navegador.",
+          "x-group": "Imágenes",
+          "x-widget": "image",
+          "x-asset": {
+            "path": "public/assets/logo/favicon-32.png",
+            "minWidth": 32,
+            "ratio": "1:1",
+            "maxKB": 20
+          }
+        },
+        "appleTouchIcon": {
+          "type": "string",
+          "title": "Ícono Apple",
+          "description": "Ícono de 180 × 180 píxeles, opaco, para dispositivos Apple.",
+          "x-group": "Imágenes",
+          "x-widget": "image",
+          "x-asset": {
+            "path": "public/assets/logo/apple-touch-icon.png",
+            "minWidth": 180,
+            "ratio": "1:1",
+            "maxKB": 40
+          }
+        },
+        "alt": {
+          "type": "string",
+          "title": "Texto alternativo del logo",
+          "description": "Descripción breve del logo para accesibilidad. Suele ser el nombre de la marca.",
+          "x-group": "Imágenes",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Misty"]
+        }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Buscadores y redes",
+      "description": "Título, descripción e imagen que se muestran al compartir el sitio.",
+      "x-group": "Textos",
+      "required": ["titleSuffix", "description", "socialImage"],
+      "properties": {
+        "titleSuffix": {
+          "type": "string",
+          "title": "Sufijo del título",
+          "description": "Texto que acompaña al nombre de la marca en la pestaña del navegador y en redes.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Indumentaria Femenina & Showroom"]
+        },
+        "description": {
+          "type": "string",
+          "title": "Descripción",
+          "description": "Resumen que aparece en buscadores y al compartir el enlace.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Prendas modernas diseñadas para acompañar tu rutina con telas de excelente textura, confección minuciosa y la calidez de un trato persona a persona. Showroom Flores y envíos a todo el país."]
+        },
+        "socialImage": {
+          "type": "string",
+          "title": "Imagen para redes",
+          "description": "Imagen de 1200 × 630 píxeles que se muestra al compartir el sitio.",
+          "x-group": "Imágenes",
+          "x-widget": "image",
+          "x-exampleData": true,
+          "examples": ["/assets/misc/og-image.jpg"],
+          "x-asset": {
+            "path": "public/assets/misc/og-image.jpg",
+            "minWidth": 1200,
+            "ratio": "1200:630",
+            "maxKB": 200
+          }
+        }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Tipografías",
+      "description": "Fuentes de títulos y de texto, y la hoja de estilos de Google Fonts.",
+      "x-group": "Marca",
+      "required": ["headingFont", "bodyFont", "stylesheetUrl"],
+      "properties": {
+        "headingFont": {
+          "type": "string",
+          "title": "Fuente de títulos",
+          "description": "Familia tipográfica para títulos (por ejemplo, Playfair Display, serif).",
+          "x-group": "Marca",
+          "x-widget": "text"
+        },
+        "bodyFont": {
+          "type": "string",
+          "title": "Fuente de texto",
+          "description": "Familia tipográfica para párrafos y botones.",
+          "x-group": "Marca",
+          "x-widget": "text"
+        },
+        "stylesheetUrl": {
+          "type": "string",
+          "title": "Hoja de fuentes",
+          "description": "URL de Google Fonts u otra hoja que carga las tipografías.",
+          "x-group": "Marca",
+          "x-widget": "url"
+        }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Colores",
+      "description": "Paleta de la marca. Cada valor es un color hexadecimal de seis dígitos.",
+      "x-group": "Colores",
+      "required": [
+        "primary",
+        "primaryHover",
+        "secondary",
+        "secondaryDark",
+        "secondaryContainer",
+        "secondaryFixed",
+        "surface",
+        "surfaceDim",
+        "surfaceContainerLow",
+        "surfaceContainer",
+        "surfaceContainerHigh",
+        "surfaceContainerHighest",
+        "surfaceBright",
+        "onSurface",
+        "onSurfaceVariant",
+        "outline",
+        "outlineVariant"
+      ],
+      "properties": {
+        "primary": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Color principal",
+          "description": "Color de botones principales y acentos fuertes.",
+          "x-group": "Botones",
+          "x-widget": "color"
+        },
+        "primaryHover": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Principal al pasar el cursor",
+          "description": "Variante más oscura del color principal para el estado hover.",
+          "x-group": "Estados",
+          "x-widget": "color"
+        },
+        "secondary": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Color secundario",
+          "description": "Color de botones y detalles secundarios.",
+          "x-group": "Botones",
+          "x-widget": "color"
+        },
+        "secondaryDark": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Secundario oscuro",
+          "description": "Variante oscura del color secundario.",
+          "x-group": "Botones",
+          "x-widget": "color"
+        },
+        "secondaryContainer": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Contenedor secundario",
+          "description": "Fondo suave para chips, íconos y destacados.",
+          "x-group": "Acentos",
+          "x-widget": "color"
+        },
+        "secondaryFixed": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Acento fijo",
+          "description": "Acento claro para badges y selecciones.",
+          "x-group": "Acentos",
+          "x-widget": "color"
+        },
+        "surface": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Fondo de página",
+          "description": "Color de fondo principal del sitio.",
+          "x-group": "Fondos",
+          "x-widget": "color"
+        },
+        "surfaceDim": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Fondo atenuado",
+          "description": "Fondo un poco más oscuro, por ejemplo detrás del hero.",
+          "x-group": "Fondos",
+          "x-widget": "color"
+        },
+        "surfaceContainerLow": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Contenedor bajo",
+          "description": "Fondo de bloques como el pie de página.",
+          "x-group": "Fondos",
+          "x-widget": "color"
+        },
+        "surfaceContainer": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Contenedor",
+          "description": "Fondo de tarjetas y franjas intermedias.",
+          "x-group": "Fondos",
+          "x-widget": "color"
+        },
+        "surfaceContainerHigh": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Contenedor alto",
+          "description": "Fondo un punto más marcado que el contenedor.",
+          "x-group": "Fondos",
+          "x-widget": "color"
+        },
+        "surfaceContainerHighest": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Contenedor máximo",
+          "description": "Fondo más marcado; también se usa en bordes suaves.",
+          "x-group": "Fondos",
+          "x-widget": "color"
+        },
+        "surfaceBright": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Fondo claro",
+          "description": "Superficie blanca o muy clara para tarjetas.",
+          "x-group": "Fondos",
+          "x-widget": "color"
+        },
+        "onSurface": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Texto sobre fondo",
+          "description": "Color del texto principal.",
+          "x-group": "Textos",
+          "x-widget": "color",
+          "x-contrastWith": "surface"
+        },
+        "onSurfaceVariant": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Texto secundario",
+          "description": "Color de párrafos y textos de apoyo.",
+          "x-group": "Textos",
+          "x-widget": "color",
+          "x-contrastWith": "surface"
+        },
+        "outline": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Borde",
+          "description": "Color de bordes visibles.",
+          "x-group": "Bordes",
+          "x-widget": "color"
+        },
+        "outlineVariant": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "title": "Borde suave",
+          "description": "Color de separadores y bordes discretos.",
+          "x-group": "Bordes",
+          "x-widget": "color"
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Contacto",
+      "description": "WhatsApp, Instagram, correo, dirección y horarios.",
+      "x-group": "Contacto",
+      "required": ["whatsapp", "instagram", "email", "address", "hours"],
+      "properties": {
+        "whatsapp": {
+          "type": "object",
+          "additionalProperties": false,
+          "title": "WhatsApp",
+          "description": "Número y mensajes prearmados.",
+          "x-group": "Contacto",
+          "required": ["number", "display", "messages"],
+          "properties": {
+            "number": {
+              "type": "string",
+              "pattern": "^[0-9]+$",
+              "title": "Número de WhatsApp",
+              "description": "Número internacional solo con dígitos, sin + ni espacios. Ejemplo: 5491140008800.",
+              "x-group": "Contacto",
+              "x-widget": "whatsapp",
+              "x-exampleData": true,
+              "examples": ["5491140008800"]
+            },
+            "display": {
+              "type": "string",
+              "title": "Número para mostrar",
+              "description": "Número con formato legible, como se ve en la página.",
+              "x-group": "Contacto",
+              "x-widget": "text",
+              "x-exampleData": true,
+              "examples": ["+54 9 11 4000-8800"]
+            },
+            "messages": {
+              "type": "object",
+              "additionalProperties": false,
+              "title": "Mensajes de WhatsApp",
+              "description": "Textos que se prellenan al abrir el chat.",
+              "x-group": "Contacto",
+              "required": ["default", "wholesale"],
+              "properties": {
+                "default": {
+                  "type": "string",
+                  "title": "Mensaje general",
+                  "description": "Mensaje al tocar el botón principal o el flotante de WhatsApp.",
+                  "x-group": "Contacto",
+                  "x-widget": "textarea",
+                  "x-exampleData": true,
+                  "examples": ["¡Hola Misty! Quisiera consultar por sus prendas y conocer el catálogo."]
+                },
+                "wholesale": {
+                  "type": "string",
+                  "title": "Mensaje mayorista",
+                  "description": "Mensaje al pedir lista de precios o catálogo mayorista.",
+                  "x-group": "Comercial",
+                  "x-widget": "textarea",
+                  "x-exampleData": true,
+                  "examples": ["¡Hola Misty! Me interesa solicitar la lista de precios mayorista y el catálogo en PDF."]
+                },
+                "retail": {
+                  "type": "string",
+                  "title": "Mensaje minorista",
+                  "description": "Mensaje opcional para consultas de venta por unidad.",
+                  "x-group": "Contacto",
+                  "x-widget": "textarea"
+                }
+              }
+            }
+          }
+        },
+        "instagram": {
+          "type": "object",
+          "additionalProperties": false,
+          "title": "Instagram",
+          "description": "Usuario y enlace de la cuenta.",
+          "x-group": "Contacto",
+          "required": ["handle", "url"],
+          "properties": {
+            "handle": {
+              "type": "string",
+              "title": "Usuario de Instagram",
+              "description": "Nombre de usuario con @, como se muestra en el sitio.",
+              "x-group": "Contacto",
+              "x-widget": "text",
+              "x-exampleData": true,
+              "examples": ["@misty.indumentaria"]
+            },
+            "url": {
+              "type": "string",
+              "title": "Enlace de Instagram",
+              "description": "URL completa del perfil.",
+              "x-group": "Contacto",
+              "x-widget": "url",
+              "x-exampleData": true,
+              "examples": ["https://instagram.com/misty.indumentaria"]
+            }
+          }
+        },
+        "email": {
+          "type": "string",
+          "title": "Correo electrónico",
+          "description": "Dirección de correo que se muestra en el pie.",
+          "x-group": "Contacto",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["ventas@misty.com.ar"]
+        },
+        "address": {
+          "type": "object",
+          "additionalProperties": false,
+          "title": "Dirección",
+          "description": "Showroom o local y enlace al mapa.",
+          "x-group": "Contacto",
+          "required": ["full"],
+          "properties": {
+            "full": {
+              "type": "string",
+              "title": "Dirección completa",
+              "description": "Calle, número y local, como se muestra en el sitio.",
+              "x-group": "Contacto",
+              "x-widget": "text",
+              "x-exampleData": true,
+              "examples": ["Av. Avellaneda 2840, Local 12"]
+            },
+            "mapsUrl": {
+              "type": "string",
+              "title": "Enlace de Google Maps",
+              "description": "URL para abrir la ubicación. Si falta, el sitio arma una búsqueda con la dirección y la ciudad.",
+              "x-group": "Contacto",
+              "x-widget": "url",
+              "x-exampleData": true,
+              "examples": ["https://maps.google.com/?q=Av.%20Avellaneda%202840%2C%20Local%2012%2C%20Flores%2C%20Buenos%20Aires"]
+            },
+            "city": {
+              "type": "string",
+              "title": "Ciudad",
+              "description": "Ciudad y provincia para completar la búsqueda en el mapa.",
+              "x-group": "Contacto",
+              "x-widget": "text",
+              "x-exampleData": true,
+              "examples": ["Flores, Buenos Aires"]
+            },
+            "transitInfo": {
+              "type": "string",
+              "title": "Cómo llegar",
+              "description": "Texto opcional sobre colectivos, subte o estacionamiento.",
+              "x-group": "Contacto",
+              "x-widget": "textarea"
+            }
+          }
+        },
+        "hours": {
+          "type": "object",
+          "additionalProperties": false,
+          "title": "Horarios",
+          "description": "Líneas de horario que se muestran en contacto y en el pie.",
+          "x-group": "Contacto",
+          "required": ["lines"],
+          "properties": {
+            "lines": {
+              "type": "array",
+              "title": "Líneas de horario",
+              "description": "Cada ítem es una línea, por ejemplo de lunes a viernes y sábados.",
+              "x-group": "Contacto",
+              "x-widget": "hours-list",
+              "x-exampleData": true,
+              "examples": [["Lun a Vie: 08:00 a 17:00 hs", "Sábados: 08:30 a 13:30 hs"]],
+              "items": {
+                "type": "string",
+                "title": "Línea de horario",
+                "description": "Una línea de días y horas.",
+                "x-group": "Contacto",
+                "x-widget": "text"
+              }
+            },
+            "closedWeekdays": {
+              "type": "array",
+              "title": "Días cerrado",
+              "description": "Números de 0 (domingo) a 6 (sábado) en los que no hay atención.",
+              "x-group": "Contacto",
+              "x-widget": "list",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 6,
+                "title": "Día cerrado",
+                "description": "0 es domingo y 6 es sábado.",
+                "x-group": "Contacto",
+                "x-widget": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "navigation": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Navegación",
+      "description": "Enlaces del encabezado y textos de los botones.",
+      "x-group": "Textos",
+      "required": ["links", "ctaButtonText", "ctaButtonTextMobile"],
+      "properties": {
+        "links": {
+          "type": "array",
+          "title": "Enlaces del menú",
+          "description": "Ítems del menú superior.",
+          "x-group": "Textos",
+          "x-widget": "list",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "href"],
+            "properties": {
+              "label": {
+                "type": "string",
+                "title": "Texto del enlace",
+                "description": "Etiqueta visible en el menú.",
+                "x-group": "Textos",
+                "x-widget": "text",
+                "x-exampleData": true,
+                "examples": ["Nosotros"]
+              },
+              "href": {
+                "type": "string",
+                "title": "Destino",
+                "description": "Ancla o URL del enlace (por ejemplo #contacto).",
+                "x-group": "Textos",
+                "x-widget": "text"
+              }
+            }
+          }
+        },
+        "ctaButtonText": {
+          "type": "string",
+          "title": "Botón de contacto (escritorio)",
+          "description": "Texto del botón de WhatsApp en pantallas grandes.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Escribinos por WhatsApp"]
+        },
+        "ctaButtonTextMobile": {
+          "type": "string",
+          "title": "Botón de contacto (celular)",
+          "description": "Texto corto del mismo botón en el celular.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["WhatsApp"]
+        }
+      }
+    },
+    "marquee": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Franja móvil",
+      "description": "Frases que se desplazan debajo del encabezado.",
+      "x-group": "Textos",
+      "properties": {
+        "items": {
+          "type": "array",
+          "title": "Frases",
+          "description": "Lista de mensajes de la franja.",
+          "x-group": "Textos",
+          "x-widget": "list",
+          "x-exampleData": true,
+          "examples": [["Envíos a todo el país por expreso y correo"]],
+          "items": {
+            "type": "string",
+            "title": "Frase",
+            "description": "Una frase de la franja móvil.",
+            "x-group": "Textos",
+            "x-widget": "text"
+          }
+        }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Portada",
+      "description": "Textos, imagen y botones de la primera sección.",
+      "x-group": "Textos",
+      "required": ["eyebrowBadge", "headline", "subheadline", "backgroundImage", "primaryCta", "secondaryCta", "trustBadges"],
+      "properties": {
+        "eyebrowBadge": {
+          "type": "string",
+          "title": "Etiqueta superior",
+          "description": "Texto chico encima del título de la portada.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Nueva Temporada · Mayorista & Minorista"]
+        },
+        "headline": {
+          "type": "string",
+          "title": "Título de portada",
+          "description": "Título principal de la primera pantalla.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Moda versátil que acompaña tu ritmo de vida"]
+        },
+        "subheadline": {
+          "type": "string",
+          "title": "Bajada de portada",
+          "description": "Párrafo de apoyo debajo del título.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Prendas contemporáneas con excelente relación precio–calidad. Diseñadas para renovar tu guardarropa y potenciar tu negocio o estilo diario."]
+        },
+        "backgroundImage": { "$ref": "#/definitions/heroImage" },
+        "primaryCta": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "title": "Botón principal",
+              "description": "Texto del botón de WhatsApp en la portada.",
+              "x-group": "Textos",
+              "x-widget": "text",
+              "x-exampleData": true,
+              "examples": ["Escribinos por WhatsApp"]
+            }
+          }
+        },
+        "secondaryCta": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "targetSectionId"],
+          "properties": {
+            "label": {
+              "type": "string",
+              "title": "Botón secundario",
+              "description": "Texto del segundo botón de la portada.",
+              "x-group": "Textos",
+              "x-widget": "text",
+              "x-exampleData": true,
+              "examples": ["Conocé la marca"]
+            },
+            "targetSectionId": {
+              "type": "string",
+              "title": "Sección de destino",
+              "description": "Id de la sección a la que baja el botón (sin #).",
+              "x-group": "Textos",
+              "x-widget": "text"
+            }
+          }
+        },
+        "trustBadges": {
+          "type": "array",
+          "title": "Sellos de confianza",
+          "description": "Tres frases con ícono debajo de los botones.",
+          "x-group": "Textos",
+          "x-widget": "list",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "iconType", "label"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "title": "Identificador",
+                "description": "Id interno del sello (minúsculas y guiones).",
+                "x-group": "Textos",
+                "x-widget": "text"
+              },
+              "iconType": {
+                "type": "string",
+                "enum": ["support", "shipping", "check"],
+                "title": "Ícono",
+                "description": "Dibujo del sello: atención, envío o tilde.",
+                "x-group": "Textos",
+                "x-widget": "icon"
+              },
+              "label": {
+                "type": "string",
+                "title": "Texto del sello",
+                "description": "Frase corta junto al ícono.",
+                "x-group": "Textos",
+                "x-widget": "text",
+                "x-exampleData": true,
+                "examples": ["Atención personalizada"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "quickWholesaleBar": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Franja mayorista",
+      "description": "Barra entre la portada y la sección de la marca.",
+      "x-group": "Comercial",
+      "required": ["title", "subtitle", "buttonText"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Título de la franja",
+          "description": "Título de la barra mayorista y minorista.",
+          "x-group": "Comercial",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Venta por mayor y por menor sin intermediarios"]
+        },
+        "subtitle": {
+          "type": "string",
+          "title": "Bajada de la franja",
+          "description": "Texto de apoyo de la barra.",
+          "x-group": "Comercial",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Llevá curvas completas para tu comercio o tus prendas favoritas por unidad."]
+        },
+        "buttonText": {
+          "type": "string",
+          "title": "Botón de la franja",
+          "description": "Texto del botón que abre WhatsApp mayorista.",
+          "x-group": "Comercial",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Pedir Lista Mayorista (PDF)"]
+        }
+      }
+    },
+    "essenceSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Nuestra esencia",
+      "description": "Textos, fotos y pilares de la marca.",
+      "x-group": "Textos",
+      "required": ["eyebrow", "title", "description", "look1", "look2", "pillars"],
+      "properties": {
+        "eyebrow": {
+          "type": "string",
+          "title": "Etiqueta de la sección",
+          "description": "Texto chico encima del título.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Nuestra Esencia"]
+        },
+        "title": {
+          "type": "string",
+          "title": "Título de la sección",
+          "description": "Título de la presentación de la marca.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Diseño actual para todos los días"]
+        },
+        "description": {
+          "type": "string",
+          "title": "Descripción",
+          "description": "Párrafo que presenta a la marca.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Creemos en una moda simple, auténtica y pensada para acompañar tu día a día. Creamos prendas actuales, cómodas y bien confeccionadas, con una buena relación entre calidad y precio, para que renovar tu guardarropa sea fácil y accesible."]
+        },
+        "look1": { "$ref": "#/definitions/lookImage" },
+        "look2": { "$ref": "#/definitions/lookImage" },
+        "pillars": {
+          "type": "array",
+          "title": "Pilares",
+          "description": "Tres ideas con ícono, título y texto.",
+          "x-group": "Textos",
+          "x-widget": "list",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "title", "description", "iconType"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "title": "Identificador",
+                "description": "Id interno del pilar.",
+                "x-group": "Textos",
+                "x-widget": "text"
+              },
+              "title": {
+                "type": "string",
+                "title": "Título del pilar",
+                "description": "Título corto.",
+                "x-group": "Textos",
+                "x-widget": "text",
+                "x-exampleData": true,
+                "examples": ["Tendencias reales"]
+              },
+              "description": {
+                "type": "string",
+                "title": "Texto del pilar",
+                "description": "Explicación del pilar.",
+                "x-group": "Textos",
+                "x-widget": "textarea",
+                "x-exampleData": true,
+                "examples": ["Siluetas modernas concebidas para la mujer real. Una fusión equilibrada entre elegancia casual, versatilidad diurna y comodidad total."]
+              },
+              "iconType": {
+                "type": "string",
+                "enum": ["palette", "precision", "groups"],
+                "title": "Ícono",
+                "description": "Dibujo del pilar.",
+                "x-group": "Textos",
+                "x-widget": "icon"
+              }
+            }
+          }
+        }
+      }
+    },
+    "processSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Proceso de compra",
+      "description": "Los tres pasos para comprar.",
+      "x-group": "Textos",
+      "required": ["eyebrowBadge", "title", "subtitle", "steps"],
+      "properties": {
+        "eyebrowBadge": {
+          "type": "string",
+          "title": "Etiqueta",
+          "description": "Texto chico encima del título.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Experiencia Ágil"]
+        },
+        "title": {
+          "type": "string",
+          "title": "Título",
+          "description": "Título de la sección de pasos.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Comprar en Misty es simple y directo"]
+        },
+        "subtitle": {
+          "type": "string",
+          "title": "Bajada",
+          "description": "Párrafo de apoyo.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Sin registros eternos ni procesos engorrosos. Coordinamos todo persona a persona."]
+        },
+        "steps": {
+          "type": "array",
+          "title": "Pasos",
+          "description": "Lista de pasos numerados.",
+          "x-group": "Textos",
+          "x-widget": "list",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["number", "title", "description", "iconType"],
+            "properties": {
+              "number": {
+                "type": "string",
+                "title": "Número",
+                "description": "Número visible del paso (01, 02, 03).",
+                "x-group": "Textos",
+                "x-widget": "text"
+              },
+              "title": {
+                "type": "string",
+                "title": "Título del paso",
+                "description": "Nombre del paso.",
+                "x-group": "Textos",
+                "x-widget": "text",
+                "x-exampleData": true,
+                "examples": ["Elegí tus prendas"]
+              },
+              "description": {
+                "type": "string",
+                "title": "Texto del paso",
+                "description": "Explicación del paso.",
+                "x-group": "Textos",
+                "x-widget": "textarea",
+                "x-exampleData": true,
+                "examples": ["Mirá nuestro lookbook y solicitá el catálogo digital con stock actualizado al instante en WhatsApp."]
+              },
+              "iconType": {
+                "type": "string",
+                "enum": ["book", "chat", "mail"],
+                "title": "Ícono",
+                "description": "Dibujo del paso.",
+                "x-group": "Textos",
+                "x-widget": "icon"
+              }
+            }
+          }
+        }
+      }
+    },
+    "contactSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Sección de contacto",
+      "description": "Textos de las tarjetas de WhatsApp, Instagram, showroom y mapa.",
+      "x-group": "Textos",
+      "required": ["eyebrowBadge", "title", "subtitle", "whatsappCard", "instagramCard", "showroomCard", "mapCallout"],
+      "properties": {
+        "eyebrowBadge": {
+          "type": "string",
+          "title": "Etiqueta",
+          "description": "Texto chico encima del título de contacto.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Canales de Atención"]
+        },
+        "title": {
+          "type": "string",
+          "title": "Título",
+          "description": "Título de la sección de contacto.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Estamos cerca tuyo"]
+        },
+        "subtitle": {
+          "type": "string",
+          "title": "Bajada",
+          "description": "Párrafo de apoyo de la sección de contacto.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Contactanos a través del medio que más cómodo te resulte. Estamos a un mensaje de distancia para resolver dudas, pasar presupuestos y tomar pedidos."]
+        },
+        "whatsappCard": { "$ref": "#/definitions/actionCard" },
+        "instagramCard": { "$ref": "#/definitions/instagramCard" },
+        "showroomCard": { "$ref": "#/definitions/showroomCard" },
+        "mapCallout": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["eyebrow", "description", "buttonText"],
+          "properties": {
+            "eyebrow": {
+              "type": "string",
+              "title": "Etiqueta del mapa",
+              "description": "Texto chico encima del título del mapa.",
+              "x-group": "Textos",
+              "x-widget": "text",
+              "x-exampleData": true,
+              "examples": ["Ubicación Estratégica"]
+            },
+            "description": {
+              "type": "string",
+              "title": "Texto del mapa",
+              "description": "Cómo llegar o ventajas de la ubicación.",
+              "x-group": "Textos",
+              "x-widget": "textarea",
+              "x-exampleData": true,
+              "examples": ["Fácil acceso en colectivos y subte Línea A. Estacionamiento comercial disponible en la zona."]
+            },
+            "buttonText": {
+              "type": "string",
+              "title": "Botón del mapa",
+              "description": "Texto del botón que abre Google Maps.",
+              "x-group": "Textos",
+              "x-widget": "text",
+              "x-exampleData": true,
+              "examples": ["Abrir en Google Maps"]
+            }
+          }
+        },
+        "showroomTitle": {
+          "type": "string",
+          "title": "Título del showroom en el mapa",
+          "description": "Título largo que se muestra junto a la ilustración del mapa. Es distinto del título corto de la tarjeta.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Showroom en el corazón textil de Flores"]
+        }
+      }
+    },
+    "wholesaleCallout": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Llamado mayorista",
+      "description": "Bloque final para comercios y revendedoras.",
+      "x-group": "Comercial",
+      "required": ["badge", "title", "description", "buttonText"],
+      "properties": {
+        "badge": {
+          "type": "string",
+          "title": "Etiqueta",
+          "description": "Texto chico del bloque mayorista.",
+          "x-group": "Comercial",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Canal Exclusivo para Emprendedoras"]
+        },
+        "title": {
+          "type": "string",
+          "title": "Título",
+          "description": "Título del llamado a comercios.",
+          "x-group": "Comercial",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["¿Tenés local o vendés online?"]
+        },
+        "description": {
+          "type": "string",
+          "title": "Descripción",
+          "description": "Texto del llamado mayorista.",
+          "x-group": "Comercial",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Consultá hoy mismo por WhatsApp para recibir la lista de precios mayorista actualizada, condiciones de compra mínima por bulto y el catálogo en PDF para empezar a vender de inmediato."]
+        },
+        "buttonText": {
+          "type": "string",
+          "title": "Botón",
+          "description": "Texto del botón de catálogo mayorista.",
+          "x-group": "Comercial",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Solicitar Catálogo Mayorista"]
+        }
+      }
+    },
+    "footer": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Pie de página",
+      "description": "Textos del pie. La leyenda de demostración la completa el sitio.",
+      "x-group": "Textos",
+      "required": [
+        "brandDescription",
+        "trustBadge",
+        "showroomTitle",
+        "channelsTitle",
+        "legalTitle",
+        "legalNotice",
+        "copyrightText",
+        "variantTag"
+      ],
+      "properties": {
+        "brandDescription": {
+          "type": "string",
+          "title": "Descripción de la marca",
+          "description": "Párrafo corto junto al logo en el pie.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Indumentaria femenina con identidad contemporánea, disponible para pedidos por menor y curvas mayoristas."]
+        },
+        "trustBadge": {
+          "type": "string",
+          "title": "Sello del pie",
+          "description": "Frase de confianza debajo de la descripción.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Canal Mayorista & Minorista"]
+        },
+        "showroomTitle": {
+          "type": "string",
+          "title": "Título de showroom",
+          "description": "Título de la columna de dirección y horarios.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Atención & Showroom"]
+        },
+        "channelsTitle": {
+          "type": "string",
+          "title": "Título de canales",
+          "description": "Título de la columna de Instagram, WhatsApp y correo.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Contacto Directo"]
+        },
+        "legalTitle": {
+          "type": "string",
+          "title": "Título legal",
+          "description": "Título de la columna legal.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Información Legal"]
+        },
+        "legalNotice": {
+          "type": "string",
+          "title": "Aviso legal",
+          "description": "Texto legal o de prototipo.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Este sitio web corresponde a una demostración institucional con fines conceptuales y de portfolio. Toda marca y productos referenciados forman parte de un prototipo de diseño."]
+        },
+        "copyrightText": {
+          "type": "string",
+          "title": "Copyright",
+          "description": "Línea de derechos reservados.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["© 2026 Misty Indumentaria. Todos los derechos reservados."]
+        },
+        "demonstrationDisclaimer": {
+          "type": "string",
+          "title": "Leyenda de demostración",
+          "description": "Texto base de prototipo. El sitio lo completa con el nombre del servicio.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Marca, productos y precios de ejemplo — prototipo de demostración"]
+        },
+        "variantTag": {
+          "type": "string",
+          "title": "Etiqueta de variante",
+          "description": "Crédito o nombre de la variante de diseño.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Variante A · Editorial Lookbook · Diseño y Desarrollo de Arquitectura Web Frontend"]
+        }
+      }
+    }
+  },
+  "definitions": {
+    "heroImage": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Imagen de portada",
+      "description": "Foto de fondo de la primera pantalla.",
+      "required": ["src", "alt", "width", "height"],
+      "properties": {
+        "src": {
+          "type": "string",
+          "title": "Archivo de portada",
+          "description": "Foto horizontal de al menos 1280 px de ancho.",
+          "x-group": "Imágenes",
+          "x-widget": "image",
+          "x-exampleData": true,
+          "examples": ["/assets/hero/hero-1.jpg"],
+          "x-asset": {
+            "path": "public/assets/hero/hero-1.jpg",
+            "minWidth": 1280,
+            "ratio": "1376:768",
+            "maxKB": 250
+          }
+        },
+        "fallback": {
+          "type": "string",
+          "title": "Imagen de respaldo",
+          "description": "Foto alternativa si no carga la de portada.",
+          "x-group": "Imágenes",
+          "x-widget": "image"
+        },
+        "alt": {
+          "type": "string",
+          "title": "Texto alternativo",
+          "description": "Descripción de la foto de portada.",
+          "x-group": "Imágenes",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Editorial lookbook de campaña con modelos en showroom contemporáneo"]
+        },
+        "width": {
+          "type": "integer",
+          "title": "Ancho en píxeles",
+          "description": "Ancho real del archivo, para que la página reserve el espacio.",
+          "x-group": "Imágenes",
+          "x-widget": "number"
+        },
+        "height": {
+          "type": "integer",
+          "title": "Alto en píxeles",
+          "description": "Alto real del archivo.",
+          "x-group": "Imágenes",
+          "x-widget": "number"
+        }
+      }
+    },
+    "lookImage": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Foto de look",
+      "description": "Retrato vertical de la sección de esencia. Mínimo 800 px de ancho.",
+      "required": ["src", "alt", "width", "height"],
+      "properties": {
+        "src": {
+          "type": "string",
+          "title": "Archivo de la foto",
+          "description": "Retrato vertical de al menos 800 px de ancho.",
+          "x-group": "Imágenes",
+          "x-widget": "image",
+          "x-exampleData": true,
+          "examples": ["/assets/misc/sobre-marca-1.jpg"],
+          "x-asset": {
+            "path": "public/assets/misc/sobre-marca-1.jpg",
+            "minWidth": 800,
+            "ratio": "896:1200",
+            "maxKB": 180
+          }
+        },
+        "fallback": {
+          "type": "string",
+          "title": "Imagen de respaldo",
+          "description": "Foto alternativa si no carga la principal.",
+          "x-group": "Imágenes",
+          "x-widget": "image"
+        },
+        "alt": {
+          "type": "string",
+          "title": "Texto alternativo",
+          "description": "Descripción de la foto.",
+          "x-group": "Imágenes",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Modelo luciendo blazer terracota elegante y top neutro"]
+        },
+        "width": {
+          "type": "integer",
+          "title": "Ancho en píxeles",
+          "description": "Ancho real del archivo.",
+          "x-group": "Imágenes",
+          "x-widget": "number"
+        },
+        "height": {
+          "type": "integer",
+          "title": "Alto en píxeles",
+          "description": "Alto real del archivo.",
+          "x-group": "Imágenes",
+          "x-widget": "number"
+        },
+        "badgeCategory": {
+          "type": "string",
+          "title": "Etiqueta sobre la foto",
+          "description": "Texto chico superpuesto (categoría del look).",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Look 01 · Sastrería Relajada"]
+        },
+        "badgeTitle": {
+          "type": "string",
+          "title": "Título sobre la foto",
+          "description": "Texto superpuesto más destacado.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Lino & Gabardina Premium"]
+        }
+      }
+    },
+    "actionCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["badge", "title", "description", "buttonText"],
+      "properties": {
+        "badge": {
+          "type": "string",
+          "title": "Etiqueta de la tarjeta",
+          "description": "Texto chico de la tarjeta de WhatsApp.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Canal Principal"]
+        },
+        "title": {
+          "type": "string",
+          "title": "Título de la tarjeta",
+          "description": "Título de la tarjeta de WhatsApp.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["WhatsApp Directo"]
+        },
+        "description": {
+          "type": "string",
+          "title": "Texto de la tarjeta",
+          "description": "Descripción de la tarjeta de WhatsApp.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Atención inmediata para listas de precios, consultas mayoristas y pedidos minoristas."]
+        },
+        "buttonText": {
+          "type": "string",
+          "title": "Botón de la tarjeta",
+          "description": "Texto del botón de WhatsApp.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Chatear con asesoras"]
+        }
+      }
+    },
+    "instagramCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Título de Instagram",
+          "description": "Título de la tarjeta de Instagram.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Instagram Oficial"]
+        },
+        "badge": {
+          "type": "string",
+          "title": "Etiqueta de Instagram",
+          "description": "Texto chico de la tarjeta de Instagram.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Comunidad Activa"]
+        },
+        "description": {
+          "type": "string",
+          "title": "Texto de Instagram",
+          "description": "Descripción de la cuenta.",
+          "x-group": "Textos",
+          "x-widget": "textarea",
+          "x-exampleData": true,
+          "examples": ["Mirá las prendas en movimiento, looks cotidianos, reviews de clientas y novedades semanales."]
+        },
+        "buttonText": {
+          "type": "string",
+          "title": "Botón de Instagram",
+          "description": "Texto del botón que abre Instagram.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Ver comunidad & novedades"]
+        }
+      }
+    },
+    "showroomCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "hoursLabel"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Título de la tarjeta de showroom",
+          "description": "Título corto de la tarjeta de local.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Showroom Comercial"]
+        },
+        "hoursLabel": {
+          "type": "string",
+          "title": "Rótulo de horarios",
+          "description": "Texto que precede a las líneas de horario.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Horarios de Atención:"]
+        },
+        "badge": {
+          "type": "string",
+          "title": "Etiqueta de showroom",
+          "description": "Texto chico de la tarjeta de showroom.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Punto de Venta"]
+        },
+        "buttonText": {
+          "type": "string",
+          "title": "Botón de cómo llegar",
+          "description": "Texto del botón de la tarjeta de showroom.",
+          "x-group": "Textos",
+          "x-widget": "text",
+          "x-exampleData": true,
+          "examples": ["Cómo llegar"]
+        }
+      }
+    }
+  }
+}

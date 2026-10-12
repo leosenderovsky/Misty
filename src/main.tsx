@@ -11,8 +11,8 @@ for (const [name, value] of Object.entries(brandConfig.theme)) {
   root.style.setProperty(`--brand-${cssName}`, value);
 }
 
-root.style.setProperty('--brand-font-headings', brandConfig.typography.headings);
-root.style.setProperty('--brand-font-body', brandConfig.typography.body);
+root.style.setProperty('--brand-font-headings', brandConfig.typography.headingFont);
+root.style.setProperty('--brand-font-body', brandConfig.typography.bodyFont);
 
 const fontStylesheet = document.head.querySelector<HTMLLinkElement>('link[data-brand-fonts]');
 if (!fontStylesheet) {
@@ -54,8 +54,8 @@ if (!favicon || !appleTouchIcon || !canonicalLink) {
   throw new Error('Missing favicon or canonical link element');
 }
 
-favicon.href = new URL(brandConfig.identity.faviconUrl, siteUrl).href;
-appleTouchIcon.href = new URL(brandConfig.identity.appleTouchIconUrl, siteUrl).href;
+favicon.href = new URL(brandConfig.logo.favicon32, siteUrl).href;
+appleTouchIcon.href = new URL(brandConfig.logo.appleTouchIcon, siteUrl).href;
 canonicalLink.href = canonicalUrl;
 
 createRoot(document.getElementById('root')!).render(
