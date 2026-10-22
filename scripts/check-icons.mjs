@@ -101,7 +101,7 @@ function hasAlpha(data, info, x, y) {
 }
 
 async function validateManualIconCrop() {
-  const iconCrop = brandConfig.identity.iconCrop;
+  const iconCrop = brandConfig.logo.iconCrop;
   if (!iconCrop) return;
 
   const rawLogo = await sharp(logoPath).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -134,7 +134,7 @@ async function validateManualIconCrop() {
   }
 
   if (cutsVisiblePixels) {
-    console.error('identity.iconCrop corta pixeles visibles del logo; ajusta el recorte del emblema');
+    console.error('logo.iconCrop corta pixeles visibles del logo; ajusta el recorte del emblema');
     process.exitCode = 1;
   }
 }
@@ -171,7 +171,7 @@ async function validateIcon(filename, expectedSize, { requireOpaque = false } = 
     process.exitCode = 1;
   } else {
     if (content.touchesOuterBand) {
-      console.error('el emblema toca el borde del icono: recorte incorrecto, ajusta identity.iconCrop');
+      console.error('el emblema toca el borde del icono: recorte incorrecto, ajusta logo.iconCrop');
       process.exitCode = 1;
     }
     if (content.majorAxisRatio < 0.7 || content.majorAxisRatio > 0.95) {

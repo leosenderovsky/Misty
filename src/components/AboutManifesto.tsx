@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+import { Txt } from './Txt';
 import { Palette, Sparkles, Users } from 'lucide-react';
 import { brandConfig } from '../brand.config';
 
@@ -27,18 +28,12 @@ export const AboutManifesto: React.FC = () => {
         <div className="flex flex-col items-start max-w-2xl mb-14">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-6 h-[2px] bg-brand-secondary" />
-            <span className="text-[11px] uppercase tracking-wider text-brand-secondary font-bold">
-              {brandConfig.essenceSection.eyebrow}
-            </span>
+            <Txt as="span" className="text-[11px] uppercase tracking-wider text-brand-secondary font-bold" value={brandConfig.essenceSection.eyebrow} />
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] lg:leading-[48px] text-brand-on-surface tracking-tight leading-tight font-semibold">
-            {brandConfig.essenceSection.title}
-          </h2>
+          <Txt as="h2" className="font-serif text-3xl sm:text-4xl lg:text-[40px] lg:leading-[48px] text-brand-on-surface tracking-tight leading-tight font-semibold" value={brandConfig.essenceSection.title} />
 
-          <p className="text-base sm:text-lg text-brand-on-surface-variant mt-4 leading-relaxed font-normal">
-            {brandConfig.essenceSection.description}
-          </p>
+          <Txt as="p" className="text-base sm:text-lg text-brand-on-surface-variant mt-4 leading-relaxed font-normal" value={brandConfig.essenceSection.description} />
         </div>
 
         {/* Bento / Diptych Grid (12 cols) */}
@@ -59,12 +54,8 @@ export const AboutManifesto: React.FC = () => {
                 referrerPolicy="no-referrer"
               />
               <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-brand-surface-bright/95 backdrop-blur-md shadow-sm border border-brand-surface-container-highest">
-                <span className="text-[11px] uppercase text-brand-secondary font-bold tracking-wider block">
-                  {brandConfig.essenceSection.look1.badgeCategory}
-                </span>
-                <p className="text-base sm:text-lg font-semibold text-brand-on-surface mt-0.5">
-                  {brandConfig.essenceSection.look1.badgeTitle}
-                </p>
+                <Txt as="span" className="text-[11px] uppercase text-brand-secondary font-bold tracking-wider block" value={brandConfig.essenceSection.look1.badgeCategory} />
+                <Txt as="p" className="text-base sm:text-lg font-semibold text-brand-on-surface mt-0.5" value={brandConfig.essenceSection.look1.badgeTitle} />
               </div>
             </div>
           </div>
@@ -121,12 +112,8 @@ export const AboutManifesto: React.FC = () => {
                 referrerPolicy="no-referrer"
               />
               <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-brand-surface-bright/95 backdrop-blur-md shadow-sm border border-brand-surface-container-highest">
-                <span className="text-[11px] uppercase text-brand-secondary font-bold tracking-wider block">
-                  {brandConfig.essenceSection.look2.badgeCategory}
-                </span>
-                <p className="text-base sm:text-lg font-semibold text-brand-on-surface mt-0.5">
-                  {brandConfig.essenceSection.look2.badgeTitle}
-                </p>
+                <Txt as="span" className="text-[11px] uppercase text-brand-secondary font-bold tracking-wider block" value={brandConfig.essenceSection.look2.badgeCategory} />
+                <Txt as="p" className="text-base sm:text-lg font-semibold text-brand-on-surface mt-0.5" value={brandConfig.essenceSection.look2.badgeTitle} />
               </div>
             </div>
           </div>

@@ -19,14 +19,14 @@ function assertFractionCrop(crop) {
   const fields = ['left', 'top', 'width', 'height'];
   for (const field of fields) {
     if (!Number.isFinite(crop[field]) || crop[field] < 0 || crop[field] > 1) {
-      throw new Error(`identity.iconCrop.${field} must be a fraction from 0 to 1`);
+      throw new Error(`logo.iconCrop.${field} must be a fraction from 0 to 1`);
     }
   }
   if (crop.width <= 0 || crop.height <= 0) {
-    throw new Error('identity.iconCrop width and height must be greater than 0');
+    throw new Error('logo.iconCrop width and height must be greater than 0');
   }
   if (crop.left + crop.width > 1 || crop.top + crop.height > 1) {
-    throw new Error('identity.iconCrop must stay inside the trimmed logo bounds');
+    throw new Error('logo.iconCrop must stay inside the trimmed logo bounds');
   }
 }
 
@@ -69,7 +69,7 @@ async function extractEmblem(logoPath) {
   const logoBuffer = await flattenedLogo.toBuffer();
   const trim = await trimToAlpha(logoBuffer);
   const trimmedLogo = await sharp(logoBuffer).extract(trim).png().toBuffer();
-  const iconCrop = brandConfig.identity.iconCrop;
+  const iconCrop = brandConfig.logo.iconCrop;
 
   if (iconCrop) {
     assertFractionCrop(iconCrop);

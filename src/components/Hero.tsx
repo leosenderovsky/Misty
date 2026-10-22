@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+import { Txt } from './Txt';
 import { MessageCircle, ArrowDown, Headphones, Truck, CheckCircle2 } from 'lucide-react';
 import { brandConfig, getWhatsAppUrl } from '../brand.config';
 
@@ -46,20 +47,14 @@ export const Hero: React.FC = () => {
         {/* Badge with pulse dot */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-surface-bright/95 backdrop-blur-md shadow-md text-brand-on-surface mb-6 border border-white/40">
           <span className="w-2 h-2 rounded-full bg-brand-secondary animate-pulse" />
-          <span className="text-[11px] uppercase tracking-wider text-brand-primary font-bold">
-            {brandConfig.hero.eyebrowBadge}
-          </span>
+          <Txt as="span" className="text-[11px] uppercase tracking-wider text-brand-primary font-bold" value={brandConfig.hero.eyebrowBadge} />
         </div>
 
         {/* Main Headline (Playfair Display) */}
-        <h1 className="font-serif text-3xl sm:text-5xl lg:text-[56px] lg:leading-[64px] text-white max-w-4xl tracking-tight leading-tight mb-6 font-semibold">
-          {brandConfig.hero.headline}
-        </h1>
+        <Txt as="h1" className="font-serif text-3xl sm:text-5xl lg:text-[56px] lg:leading-[64px] text-white max-w-4xl tracking-tight leading-tight mb-6 font-semibold" value={brandConfig.hero.headline} />
 
         {/* Positioning Subheadline */}
-        <p className="text-base sm:text-lg text-slate-100 max-w-2xl font-normal leading-relaxed mb-10">
-          {brandConfig.hero.subheadline}
-        </p>
+        <Txt as="p" className="text-base sm:text-lg text-slate-100 max-w-2xl font-normal leading-relaxed mb-10" value={brandConfig.hero.subheadline} />
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-12">
@@ -70,14 +65,14 @@ export const Hero: React.FC = () => {
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-brand-primary text-white text-base sm:text-lg font-semibold shadow-xl hover:bg-brand-primary-hover transition-all hover:scale-[1.02] active:scale-[0.99]"
           >
             <MessageCircle className="w-5 h-5 shrink-0" />
-            <span>{brandConfig.hero.primaryCta.label}</span>
+            <Txt as="span" value={brandConfig.hero.primaryCta.label} />
           </a>
 
           <a
             href={`#${brandConfig.hero.secondaryCta.targetSectionId}`}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/20 hover:bg-brand-surface-bright text-white hover:text-brand-on-surface backdrop-blur-md border border-white/30 transition-all text-base sm:text-lg font-semibold"
           >
-            <span>{brandConfig.hero.secondaryCta.label}</span>
+            <Txt as="span" value={brandConfig.hero.secondaryCta.label} />
             <ArrowDown className="w-5 h-5 shrink-0" />
           </a>
         </div>

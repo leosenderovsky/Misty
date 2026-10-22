@@ -27,7 +27,13 @@ npm run preview
 src/
 ├── App.tsx
 ├── main.tsx
-├── brand.config.ts
+├── brand.config.ts        (envoltorio: importa src/data/brand.json y exporta `brandConfig`)
+├── demoBanner.config.ts
+├── data/
+│   ├── brand.json         (datos editables de la marca)
+│   ├── brand.schema.json  (esquema: etiquetas en español, tipos y reglas)
+│   └── prototype-markers.json (textos del prototipo que no deben llegar a un cliente)
+├── generated/             (tipos generados desde el esquema; se commitean)
 └── components/
     ├── Header.tsx
     ├── Hero.tsx
@@ -46,18 +52,19 @@ public/assets/
 scripts/
 └── scripts de imágenes, logo e iconos
 docs/
-└── IMAGENES.md
+├── IMAGENES.md
+└── CAMPOS.md          (generado: tabla de campos editables)
 ```
 
 ## Adaptar la marca
 
-Editá `src/brand.config.ts` en este orden:
+Los datos se editan en **`src/data/brand.json`** (no en `brand.config.ts`, que es solo un envoltorio). La tabla completa de campos está en `docs/CAMPOS.md` (se regenera con `npm run docs:fields`). Orden sugerido:
 
-1. **identity** — nombre, rubro, logo y rutas de favicon e ícono Apple.
+1. **identity** y **logo** — nombre, rubro, logo y rutas de favicon e ícono Apple (`logo.src`, `logo.favicon32`, `logo.appleTouchIcon`).
 2. **seo** — sufijo del título, descripción y la imagen social.
 3. **typography** — familias tipográficas y URL de la hoja de estilos.
 4. **theme** — colores de marca y superficies.
-5. **contact** — WhatsApp, Instagram, email, showroom, dirección y horarios.
+5. **contact** — WhatsApp (con sus mensajes), Instagram, correo, dirección (`address`) y horarios (`hours.lines`).
 6. **navigation** — enlaces y textos de los botones de navegación.
 7. **marquee** — mensajes de la franja móvil.
 8. **hero** — textos, imagen, CTAs y sellos de confianza.
@@ -74,7 +81,7 @@ No hay un interruptor para ocultar mayorista. Si el cliente no lo usa, sacá Qui
 
 ## Imágenes y logo
 
-Usá estas rutas para las imágenes actuales; reemplazalas y actualizá sus datos y textos alternativos en `src/brand.config.ts`.
+Usá estas rutas para las imágenes actuales; reemplazalas y actualizá sus datos y textos alternativos en `src/data/brand.json`.
 
 | Archivo | Uso | Medida mínima o regla |
 |---|---|---|
@@ -103,6 +110,30 @@ El SVG del logo es opcional: hoy no existe public/assets/logo/logo.svg y el siti
 
 `make:logo-png` requiere que primero exista un SVG que pase `check:logo`. Más detalles en `docs/IMAGENES.md`.
 
+## Datos, validación y pruebas
+
+| Comando | Para qué sirve |
+|---|---|
+| `npm run generate:types` | Genera `src/generated/brand.types.ts` desde `brand.schema.json` (corre solo en `dev` y `build`; el archivo se commitea). |
+| `npm run check:config` | Valida `brand.json` contra el esquema y revisa imágenes existentes, colores, contraste, WhatsApp y URLs. |
+| `npm run check:config:strict` | Además exige reemplazar los datos de ejemplo y rechaza los textos de `prototype-markers.json`. **Falla en el prototipo, a propósito.** |
+| `npm run check:render` | Renderiza la aplicación sin navegador y falla ante cualquier excepción (detecta páginas en blanco). |
+| `npm run check:texts` | Renderiza la aplicación y falla si algún texto visible (o `aria-label`, `alt`, `title`) **no sale de `brand.json`**: garantiza que todo texto sea editable. |
+| `npm run docs:fields` | Genera `docs/CAMPOS.md` a partir del esquema. |
+| `npm run logo:optimize` | Reduce `logo.png` a 800 px de ancho y 120 KB como máximo, conservando la transparencia. |
+
+### Todos los textos son editables (y quitables)
+
+Ningún texto visible está escrito en el código: todo sale de `src/data/brand.json`, incluidos los botones, los títulos del pie y las etiquetas de accesibilidad (bloque `ui`). Para adaptarlos a un cliente:
+
+- **Cambiar un texto:** editá su valor (por ejemplo `footer.channelsTitle` de "Contacto Directo" a "Contacto").
+- **Quitar un elemento:** dejá su texto **vacío** (`""`). El elemento no se dibuja. En el pie, si una columna queda sin contenido (por ejemplo `legalTitle` y `legalNotice` vacíos), la columna se oculta y las demás se reacomodan.
+- **Quitar una sección o un bloque:** `quickWholesaleBar.enabled`, `wholesaleCallout.enabled` y `ui.whatsappFloating.enabled` en `false`.
+- **Textos con variables:** `{name}` (nombre de la marca) y `{address}` (dirección) se reemplazan automáticamente.
+- En el modo estricto (`check:config:strict`) se exige reemplazar los textos propios de la marca; los **textos genéricos de interfaz** (botones y títulos del pie) se pueden dejar como están.
+
+Si agregás un componente nuevo, sus textos deben ir a `brand.json` (y a `brand.schema.json`); `npm run check:texts` lo verifica.
+
 ## Variables de entorno
 
 Las variables de esta tabla están declaradas en `.env.example`.
@@ -121,6 +152,8 @@ si esa URL queda vacía, `src/main.tsx` usa el origen actual de la página.
 ## Modo demo
 
 `src/components/PrototypeBanner.tsx` muestra que la marca es un prototipo. `src/demoBanner.config.ts` lee el nombre y el enlace; si no hay nombre, muestra el aviso genérico. El pie arma su leyenda con `getDemoLegend()`, también definido en ese archivo.
+
+El banner muestra por defecto el nombre **Tienda ON!** sin enlace (el sitio https://tiendaon.com.ar todavía no existe); se cambia con `VITE_DEMO_BRAND_NAME` y `VITE_DEMO_BRAND_URL`. Para ocultarlo sin borrar archivos, poné `demo.showPrototypeBanner` en `false` en `src/data/brand.json`.
 
 Al entregar a un cliente real, borrá `src/components/PrototypeBanner.tsx` y `src/demoBanner.config.ts`; quitá de `src/App.tsx` el import y el render marcados DEMO ONLY. Sacá también la leyenda del pie: el uso de `getDemoLegend()` en `src/brand.config.ts` y su render en `src/components/Footer.tsx`.
 
@@ -150,7 +183,8 @@ npm run verify:deploy -- https://<sitio>.netlify.app
 
 ## Antes de entregar
 
-- [ ] Actualizá identidad, SEO, tipografías, tema, contacto, textos y enlaces en `src/brand.config.ts`.
+- [ ] Actualizá identidad, SEO, tipografías, tema, contacto, textos y enlaces en `src/data/brand.json`.
+- [ ] Corré `npm run check:config:strict`, `npm run check:render` y `npm run check:texts`: el primero debe pasar con los datos del cliente.
 - [ ] Reemplazá las imágenes y actualizá las rutas y textos alternativos.
 - [ ] Regenerá iconos con `npm run make:icons` y comprobá con `npm run check:icons`.
 - [ ] Revisá imágenes con `npm run check:images:strict`.

@@ -4,11 +4,13 @@
  */
 
 import React from 'react';
+import { Txt } from './Txt';
 import { Send } from 'lucide-react';
 import { brandConfig, getWhatsAppUrl } from '../brand.config';
 
 export const WholesaleBanner: React.FC = () => {
   const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.messages.wholesale);
+  if (brandConfig.wholesaleCallout.enabled === false) return null;
 
   return (
     <section className="w-full py-12 px-4 sm:px-6 lg:px-8 bg-brand-surface">
@@ -20,17 +22,11 @@ export const WholesaleBanner: React.FC = () => {
 
           <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="max-w-2xl text-center lg:text-left">
-              <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] uppercase tracking-wider mb-4 font-bold border border-white/20">
-                {brandConfig.wholesaleCallout.badge}
-              </span>
+              <Txt as="span" className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] uppercase tracking-wider mb-4 font-bold border border-white/20" value={brandConfig.wholesaleCallout.badge} />
               
-              <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-                {brandConfig.wholesaleCallout.title}
-              </h3>
+              <Txt as="h3" className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight" value={brandConfig.wholesaleCallout.title} />
               
-              <p className="text-sm sm:text-base text-brand-secondary-container mt-3 leading-relaxed">
-                {brandConfig.wholesaleCallout.description}
-              </p>
+              <Txt as="p" className="text-sm sm:text-base text-brand-secondary-container mt-3 leading-relaxed" value={brandConfig.wholesaleCallout.description} />
             </div>
 
             <div className="shrink-0 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
@@ -41,7 +37,7 @@ export const WholesaleBanner: React.FC = () => {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-brand-surface-bright text-brand-primary text-base font-semibold shadow-lg hover:bg-brand-surface-container-low transition-all hover:scale-[1.02] active:scale-[0.99]"
               >
                 <Send className="w-5 h-5 text-brand-secondary-dark" />
-                <span>{brandConfig.wholesaleCallout.buttonText}</span>
+                <Txt as="span" value={brandConfig.wholesaleCallout.buttonText} />
               </a>
             </div>
           </div>

@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { Txt } from './Txt';
 import { BookOpen, MessagesSquare, CheckCheck } from 'lucide-react';
 import { brandConfig } from '../brand.config';
 
@@ -14,15 +15,9 @@ export const ProcessSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto mb-12">
-          <span className="text-[11px] uppercase tracking-wider text-brand-secondary font-bold block">
-            {brandConfig.processSection.eyebrowBadge}
-          </span>
-          <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-brand-on-surface mt-1">
-            {brandConfig.processSection.title}
-          </h2>
-          <p className="text-xs sm:text-sm text-brand-on-surface-variant mt-2">
-            {brandConfig.processSection.subtitle}
-          </p>
+          <Txt as="span" className="text-[11px] uppercase tracking-wider text-brand-secondary font-bold block" value={brandConfig.processSection.eyebrowBadge} />
+          <Txt as="h2" className="font-serif text-2xl sm:text-3xl font-semibold text-brand-on-surface mt-1" value={brandConfig.processSection.title} />
+          <Txt as="p" className="text-xs sm:text-sm text-brand-on-surface-variant mt-2" value={brandConfig.processSection.subtitle} />
         </div>
 
         {/* 3 Step Cards */}

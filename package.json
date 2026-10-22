@@ -28,7 +28,8 @@
     "check:logo": "node scripts/check-logo.mjs",
     "make:logo-png": "node scripts/make-logo-png.mjs",
     "images:optimize": "node scripts/optimize-images.mjs",
-    "make:og": "node scripts/make-og-image.mjs"
+    "make:og": "node scripts/make-og-image.mjs",
+    "check:texts": "node scripts/check-texts.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

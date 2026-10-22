@@ -4,11 +4,14 @@
  */
 
 import React from 'react';
+import { Txt } from './Txt';
 import { Store, Download } from 'lucide-react';
 import { brandConfig, getWhatsAppUrl } from '../brand.config';
 
 export const QuickWholesaleStrip: React.FC = () => {
   const waWholesaleUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.messages.wholesale);
+
+  if (brandConfig.quickWholesaleBar.enabled === false) return null;
 
   return (
     <section className="w-full bg-brand-surface-container py-6 px-4 sm:px-6 lg:px-8 border-y border-brand-surface-container-highest/60">
@@ -20,12 +23,8 @@ export const QuickWholesaleStrip: React.FC = () => {
             <Store className="w-5 h-5" />
           </span>
           <div>
-            <p className="text-base sm:text-lg font-semibold text-brand-on-surface">
-              {brandConfig.quickWholesaleBar.title}
-            </p>
-            <p className="text-xs sm:text-sm text-brand-on-surface-variant">
-              {brandConfig.quickWholesaleBar.subtitle}
-            </p>
+            <Txt as="p" className="text-base sm:text-lg font-semibold text-brand-on-surface" value={brandConfig.quickWholesaleBar.title} />
+            <Txt as="p" className="text-xs sm:text-sm text-brand-on-surface-variant" value={brandConfig.quickWholesaleBar.subtitle} />
           </div>
         </div>
 
@@ -38,7 +37,7 @@ export const QuickWholesaleStrip: React.FC = () => {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-primary text-white hover:bg-brand-secondary transition-colors text-xs sm:text-sm font-semibold shadow-sm"
           >
             <Download className="w-4 h-4" />
-            <span>{brandConfig.quickWholesaleBar.buttonText}</span>
+            <Txt as="span" value={brandConfig.quickWholesaleBar.buttonText} />
           </a>
         </div>
 

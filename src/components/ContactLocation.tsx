@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { Txt } from './Txt';
 import {
   MessageCircle,
   Instagram,
@@ -13,14 +14,7 @@ import {
   Send,
   Image,
 } from 'lucide-react';
-import {
-  brandConfig,
-  getInstagramUrl,
-  getShowroomAddressText,
-  getShowroomHoursText,
-  getShowroomMapsUrl,
-  getWhatsAppUrl,
-} from '../brand.config';
+import { brandConfig, getInstagramUrl, getShowroomAddressText, getShowroomHoursText, getShowroomMapsUrl, getWhatsAppUrl, formatText } from '../brand.config';
 
 export const ContactLocation: React.FC = () => {
   const waUrl = getWhatsAppUrl(brandConfig.contact.whatsapp.messages.default);
@@ -36,15 +30,9 @@ export const ContactLocation: React.FC = () => {
         
         {/* Section Header */}
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[11px] uppercase tracking-wider text-brand-secondary font-bold">
-            {brandConfig.contactSection.eyebrowBadge}
-          </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[40px] text-brand-on-surface font-semibold mt-1">
-            {brandConfig.contactSection.title}
-          </h2>
-          <p className="text-base sm:text-lg text-brand-on-surface-variant mt-3 leading-relaxed">
-            {brandConfig.contactSection.subtitle}
-          </p>
+          <Txt as="span" className="text-[11px] uppercase tracking-wider text-brand-secondary font-bold" value={brandConfig.contactSection.eyebrowBadge} />
+          <Txt as="h2" className="font-serif text-3xl sm:text-4xl lg:text-[40px] text-brand-on-surface font-semibold mt-1" value={brandConfig.contactSection.title} />
+          <Txt as="p" className="text-base sm:text-lg text-brand-on-surface-variant mt-3 leading-relaxed" value={brandConfig.contactSection.subtitle} />
         </div>
 
         {/* 3 Channels Action Cards Grid */}
@@ -61,17 +49,11 @@ export const ContactLocation: React.FC = () => {
                 {brandConfig.contactSection.whatsappCard.badge}
               </div>
 
-              <h3 className="font-serif text-2xl font-semibold text-brand-on-surface mb-2">
-                {brandConfig.contactSection.whatsappCard.title}
-              </h3>
+              <Txt as="h3" className="font-serif text-2xl font-semibold text-brand-on-surface mb-2" value={brandConfig.contactSection.whatsappCard.title} />
 
-              <p className="text-xs sm:text-sm text-brand-on-surface-variant mb-6 leading-relaxed">
-                {brandConfig.contactSection.whatsappCard.description}
-              </p>
+              <Txt as="p" className="text-xs sm:text-sm text-brand-on-surface-variant mb-6 leading-relaxed" value={brandConfig.contactSection.whatsappCard.description} />
 
-              <p className="text-lg font-semibold text-brand-on-surface mb-6">
-                {brandConfig.contact.whatsapp.display}
-              </p>
+              <Txt as="p" className="text-lg font-semibold text-brand-on-surface mb-6" value={brandConfig.contact.whatsapp.display} />
             </div>
 
             <a
@@ -80,7 +62,7 @@ export const ContactLocation: React.FC = () => {
               rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-brand-primary text-white hover:bg-brand-secondary transition-all text-xs sm:text-sm font-semibold shadow-sm"
             >
-              <span>{brandConfig.contactSection.whatsappCard.buttonText}</span>
+              <Txt as="span" value={brandConfig.contactSection.whatsappCard.buttonText} />
               <ExternalLink className="w-4 h-4" />
             </a>
           </div>
@@ -96,17 +78,11 @@ export const ContactLocation: React.FC = () => {
                 {brandConfig.contactSection.instagramCard.badge}
               </div>
 
-              <h3 className="font-serif text-2xl font-semibold text-brand-on-surface mb-2">
-                {brandConfig.contactSection.instagramCard.title}
-              </h3>
+              <Txt as="h3" className="font-serif text-2xl font-semibold text-brand-on-surface mb-2" value={brandConfig.contactSection.instagramCard.title} />
 
-              <p className="text-xs sm:text-sm text-brand-on-surface-variant mb-6 leading-relaxed">
-                {brandConfig.contactSection.instagramCard.description}
-              </p>
+              <Txt as="p" className="text-xs sm:text-sm text-brand-on-surface-variant mb-6 leading-relaxed" value={brandConfig.contactSection.instagramCard.description} />
 
-              <p className="text-lg font-semibold text-brand-on-surface mb-6">
-                {brandConfig.contact.instagram.handle}
-              </p>
+              <Txt as="p" className="text-lg font-semibold text-brand-on-surface mb-6" value={brandConfig.contact.instagram.handle} />
             </div>
 
             <a
@@ -115,7 +91,7 @@ export const ContactLocation: React.FC = () => {
               rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-brand-surface-container hover:bg-brand-surface-container-highest text-brand-on-surface transition-all text-xs sm:text-sm font-semibold shadow-sm"
             >
-              <span>{brandConfig.contactSection.instagramCard.buttonText}</span>
+              <Txt as="span" value={brandConfig.contactSection.instagramCard.buttonText} />
               <Image className="w-4 h-4" />
             </a>
           </div>
@@ -131,9 +107,7 @@ export const ContactLocation: React.FC = () => {
                 {brandConfig.contactSection.showroomCard.badge}
               </div>
 
-              <h3 className="font-serif text-2xl font-semibold text-brand-on-surface mb-2">
-                {brandConfig.contactSection.showroomCard.title}
-              </h3>
+              <Txt as="h3" className="font-serif text-2xl font-semibold text-brand-on-surface mb-2" value={brandConfig.contactSection.showroomCard.title} />
 
               <p className="text-xs sm:text-sm text-brand-on-surface-variant mb-3 leading-relaxed">
                 {getShowroomAddressText()}
@@ -158,7 +132,7 @@ export const ContactLocation: React.FC = () => {
               rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-brand-secondary text-white hover:bg-brand-primary transition-all text-xs sm:text-sm font-semibold shadow-sm"
             >
-              <span>{brandConfig.contactSection.showroomCard.buttonText}</span>
+              <Txt as="span" value={brandConfig.contactSection.showroomCard.buttonText} />
               <MapPin className="w-4 h-4" />
             </a>
           </div>
@@ -172,7 +146,7 @@ export const ContactLocation: React.FC = () => {
                 <svg
                   viewBox="0 0 480 300"
                   role="img"
-                  aria-label={`Ilustración de ubicación del showroom de ${brandConfig.identity.name}`}
+                  aria-label={formatText(brandConfig.contactSection.showroomCard.mapLabel, { name: brandConfig.identity.name })}
                   className="w-full max-w-lg h-auto"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -188,15 +162,9 @@ export const ContactLocation: React.FC = () => {
               </div>
 
               <div className="p-6 md:p-10 flex flex-col justify-center">
-                <span className="text-[11px] uppercase tracking-wider text-brand-secondary font-bold block mb-1">
-                  {brandConfig.contactSection.mapCallout.eyebrow}
-                </span>
-                <h3 className="font-serif text-xl sm:text-2xl font-semibold text-brand-on-surface">
-                  {brandConfig.contactSection.showroomTitle}
-                </h3>
-                <p className="text-sm text-brand-on-surface-variant mt-3 leading-relaxed">
-                  {brandConfig.contactSection.mapCallout.description}
-                </p>
+                <Txt as="span" className="text-[11px] uppercase tracking-wider text-brand-secondary font-bold block mb-1" value={brandConfig.contactSection.mapCallout.eyebrow} />
+                <Txt as="h3" className="font-serif text-xl sm:text-2xl font-semibold text-brand-on-surface" value={brandConfig.contactSection.showroomTitle} />
+                <Txt as="p" className="text-sm text-brand-on-surface-variant mt-3 leading-relaxed" value={brandConfig.contactSection.mapCallout.description} />
                 <div className="mt-5 text-sm text-brand-on-surface">
                   <p className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-brand-primary" />
@@ -218,7 +186,7 @@ export const ContactLocation: React.FC = () => {
                   className="mt-6 inline-flex w-fit items-center gap-2 px-5 py-2.5 rounded-full bg-brand-primary text-white hover:bg-brand-secondary transition-colors shadow-sm text-xs sm:text-sm font-semibold"
                 >
                   <MapPin className="w-4 h-4" />
-                  <span>{brandConfig.contactSection.mapCallout.buttonText}</span>
+                  <Txt as="span" value={brandConfig.contactSection.mapCallout.buttonText} />
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
@@ -226,23 +194,18 @@ export const ContactLocation: React.FC = () => {
           </div>
         )}
 
-        {/* CALLOUT FINAL PARA REVENDEDORAS / COMERCIOS */}
+        {/* CALLOUT FINAL PARA REVENDEDORAS / COMERCIOS (se oculta con wholesaleCallout.enabled = false) */}
+        {brandConfig.wholesaleCallout.enabled !== false && (
         <div className="w-full rounded-3xl p-8 sm:p-12 bg-brand-primary text-white shadow-xl relative overflow-hidden">
           <div className="absolute -right-24 -bottom-24 w-96 h-96 rounded-full bg-brand-secondary/50 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="max-w-2xl text-center lg:text-left">
-              <span className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] uppercase tracking-wider mb-4 font-bold border border-white/20">
-                {brandConfig.wholesaleCallout.badge}
-              </span>
+              <Txt as="span" className="inline-block px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] uppercase tracking-wider mb-4 font-bold border border-white/20" value={brandConfig.wholesaleCallout.badge} />
 
-              <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
-                {brandConfig.wholesaleCallout.title}
-              </h3>
+              <Txt as="h3" className="font-serif text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight" value={brandConfig.wholesaleCallout.title} />
 
-              <p className="text-sm sm:text-base text-slate-100 mt-3 leading-relaxed">
-                {brandConfig.wholesaleCallout.description}
-              </p>
+              <Txt as="p" className="text-sm sm:text-base text-slate-100 mt-3 leading-relaxed" value={brandConfig.wholesaleCallout.description} />
             </div>
 
             <div className="shrink-0 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
@@ -253,11 +216,12 @@ export const ContactLocation: React.FC = () => {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-brand-surface-bright text-brand-primary text-base font-semibold shadow-lg hover:bg-brand-surface-container transition-all hover:scale-[1.02] active:scale-[0.99]"
               >
                 <Send className="w-5 h-5 text-brand-secondary" />
-                <span>{brandConfig.wholesaleCallout.buttonText}</span>
+                <Txt as="span" value={brandConfig.wholesaleCallout.buttonText} />
               </a>
             </div>
           </div>
         </div>
+        )}
 
       </div>
     </section>

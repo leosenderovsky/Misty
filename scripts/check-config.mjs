@@ -159,8 +159,19 @@ for (const file of jsonFiles) {
     }
     checkStrictExamples(schema, data);
 
+    // Campos técnicos que no se reemplazan por datos del cliente (x-skipMarkers en el esquema), p. ej. `site`.
+    const skipMarkerPaths = new Set();
+    (function collectSkip(schemaNode, currentPath) {
+      if (!schemaNode || typeof schemaNode !== 'object') return;
+      if (schemaNode['x-skipMarkers'] && currentPath) skipMarkerPaths.add(currentPath);
+      for (const [k, child] of Object.entries(schemaNode.properties || {})) {
+        collectSkip(child, currentPath ? `${currentPath}.${k}` : k);
+      }
+    })(schema, '');
+
     function checkMarkers(node, currentPath = '') {
       if (!node) return;
+      if (skipMarkerPaths.has(currentPath)) return;
       if (typeof node === 'string') {
         const lower = node.toLowerCase();
         for (const marker of markers.strings || []) {

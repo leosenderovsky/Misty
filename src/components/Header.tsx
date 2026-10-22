@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+import { Txt } from './Txt';
 import { MessageCircle, User, Menu, X } from 'lucide-react';
 import { brandConfig, getWhatsAppUrl } from '../brand.config';
 import { BrandLogo } from './BrandLogo';
@@ -45,8 +46,8 @@ export const Header: React.FC = () => {
             className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-brand-primary text-white text-xs sm:text-sm font-semibold shadow-md hover:bg-brand-secondary active:scale-95 transition-all"
           >
             <MessageCircle className="w-4 h-4 shrink-0" />
-            <span className="hidden sm:inline">{brandConfig.navigation.ctaButtonText}</span>
-            <span className="sm:hidden">{brandConfig.navigation.ctaButtonTextMobile}</span>
+            <Txt as="span" className="hidden sm:inline" value={brandConfig.navigation.ctaButtonText} />
+            <Txt as="span" className="sm:hidden" value={brandConfig.navigation.ctaButtonTextMobile} />
           </a>
 
           {/* User / Profile Icon Badge */}
@@ -59,7 +60,7 @@ export const Header: React.FC = () => {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 rounded-xl text-brand-on-surface hover:bg-brand-surface-container transition-colors ml-1"
             aria-expanded={mobileMenuOpen}
-            aria-label="Abrir menú"
+            aria-label={brandConfig.ui.menuLabel}
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>

@@ -4,10 +4,14 @@
  */
 
 import React from 'react';
-import { brandConfig, getShowroomAddressText } from '../brand.config';
+import { brandConfig, formatText, getShowroomAddressText, hasText } from '../brand.config';
 
 export const MarqueeBar: React.FC = () => {
-  const items = [...(brandConfig.marquee?.items || []), `Showroom: ${getShowroomAddressText()}`];
+  const showroomText = brandConfig.marquee?.showroomText;
+  const showroomItem = hasText(showroomText)
+    ? [formatText(showroomText as string, { address: getShowroomAddressText() })]
+    : [];
+  const items = [...(brandConfig.marquee?.items || []), ...showroomItem];
   if (items.length === 0) return null;
 
   return (

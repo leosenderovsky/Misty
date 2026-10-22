@@ -4,7 +4,8 @@
  */
 
 import React, { useState } from 'react';
-import { brandConfig } from '../brand.config';
+import { Txt } from './Txt';
+import { brandConfig, formatText } from '../brand.config';
 
 interface BrandLogoProps {
   className?: string;
@@ -54,7 +55,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           viewBox="0 0 280 84"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          aria-label={`${brandConfig.identity.name} Logo`}
+          aria-label={formatText(brandConfig.ui.logoLabel, { name: brandConfig.identity.name })}
         >
           <g id="ribbon-mark" transform="translate(6, 4)">
             <path
@@ -99,12 +100,8 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
       {showTagline && (
         <div className="hidden sm:flex flex-col border-l border-brand-outline-variant/60 pl-3">
-          <span className="font-serif text-[19px] tracking-tight text-brand-on-surface leading-none">
-            {brandConfig.identity.name}
-          </span>
-          <span className="text-[10.5px] uppercase tracking-wider text-brand-secondary mt-0.5 font-bold">
-            {brandConfig.identity.niche}
-          </span>
+          <Txt as="span" className="font-serif text-[19px] tracking-tight text-brand-on-surface leading-none" value={brandConfig.identity.name} />
+          <Txt as="span" className="text-[10.5px] uppercase tracking-wider text-brand-secondary mt-0.5 font-bold" value={brandConfig.identity.niche} />
         </div>
       )}
     </div>

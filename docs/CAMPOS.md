@@ -5,21 +5,21 @@ Este documento lista todos los campos editables del archivo `src/data/brand.json
 | Ruta | Título | Descripción | Widget | Asset | Ejemplo |
 |---|---|---|---|---|---|
 | `schemaVersion` | Versión del esquema | Versión del formato de este archivo. No lo cambies a mano. | `number` |  |  |
-| `site` | Identificador del sitio | Nombre interno del prototipo o del cliente (minúsculas, sin espacios). | `text` |  |  |
+| `site` | Identificador del sitio | Nombre interno del prototipo o del cliente (minúsculas, sin espacios). Identifica el modelo de sitio (no se reemplaza por datos de un cliente). | `text` |  |  |
 | `demo.showPrototypeBanner` | Mostrar aviso de prototipo | Si está activo, el sitio muestra la franja que aclara que es un prototipo. En un cliente real se quita el banner. | `boolean` |  |  |
 | `identity.name` | Nombre de la marca | Nombre que se muestra en el logo, el título de la página y los avisos. | `text` |  | Misty |
 | `identity.niche` | Rubro | Frase corta que describe el negocio (por ejemplo, venta mayorista y minorista). | `text` |  | Venta Mayorista y Minorista |
-| `identity.iconCrop.left` | Izquierda | Desplazamiento izquierdo del recorte (fracción de 0 a 1). | `number` |  |  |
-| `identity.iconCrop.top` | Arriba | Desplazamiento superior del recorte (fracción de 0 a 1). | `number` |  |  |
-| `identity.iconCrop.width` | Ancho | Ancho del recorte (fracción de 0 a 1). | `number` |  |  |
-| `identity.iconCrop.height` | Alto | Alto del recorte (fracción de 0 a 1). | `number` |  |  |
-| `logo.src` | Archivo del logo | Ruta pública del logo en PNG con fondo transparente. | `image` | path: public/assets/logo/logo.png, minWidth: 190px, ratio: libre, maxKB: 120KB | /assets/logo/logo.png |
-| `logo.favicon32` | Favicon | Ícono de 32 × 32 píxeles que aparece en la pestaña del navegador. | `image` | path: public/assets/logo/favicon-32.png, minWidth: 32px, ratio: 1:1, maxKB: 20KB |  |
-| `logo.appleTouchIcon` | Ícono Apple | Ícono de 180 × 180 píxeles, opaco, para dispositivos Apple. | `image` | path: public/assets/logo/apple-touch-icon.png, minWidth: 180px, ratio: 1:1, maxKB: 40KB |  |
+| `logo.src` | Archivo del logo | Ruta pública del logo en PNG con fondo transparente. | `image` | path: public/assets/logo/logo.png, minWidth: 190px, maxKB: 120KB |  |
+| `logo.favicon32` | Favicon | Ícono de 32 × 32 píxeles que aparece en la pestaña del navegador. | `image` | path: public/assets/logo/favicon-32.png, minWidth: 32px, ratio: 1, maxKB: 20KB |  |
+| `logo.appleTouchIcon` | Ícono Apple | Ícono de 180 × 180 píxeles, opaco, para dispositivos Apple. | `image` | path: public/assets/logo/apple-touch-icon.png, minWidth: 180px, ratio: 1, maxKB: 40KB |  |
 | `logo.alt` | Texto alternativo del logo | Descripción breve del logo para accesibilidad. Suele ser el nombre de la marca. | `text` |  | Misty |
+| `logo.iconCrop.left` | Izquierda |  | `number` |  |  |
+| `logo.iconCrop.top` | Arriba |  | `number` |  |  |
+| `logo.iconCrop.width` | Ancho |  | `number` |  |  |
+| `logo.iconCrop.height` | Alto |  | `number` |  |  |
 | `seo.titleSuffix` | Sufijo del título | Texto que acompaña al nombre de la marca en la pestaña del navegador y en redes. | `text` |  | Indumentaria Femenina & Showroom |
 | `seo.description` | Descripción | Resumen que aparece en buscadores y al compartir el enlace. | `textarea` |  | Prendas modernas diseñadas para acompañar tu rutina con telas de excelente textura, confección minuciosa y la calidez de un trato persona a persona. Showroom Flores y envíos a todo el país. |
-| `seo.socialImage` | Imagen para redes | Imagen de 1200 × 630 píxeles que se muestra al compartir el sitio. | `image` | path: public/assets/misc/og-image.jpg, minWidth: 1200px, ratio: 1200:630, maxKB: 200KB | /assets/misc/og-image.jpg |
+| `seo.socialImage` | Imagen para redes | Imagen de 1200 × 630 píxeles que se muestra al compartir el sitio. | `image` | path: public/assets/misc/og-image.jpg, minWidth: 1200px, ratio: 1.905, maxKB: 200KB |  |
 | `typography.headingFont` | Fuente de títulos | Familia tipográfica para títulos (por ejemplo, Playfair Display, serif). | `text` |  |  |
 | `typography.bodyFont` | Fuente de texto | Familia tipográfica para párrafos y botones. | `text` |  |  |
 | `typography.stylesheetUrl` | Hoja de fuentes | URL de Google Fonts u otra hoja que carga las tipografías. | `url` |  |  |
@@ -56,37 +56,39 @@ Este documento lista todos los campos editables del archivo `src/data/brand.json
 | `contact.hours.closedWeekdays` | Días cerrado | Números de 0 (domingo) a 6 (sábado) en los que no hay atención. | `list` |  |  |
 | `navigation.links[].label` | Texto del enlace | Etiqueta visible en el menú. | `text` |  | Nosotros |
 | `navigation.links[].href` | Destino | Ancla o URL del enlace (por ejemplo #contacto). | `text` |  |  |
-| `navigation.ctaButtonText` | Botón de contacto (escritorio) | Texto del botón de WhatsApp en pantallas grandes. | `text` |  | Escribinos por WhatsApp |
-| `navigation.ctaButtonTextMobile` | Botón de contacto (celular) | Texto corto del mismo botón en el celular. | `text` |  | WhatsApp |
+| `navigation.ctaButtonText` | Botón de contacto (escritorio) | Texto del botón de WhatsApp en pantallas grandes. | `text` |  |  |
+| `navigation.ctaButtonTextMobile` | Botón de contacto (celular) | Texto corto del mismo botón en el celular. | `text` |  |  |
 | `marquee.items` | Frases | Lista de mensajes de la franja. | `list` |  | ["Envíos a todo el país por expreso y correo"] |
+| `marquee.showroomText` | Texto del showroom en la cinta | Usa {address} para insertar la dirección. Dejalo vacío para no mostrar ese ítem. | `text` |  |  |
 | `hero.eyebrowBadge` | Etiqueta superior | Texto chico encima del título de la portada. | `text` |  | Nueva Temporada · Mayorista & Minorista |
 | `hero.headline` | Título de portada | Título principal de la primera pantalla. | `textarea` |  | Moda versátil que acompaña tu ritmo de vida |
 | `hero.subheadline` | Bajada de portada | Párrafo de apoyo debajo del título. | `textarea` |  | Prendas contemporáneas con excelente relación precio–calidad. Diseñadas para renovar tu guardarropa y potenciar tu negocio o estilo diario. |
-| `hero.backgroundImage.src` | Archivo de portada | Foto horizontal de al menos 1280 px de ancho. | `image` | path: public/assets/hero/hero-1.jpg, minWidth: 1280px, ratio: 1376:768, maxKB: 250KB | /assets/hero/hero-1.jpg |
+| `hero.backgroundImage.src` | Archivo de portada | Foto horizontal de al menos 1280 px de ancho. | `image` | path: public/assets/hero/hero-1.jpg, minWidth: 1280px, ratio: 1.792, maxKB: 250KB |  |
 | `hero.backgroundImage.fallback` | Imagen de respaldo | Foto alternativa si no carga la de portada. | `image` |  |  |
 | `hero.backgroundImage.alt` | Texto alternativo | Descripción de la foto de portada. | `text` |  | Editorial lookbook de campaña con modelos en showroom contemporáneo |
 | `hero.backgroundImage.width` | Ancho en píxeles | Ancho real del archivo, para que la página reserve el espacio. | `number` |  |  |
 | `hero.backgroundImage.height` | Alto en píxeles | Alto real del archivo. | `number` |  |  |
-| `hero.primaryCta.label` | Botón principal | Texto del botón de WhatsApp en la portada. | `text` |  | Escribinos por WhatsApp |
-| `hero.secondaryCta.label` | Botón secundario | Texto del segundo botón de la portada. | `text` |  | Conocé la marca |
+| `hero.primaryCta.label` | Botón principal | Texto del botón de WhatsApp en la portada. | `text` |  |  |
+| `hero.secondaryCta.label` | Botón secundario | Texto del segundo botón de la portada. | `text` |  |  |
 | `hero.secondaryCta.targetSectionId` | Sección de destino | Id de la sección a la que baja el botón (sin #). | `text` |  |  |
 | `hero.trustBadges[].id` | Identificador | Id interno del sello (minúsculas y guiones). | `text` |  |  |
 | `hero.trustBadges[].iconType` | Ícono | Dibujo del sello: atención, envío o tilde. | `icon` |  |  |
 | `hero.trustBadges[].label` | Texto del sello | Frase corta junto al ícono. | `text` |  | Atención personalizada |
 | `quickWholesaleBar.title` | Título de la franja | Título de la barra mayorista y minorista. | `text` |  | Venta por mayor y por menor sin intermediarios |
 | `quickWholesaleBar.subtitle` | Bajada de la franja | Texto de apoyo de la barra. | `textarea` |  | Llevá curvas completas para tu comercio o tus prendas favoritas por unidad. |
-| `quickWholesaleBar.buttonText` | Botón de la franja | Texto del botón que abre WhatsApp mayorista. | `text` |  | Pedir Lista Mayorista (PDF) |
+| `quickWholesaleBar.buttonText` | Botón de la franja | Texto del botón que abre WhatsApp mayorista. | `text` |  |  |
+| `quickWholesaleBar.enabled` | Mostrar la barra mayorista rápida | Si se desactiva, la barra no se muestra. | `boolean` |  |  |
 | `essenceSection.eyebrow` | Etiqueta de la sección | Texto chico encima del título. | `text` |  | Nuestra Esencia |
 | `essenceSection.title` | Título de la sección | Título de la presentación de la marca. | `text` |  | Diseño actual para todos los días |
 | `essenceSection.description` | Descripción | Párrafo que presenta a la marca. | `textarea` |  | Creemos en una moda simple, auténtica y pensada para acompañar tu día a día. Creamos prendas actuales, cómodas y bien confeccionadas, con una buena relación entre calidad y precio, para que renovar tu guardarropa sea fácil y accesible. |
-| `essenceSection.look1.src` | Archivo de la foto | Retrato vertical de al menos 800 px de ancho. | `image` | path: public/assets/misc/sobre-marca-1.jpg, minWidth: 800px, ratio: 896:1200, maxKB: 180KB | /assets/misc/sobre-marca-1.jpg |
+| `essenceSection.look1.src` | Archivo de la foto | Retrato vertical de al menos 800 px de ancho. | `image` | path: public/assets/misc/sobre-marca-1.jpg, minWidth: 800px, ratio: 0.747, maxKB: 180KB |  |
 | `essenceSection.look1.fallback` | Imagen de respaldo | Foto alternativa si no carga la principal. | `image` |  |  |
 | `essenceSection.look1.alt` | Texto alternativo | Descripción de la foto. | `text` |  | Modelo luciendo blazer terracota elegante y top neutro |
 | `essenceSection.look1.width` | Ancho en píxeles | Ancho real del archivo. | `number` |  |  |
 | `essenceSection.look1.height` | Alto en píxeles | Alto real del archivo. | `number` |  |  |
 | `essenceSection.look1.badgeCategory` | Etiqueta sobre la foto | Texto chico superpuesto (categoría del look). | `text` |  | Look 01 · Sastrería Relajada |
 | `essenceSection.look1.badgeTitle` | Título sobre la foto | Texto superpuesto más destacado. | `text` |  | Lino & Gabardina Premium |
-| `essenceSection.look2.src` | Archivo de la foto | Retrato vertical de al menos 800 px de ancho. | `image` | path: public/assets/misc/sobre-marca-1.jpg, minWidth: 800px, ratio: 896:1200, maxKB: 180KB | /assets/misc/sobre-marca-1.jpg |
+| `essenceSection.look2.src` | Archivo de la foto | Retrato vertical de al menos 800 px de ancho. | `image` | path: public/assets/misc/sobre-marca-1.jpg, minWidth: 800px, ratio: 0.747, maxKB: 180KB |  |
 | `essenceSection.look2.fallback` | Imagen de respaldo | Foto alternativa si no carga la principal. | `image` |  |  |
 | `essenceSection.look2.alt` | Texto alternativo | Descripción de la foto. | `text` |  | Modelo luciendo blazer terracota elegante y top neutro |
 | `essenceSection.look2.width` | Ancho en píxeles | Ancho real del archivo. | `number` |  |  |
@@ -110,29 +112,38 @@ Este documento lista todos los campos editables del archivo `src/data/brand.json
 | `contactSection.whatsappCard.badge` | Etiqueta de la tarjeta | Texto chico de la tarjeta de WhatsApp. | `text` |  | Canal Principal |
 | `contactSection.whatsappCard.title` | Título de la tarjeta | Título de la tarjeta de WhatsApp. | `text` |  | WhatsApp Directo |
 | `contactSection.whatsappCard.description` | Texto de la tarjeta | Descripción de la tarjeta de WhatsApp. | `textarea` |  | Atención inmediata para listas de precios, consultas mayoristas y pedidos minoristas. |
-| `contactSection.whatsappCard.buttonText` | Botón de la tarjeta | Texto del botón de WhatsApp. | `text` |  | Chatear con asesoras |
+| `contactSection.whatsappCard.buttonText` | Botón de la tarjeta | Texto del botón de WhatsApp. | `text` |  |  |
 | `contactSection.instagramCard.title` | Título de Instagram | Título de la tarjeta de Instagram. | `text` |  | Instagram Oficial |
 | `contactSection.instagramCard.badge` | Etiqueta de Instagram | Texto chico de la tarjeta de Instagram. | `text` |  | Comunidad Activa |
 | `contactSection.instagramCard.description` | Texto de Instagram | Descripción de la cuenta. | `textarea` |  | Mirá las prendas en movimiento, looks cotidianos, reviews de clientas y novedades semanales. |
-| `contactSection.instagramCard.buttonText` | Botón de Instagram | Texto del botón que abre Instagram. | `text` |  | Ver comunidad & novedades |
+| `contactSection.instagramCard.buttonText` | Botón de Instagram | Texto del botón que abre Instagram. | `text` |  |  |
 | `contactSection.showroomCard.title` | Título de la tarjeta de showroom | Título corto de la tarjeta de local. | `text` |  | Showroom Comercial |
 | `contactSection.showroomCard.hoursLabel` | Rótulo de horarios | Texto que precede a las líneas de horario. | `text` |  | Horarios de Atención: |
 | `contactSection.showroomCard.badge` | Etiqueta de showroom | Texto chico de la tarjeta de showroom. | `text` |  | Punto de Venta |
-| `contactSection.showroomCard.buttonText` | Botón de cómo llegar | Texto del botón de la tarjeta de showroom. | `text` |  | Cómo llegar |
+| `contactSection.showroomCard.buttonText` | Botón de cómo llegar | Texto del botón de la tarjeta de showroom. | `text` |  |  |
+| `contactSection.showroomCard.mapLabel` | Descripción accesible del mapa | Usa {name} para insertar el nombre de la marca. | `text` |  |  |
 | `contactSection.mapCallout.eyebrow` | Etiqueta del mapa | Texto chico encima del título del mapa. | `text` |  | Ubicación Estratégica |
 | `contactSection.mapCallout.description` | Texto del mapa | Cómo llegar o ventajas de la ubicación. | `textarea` |  | Fácil acceso en colectivos y subte Línea A. Estacionamiento comercial disponible en la zona. |
-| `contactSection.mapCallout.buttonText` | Botón del mapa | Texto del botón que abre Google Maps. | `text` |  | Abrir en Google Maps |
+| `contactSection.mapCallout.buttonText` | Botón del mapa | Texto del botón que abre Google Maps. | `text` |  |  |
 | `contactSection.showroomTitle` | Título del showroom en el mapa | Título largo que se muestra junto a la ilustración del mapa. Es distinto del título corto de la tarjeta. | `text` |  | Showroom en el corazón textil de Flores |
 | `wholesaleCallout.badge` | Etiqueta | Texto chico del bloque mayorista. | `text` |  | Canal Exclusivo para Emprendedoras |
 | `wholesaleCallout.title` | Título | Título del llamado a comercios. | `text` |  | ¿Tenés local o vendés online? |
 | `wholesaleCallout.description` | Descripción | Texto del llamado mayorista. | `textarea` |  | Consultá hoy mismo por WhatsApp para recibir la lista de precios mayorista actualizada, condiciones de compra mínima por bulto y el catálogo en PDF para empezar a vender de inmediato. |
-| `wholesaleCallout.buttonText` | Botón | Texto del botón de catálogo mayorista. | `text` |  | Solicitar Catálogo Mayorista |
+| `wholesaleCallout.buttonText` | Botón | Texto del botón de catálogo mayorista. | `text` |  |  |
+| `wholesaleCallout.enabled` | Mostrar el llamado mayorista | Si se desactiva, el bloque no se muestra. | `boolean` |  |  |
 | `footer.brandDescription` | Descripción de la marca | Párrafo corto junto al logo en el pie. | `textarea` |  | Indumentaria femenina con identidad contemporánea, disponible para pedidos por menor y curvas mayoristas. |
 | `footer.trustBadge` | Sello del pie | Frase de confianza debajo de la descripción. | `text` |  | Canal Mayorista & Minorista |
-| `footer.showroomTitle` | Título de showroom | Título de la columna de dirección y horarios. | `text` |  | Atención & Showroom |
-| `footer.channelsTitle` | Título de canales | Título de la columna de Instagram, WhatsApp y correo. | `text` |  | Contacto Directo |
-| `footer.legalTitle` | Título legal | Título de la columna legal. | `text` |  | Información Legal |
+| `footer.showroomTitle` | Título de showroom | Título de la columna de dirección y horarios. | `text` |  |  |
+| `footer.channelsTitle` | Título de canales | Título de la columna de Instagram, WhatsApp y correo. | `text` |  |  |
+| `footer.legalTitle` | Título legal | Título de la columna legal. | `text` |  |  |
 | `footer.legalNotice` | Aviso legal | Texto legal o de prototipo. | `textarea` |  | Este sitio web corresponde a una demostración institucional con fines conceptuales y de portfolio. Toda marca y productos referenciados forman parte de un prototipo de diseño. |
 | `footer.copyrightText` | Copyright | Línea de derechos reservados. | `text` |  | © 2026 Misty Indumentaria. Todos los derechos reservados. |
 | `footer.demonstrationDisclaimer` | Leyenda de demostración | Texto base de prototipo. El sitio lo completa con el nombre del servicio. | `textarea` |  | Marca, productos y precios de ejemplo — prototipo de demostración |
 | `footer.variantTag` | Etiqueta de variante | Crédito o nombre de la variante de diseño. | `text` |  | Variante A · Editorial Lookbook · Diseño y Desarrollo de Arquitectura Web Frontend |
+| `footer.whatsappLabel` | Texto del enlace de WhatsApp | Dejalo vacío para ocultar el enlace de WhatsApp del pie. | `text` |  |  |
+| `ui.menuLabel` | Etiqueta accesible del botón de menú | Lo leen los lectores de pantalla en el botón de menú del celular. | `text` |  |  |
+| `ui.logoLabel` | Etiqueta accesible del logo | Usa {name} para insertar el nombre de la marca. | `text` |  |  |
+| `ui.whatsappFloating.enabled` | Mostrar el botón flotante | Si se desactiva, el botón no se muestra. | `boolean` |  |  |
+| `ui.whatsappFloating.tooltip` | Mensaje junto al botón | Dejalo vacío para no mostrar el mensaje. | `text` |  |  |
+| `ui.whatsappFloating.closeTooltipLabel` | Etiqueta accesible para cerrar el mensaje | Lo leen los lectores de pantalla. | `text` |  |  |
+| `ui.whatsappFloating.buttonLabel` | Etiqueta accesible del botón | Lo leen los lectores de pantalla. | `text` |  |  |

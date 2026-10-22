@@ -46,3 +46,13 @@ export function getWhatsAppUrl(customMessage?: string): string {
   const message = customMessage ?? brandConfig.contact.whatsapp.messages.default;
   return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
 }
+
+/** Reemplaza marcadores {clave} de un texto editable por sus valores. */
+export function formatText(template: string, vars: Record<string, string>): string {
+  return template.replace(/\{(\w+)\}/g, (_match, key: string) => vars[key] ?? `{${key}}`);
+}
+
+/** Verdadero si el texto editable tiene contenido (los textos vacíos ocultan su elemento). */
+export function hasText(value?: string | null): boolean {
+  return typeof value === 'string' && value.trim() !== '';
+}

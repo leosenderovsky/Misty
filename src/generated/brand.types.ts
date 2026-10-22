@@ -5,7 +5,7 @@
  */
 export type VersionDelEsquema = number;
 /**
- * Nombre interno del prototipo o del cliente (minúsculas, sin espacios).
+ * Nombre interno del prototipo o del cliente (minúsculas, sin espacios). Identifica el modelo de sitio (no se reemplaza por datos de un cliente).
  */
 export type IdentificadorDelSitio = string;
 /**
@@ -20,22 +20,6 @@ export type NombreDeLaMarca = string;
  * Frase corta que describe el negocio (por ejemplo, venta mayorista y minorista).
  */
 export type Rubro = string;
-/**
- * Desplazamiento izquierdo del recorte (fracción de 0 a 1).
- */
-export type Izquierda = number;
-/**
- * Desplazamiento superior del recorte (fracción de 0 a 1).
- */
-export type Arriba = number;
-/**
- * Ancho del recorte (fracción de 0 a 1).
- */
-export type Ancho = number;
-/**
- * Alto del recorte (fracción de 0 a 1).
- */
-export type Alto = number;
 /**
  * Ruta pública del logo en PNG con fondo transparente.
  */
@@ -52,6 +36,10 @@ export type IconoApple = string;
  * Descripción breve del logo para accesibilidad. Suele ser el nombre de la marca.
  */
 export type TextoAlternativoDelLogo = string;
+export type Izquierda = number;
+export type Arriba = number;
+export type Ancho = number;
+export type Alto = number;
 /**
  * Texto que acompaña al nombre de la marca en la pestaña del navegador y en redes.
  */
@@ -240,6 +228,10 @@ export type Frase = string;
  */
 export type Frases = Frase[];
 /**
+ * Usa {address} para insertar la dirección. Dejalo vacío para no mostrar ese ítem.
+ */
+export type TextoDelShowroomEnLaCinta = string;
+/**
  * Texto chico encima del título de la portada.
  */
 export type EtiquetaSuperior = string;
@@ -315,6 +307,10 @@ export type BajadaDeLaFranja = string;
  * Texto del botón que abre WhatsApp mayorista.
  */
 export type BotonDeLaFranja = string;
+/**
+ * Si se desactiva, la barra no se muestra.
+ */
+export type MostrarLaBarraMayoristaRapida = boolean;
 /**
  * Texto chico encima del título.
  */
@@ -478,6 +474,10 @@ export type EtiquetaDeShowroom = string;
  */
 export type BotonDeComoLlegar = string;
 /**
+ * Usa {name} para insertar el nombre de la marca.
+ */
+export type DescripcionAccesibleDelMapa = string;
+/**
  * Texto chico encima del título del mapa.
  */
 export type EtiquetaDelMapa = string;
@@ -509,6 +509,10 @@ export type Descripcion2 = string;
  * Texto del botón de catálogo mayorista.
  */
 export type Boton = string;
+/**
+ * Si se desactiva, el bloque no se muestra.
+ */
+export type MostrarElLlamadoMayorista = boolean;
 /**
  * Párrafo corto junto al logo en el pie.
  */
@@ -545,6 +549,34 @@ export type LeyendaDeDemostracion = string;
  * Crédito o nombre de la variante de diseño.
  */
 export type EtiquetaDeVariante = string;
+/**
+ * Dejalo vacío para ocultar el enlace de WhatsApp del pie.
+ */
+export type TextoDelEnlaceDeWhatsApp = string;
+/**
+ * Lo leen los lectores de pantalla en el botón de menú del celular.
+ */
+export type EtiquetaAccesibleDelBotonDeMenu = string;
+/**
+ * Usa {name} para insertar el nombre de la marca.
+ */
+export type EtiquetaAccesibleDelLogo = string;
+/**
+ * Si se desactiva, el botón no se muestra.
+ */
+export type MostrarElBotonFlotante = boolean;
+/**
+ * Dejalo vacío para no mostrar el mensaje.
+ */
+export type MensajeJuntoAlBoton = string;
+/**
+ * Lo leen los lectores de pantalla.
+ */
+export type EtiquetaAccesibleParaCerrarElMensaje = string;
+/**
+ * Lo leen los lectores de pantalla.
+ */
+export type EtiquetaAccesibleDelBoton = string;
 
 /**
  * Configuración editable de la marca y de los textos del sitio.
@@ -568,6 +600,7 @@ export interface BrandConfig {
   contactSection: SeccionDeContacto;
   wholesaleCallout: LlamadoMayorista;
   footer: PieDePagina;
+  ui: TextosDeInterfazYAccesibilidad;
 }
 /**
  * Opciones del prototipo de demostración.
@@ -581,16 +614,6 @@ export interface Demostracion {
 export interface Identidad {
   name: NombreDeLaMarca;
   niche: Rubro;
-  iconCrop?: RecorteDelEmblema;
-}
-/**
- * Recorte opcional del logo para generar el favicon. Las cifras van de 0 a 1 sobre el logo ya recortado al contenido visible.
- */
-export interface RecorteDelEmblema {
-  left: Izquierda;
-  top: Arriba;
-  width: Ancho;
-  height: Alto;
 }
 /**
  * Archivos del logo, favicon e ícono para dispositivos Apple.
@@ -600,6 +623,16 @@ export interface LogoEIconos {
   favicon32: Favicon;
   appleTouchIcon: IconoApple;
   alt: TextoAlternativoDelLogo;
+  iconCrop?: RecorteDelEmblema;
+}
+/**
+ * Fracciones de 0 a 1 del logo recortado. Solo hace falta si la detección automática del emblema no corta bien.
+ */
+export interface RecorteDelEmblema {
+  left: Izquierda;
+  top: Arriba;
+  width: Ancho;
+  height: Alto;
 }
 /**
  * Título, descripción e imagen que se muestran al compartir el sitio.
@@ -701,6 +734,7 @@ export interface Navegacion {
  */
 export interface FranjaMovil {
   items?: Frases;
+  showroomText?: TextoDelShowroomEnLaCinta;
 }
 /**
  * Textos, imagen y botones de la primera sección.
@@ -736,6 +770,7 @@ export interface FranjaMayorista {
   title: TituloDeLaFranja;
   subtitle: BajadaDeLaFranja;
   buttonText: BotonDeLaFranja;
+  enabled?: MostrarLaBarraMayoristaRapida;
 }
 /**
  * Textos, fotos y pilares de la marca.
@@ -803,6 +838,7 @@ export interface ShowroomCard {
   hoursLabel: RotuloDeHorarios;
   badge?: EtiquetaDeShowroom;
   buttonText?: BotonDeComoLlegar;
+  mapLabel: DescripcionAccesibleDelMapa;
 }
 /**
  * Bloque final para comercios y revendedoras.
@@ -812,6 +848,7 @@ export interface LlamadoMayorista {
   title: Titulo2;
   description: Descripcion2;
   buttonText: Boton;
+  enabled?: MostrarElLlamadoMayorista;
 }
 /**
  * Textos del pie. La leyenda de demostración la completa el sitio.
@@ -826,4 +863,22 @@ export interface PieDePagina {
   copyrightText: Copyright;
   demonstrationDisclaimer?: LeyendaDeDemostracion;
   variantTag: EtiquetaDeVariante;
+  whatsappLabel: TextoDelEnlaceDeWhatsApp;
+}
+/**
+ * Textos que no pertenecen a una sección concreta: etiquetas accesibles y el botón flotante de WhatsApp.
+ */
+export interface TextosDeInterfazYAccesibilidad {
+  menuLabel: EtiquetaAccesibleDelBotonDeMenu;
+  logoLabel: EtiquetaAccesibleDelLogo;
+  whatsappFloating: BotonFlotanteDeWhatsApp;
+}
+/**
+ * Botón fijo en la esquina inferior derecha.
+ */
+export interface BotonFlotanteDeWhatsApp {
+  enabled?: MostrarElBotonFlotante;
+  tooltip: MensajeJuntoAlBoton;
+  closeTooltipLabel: EtiquetaAccesibleParaCerrarElMensaje;
+  buttonLabel: EtiquetaAccesibleDelBoton;
 }

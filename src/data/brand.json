@@ -4,6 +4,16 @@
   "demo": {
     "showPrototypeBanner": true
   },
+  "ui": {
+    "menuLabel": "Abrir menú",
+    "logoLabel": "{name} Logo",
+    "whatsappFloating": {
+      "enabled": true,
+      "tooltip": "¿Tenés dudas? Escribinos",
+      "closeTooltipLabel": "Cerrar sugerencia",
+      "buttonLabel": "Chatear por WhatsApp"
+    }
+  },
   "identity": {
     "name": "Misty",
     "niche": "Venta Mayorista y Minorista"
@@ -88,7 +98,8 @@
       "Envíos a todo el país por expreso y correo",
       "Atención directa persona a persona",
       "Precios competitivos sin intermediarios"
-    ]
+    ],
+    "showroomText": "Showroom: {address}"
   },
   "hero": {
     "eyebrowBadge": "Nueva Temporada · Mayorista & Minorista",
@@ -129,7 +140,8 @@
   "quickWholesaleBar": {
     "title": "Venta por mayor y por menor sin intermediarios",
     "subtitle": "Llevá curvas completas para tu comercio o tus prendas favoritas por unidad.",
-    "buttonText": "Pedir Lista Mayorista (PDF)"
+    "buttonText": "Pedir Lista Mayorista (PDF)",
+    "enabled": true
   },
   "essenceSection": {
     "eyebrow": "Nuestra Esencia",
@@ -219,7 +231,8 @@
       "title": "Showroom Comercial",
       "hoursLabel": "Horarios de Atención:",
       "badge": "Punto de Venta",
-      "buttonText": "Cómo llegar"
+      "buttonText": "Cómo llegar",
+      "mapLabel": "Ilustración de ubicación del showroom de {name}"
     },
     "mapCallout": {
       "eyebrow": "Ubicación Estratégica",
@@ -232,7 +245,8 @@
     "badge": "Canal Exclusivo para Emprendedoras",
     "title": "¿Tenés local o vendés online?",
     "description": "Consultá hoy mismo por WhatsApp para recibir la lista de precios mayorista actualizada, condiciones de compra mínima por bulto y el catálogo en PDF para empezar a vender de inmediato.",
-    "buttonText": "Solicitar Catálogo Mayorista"
+    "buttonText": "Solicitar Catálogo Mayorista",
+    "enabled": true
   },
   "footer": {
     "brandDescription": "Indumentaria femenina con identidad contemporánea, disponible para pedidos por menor y curvas mayoristas.",
@@ -242,6 +256,7 @@
     "legalTitle": "Información Legal",
     "legalNotice": "Este sitio web corresponde a una demostración institucional con fines conceptuales y de portfolio. Toda marca y productos referenciados forman parte de un prototipo de diseño.",
     "copyrightText": "© 2026 Misty Indumentaria. Todos los derechos reservados.",
-    "variantTag": "Variante A · Editorial Lookbook · Diseño y Desarrollo de Arquitectura Web Frontend"
+    "variantTag": "Variante A · Editorial Lookbook · Diseño y Desarrollo de Arquitectura Web Frontend",
+    "whatsappLabel": "WhatsApp Ventas & Asesoramiento"
   }
 }

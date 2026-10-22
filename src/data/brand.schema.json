@@ -8,6 +8,7 @@
     "schemaVersion",
     "site",
     "demo",
+    "ui",
     "identity",
     "logo",
     "seo",
@@ -29,14 +30,16 @@
       "title": "Versión del esquema",
       "description": "Versión del formato de este archivo. No lo cambies a mano.",
       "x-group": "Marca",
-      "x-widget": "number"
+      "x-widget": "number",
+      "x-skipMarkers": true
     },
     "site": {
       "type": "string",
       "title": "Identificador del sitio",
-      "description": "Nombre interno del prototipo o del cliente (minúsculas, sin espacios).",
+      "description": "Nombre interno del prototipo o del cliente (minúsculas, sin espacios). Identifica el modelo de sitio (no se reemplaza por datos de un cliente).",
       "x-group": "Marca",
-      "x-widget": "text"
+      "x-widget": "text",
+      "x-skipMarkers": true
     },
     "demo": {
       "type": "object",
@@ -44,7 +47,9 @@
       "title": "Demostración",
       "description": "Opciones del prototipo de demostración.",
       "x-group": "Marca",
-      "required": ["showPrototypeBanner"],
+      "required": [
+        "showPrototypeBanner"
+      ],
       "properties": {
         "showPrototypeBanner": {
           "type": "boolean",
@@ -61,7 +66,10 @@
       "title": "Identidad",
       "description": "Nombre comercial y rubro.",
       "x-group": "Marca",
-      "required": ["name", "niche"],
+      "required": [
+        "name",
+        "niche"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -70,7 +78,9 @@
           "x-group": "Marca",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Misty"]
+          "examples": [
+            "Misty"
+          ]
         },
         "niche": {
           "type": "string",
@@ -79,53 +89,9 @@
           "x-group": "Marca",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Venta Mayorista y Minorista"]
-        },
-        "iconCrop": {
-          "type": "object",
-          "additionalProperties": false,
-          "title": "Recorte del emblema",
-          "description": "Recorte opcional del logo para generar el favicon. Las cifras van de 0 a 1 sobre el logo ya recortado al contenido visible.",
-          "x-group": "Imágenes",
-          "required": ["left", "top", "width", "height"],
-          "properties": {
-            "left": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1,
-              "title": "Izquierda",
-              "description": "Desplazamiento izquierdo del recorte (fracción de 0 a 1).",
-              "x-group": "Imágenes",
-              "x-widget": "number"
-            },
-            "top": {
-              "type": "number",
-              "minimum": 0,
-              "maximum": 1,
-              "title": "Arriba",
-              "description": "Desplazamiento superior del recorte (fracción de 0 a 1).",
-              "x-group": "Imágenes",
-              "x-widget": "number"
-            },
-            "width": {
-              "type": "number",
-              "exclusiveMinimum": 0,
-              "maximum": 1,
-              "title": "Ancho",
-              "description": "Ancho del recorte (fracción de 0 a 1).",
-              "x-group": "Imágenes",
-              "x-widget": "number"
-            },
-            "height": {
-              "type": "number",
-              "exclusiveMinimum": 0,
-              "maximum": 1,
-              "title": "Alto",
-              "description": "Alto del recorte (fracción de 0 a 1).",
-              "x-group": "Imágenes",
-              "x-widget": "number"
-            }
-          }
+          "examples": [
+            "Venta Mayorista y Minorista"
+          ]
         }
       }
     },
@@ -135,7 +101,12 @@
       "title": "Logo e íconos",
       "description": "Archivos del logo, favicon e ícono para dispositivos Apple.",
       "x-group": "Imágenes",
-      "required": ["src", "favicon32", "appleTouchIcon", "alt"],
+      "required": [
+        "src",
+        "favicon32",
+        "appleTouchIcon",
+        "alt"
+      ],
       "properties": {
         "src": {
           "type": "string",
@@ -143,12 +114,10 @@
           "description": "Ruta pública del logo en PNG con fondo transparente.",
           "x-group": "Imágenes",
           "x-widget": "image",
-          "x-exampleData": true,
-          "examples": ["/assets/logo/logo.png"],
           "x-asset": {
             "path": "public/assets/logo/logo.png",
             "minWidth": 190,
-            "ratio": "libre",
+            "ratio": null,
             "maxKB": 120
           }
         },
@@ -161,7 +130,7 @@
           "x-asset": {
             "path": "public/assets/logo/favicon-32.png",
             "minWidth": 32,
-            "ratio": "1:1",
+            "ratio": 1.0,
             "maxKB": 20
           }
         },
@@ -174,7 +143,7 @@
           "x-asset": {
             "path": "public/assets/logo/apple-touch-icon.png",
             "minWidth": 180,
-            "ratio": "1:1",
+            "ratio": 1.0,
             "maxKB": 40
           }
         },
@@ -185,7 +154,52 @@
           "x-group": "Imágenes",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Misty"]
+          "examples": [
+            "Misty"
+          ]
+        },
+        "iconCrop": {
+          "title": "Recorte del emblema",
+          "description": "Fracciones de 0 a 1 del logo recortado. Solo hace falta si la detección automática del emblema no corta bien.",
+          "type": "object",
+          "x-group": "Imágenes",
+          "properties": {
+            "left": {
+              "title": "Izquierda",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "x-widget": "number"
+            },
+            "top": {
+              "title": "Arriba",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "x-widget": "number"
+            },
+            "width": {
+              "title": "Ancho",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "x-widget": "number"
+            },
+            "height": {
+              "title": "Alto",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "x-widget": "number"
+            }
+          },
+          "required": [
+            "left",
+            "top",
+            "width",
+            "height"
+          ],
+          "additionalProperties": false
         }
       }
     },
@@ -195,7 +209,11 @@
       "title": "Buscadores y redes",
       "description": "Título, descripción e imagen que se muestran al compartir el sitio.",
       "x-group": "Textos",
-      "required": ["titleSuffix", "description", "socialImage"],
+      "required": [
+        "titleSuffix",
+        "description",
+        "socialImage"
+      ],
       "properties": {
         "titleSuffix": {
           "type": "string",
@@ -204,7 +222,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Indumentaria Femenina & Showroom"]
+          "examples": [
+            "Indumentaria Femenina & Showroom"
+          ]
         },
         "description": {
           "type": "string",
@@ -213,7 +233,9 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Prendas modernas diseñadas para acompañar tu rutina con telas de excelente textura, confección minuciosa y la calidez de un trato persona a persona. Showroom Flores y envíos a todo el país."]
+          "examples": [
+            "Prendas modernas diseñadas para acompañar tu rutina con telas de excelente textura, confección minuciosa y la calidez de un trato persona a persona. Showroom Flores y envíos a todo el país."
+          ]
         },
         "socialImage": {
           "type": "string",
@@ -221,12 +243,10 @@
           "description": "Imagen de 1200 × 630 píxeles que se muestra al compartir el sitio.",
           "x-group": "Imágenes",
           "x-widget": "image",
-          "x-exampleData": true,
-          "examples": ["/assets/misc/og-image.jpg"],
           "x-asset": {
             "path": "public/assets/misc/og-image.jpg",
             "minWidth": 1200,
-            "ratio": "1200:630",
+            "ratio": 1.905,
             "maxKB": 200
           }
         }
@@ -238,7 +258,11 @@
       "title": "Tipografías",
       "description": "Fuentes de títulos y de texto, y la hoja de estilos de Google Fonts.",
       "x-group": "Marca",
-      "required": ["headingFont", "bodyFont", "stylesheetUrl"],
+      "required": [
+        "headingFont",
+        "bodyFont",
+        "stylesheetUrl"
+      ],
       "properties": {
         "headingFont": {
           "type": "string",
@@ -435,7 +459,13 @@
       "title": "Contacto",
       "description": "WhatsApp, Instagram, correo, dirección y horarios.",
       "x-group": "Contacto",
-      "required": ["whatsapp", "instagram", "email", "address", "hours"],
+      "required": [
+        "whatsapp",
+        "instagram",
+        "email",
+        "address",
+        "hours"
+      ],
       "properties": {
         "whatsapp": {
           "type": "object",
@@ -443,7 +473,11 @@
           "title": "WhatsApp",
           "description": "Número y mensajes prearmados.",
           "x-group": "Contacto",
-          "required": ["number", "display", "messages"],
+          "required": [
+            "number",
+            "display",
+            "messages"
+          ],
           "properties": {
             "number": {
               "type": "string",
@@ -453,7 +487,9 @@
               "x-group": "Contacto",
               "x-widget": "whatsapp",
               "x-exampleData": true,
-              "examples": ["5491140008800"]
+              "examples": [
+                "5491140008800"
+              ]
             },
             "display": {
               "type": "string",
@@ -462,7 +498,9 @@
               "x-group": "Contacto",
               "x-widget": "text",
               "x-exampleData": true,
-              "examples": ["+54 9 11 4000-8800"]
+              "examples": [
+                "+54 9 11 4000-8800"
+              ]
             },
             "messages": {
               "type": "object",
@@ -470,7 +508,10 @@
               "title": "Mensajes de WhatsApp",
               "description": "Textos que se prellenan al abrir el chat.",
               "x-group": "Contacto",
-              "required": ["default", "wholesale"],
+              "required": [
+                "default",
+                "wholesale"
+              ],
               "properties": {
                 "default": {
                   "type": "string",
@@ -479,7 +520,9 @@
                   "x-group": "Contacto",
                   "x-widget": "textarea",
                   "x-exampleData": true,
-                  "examples": ["¡Hola Misty! Quisiera consultar por sus prendas y conocer el catálogo."]
+                  "examples": [
+                    "¡Hola Misty! Quisiera consultar por sus prendas y conocer el catálogo."
+                  ]
                 },
                 "wholesale": {
                   "type": "string",
@@ -488,7 +531,9 @@
                   "x-group": "Comercial",
                   "x-widget": "textarea",
                   "x-exampleData": true,
-                  "examples": ["¡Hola Misty! Me interesa solicitar la lista de precios mayorista y el catálogo en PDF."]
+                  "examples": [
+                    "¡Hola Misty! Me interesa solicitar la lista de precios mayorista y el catálogo en PDF."
+                  ]
                 },
                 "retail": {
                   "type": "string",
@@ -507,7 +552,10 @@
           "title": "Instagram",
           "description": "Usuario y enlace de la cuenta.",
           "x-group": "Contacto",
-          "required": ["handle", "url"],
+          "required": [
+            "handle",
+            "url"
+          ],
           "properties": {
             "handle": {
               "type": "string",
@@ -516,7 +564,9 @@
               "x-group": "Contacto",
               "x-widget": "text",
               "x-exampleData": true,
-              "examples": ["@misty.indumentaria"]
+              "examples": [
+                "@misty.indumentaria"
+              ]
             },
             "url": {
               "type": "string",
@@ -525,7 +575,9 @@
               "x-group": "Contacto",
               "x-widget": "url",
               "x-exampleData": true,
-              "examples": ["https://instagram.com/misty.indumentaria"]
+              "examples": [
+                "https://instagram.com/misty.indumentaria"
+              ]
             }
           }
         },
@@ -536,7 +588,9 @@
           "x-group": "Contacto",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["ventas@misty.com.ar"]
+          "examples": [
+            "ventas@misty.com.ar"
+          ]
         },
         "address": {
           "type": "object",
@@ -544,7 +598,9 @@
           "title": "Dirección",
           "description": "Showroom o local y enlace al mapa.",
           "x-group": "Contacto",
-          "required": ["full"],
+          "required": [
+            "full"
+          ],
           "properties": {
             "full": {
               "type": "string",
@@ -553,7 +609,9 @@
               "x-group": "Contacto",
               "x-widget": "text",
               "x-exampleData": true,
-              "examples": ["Av. Avellaneda 2840, Local 12"]
+              "examples": [
+                "Av. Avellaneda 2840, Local 12"
+              ]
             },
             "mapsUrl": {
               "type": "string",
@@ -562,7 +620,9 @@
               "x-group": "Contacto",
               "x-widget": "url",
               "x-exampleData": true,
-              "examples": ["https://maps.google.com/?q=Av.%20Avellaneda%202840%2C%20Local%2012%2C%20Flores%2C%20Buenos%20Aires"]
+              "examples": [
+                "https://maps.google.com/?q=Av.%20Avellaneda%202840%2C%20Local%2012%2C%20Flores%2C%20Buenos%20Aires"
+              ]
             },
             "city": {
               "type": "string",
@@ -571,7 +631,9 @@
               "x-group": "Contacto",
               "x-widget": "text",
               "x-exampleData": true,
-              "examples": ["Flores, Buenos Aires"]
+              "examples": [
+                "Flores, Buenos Aires"
+              ]
             },
             "transitInfo": {
               "type": "string",
@@ -588,7 +650,9 @@
           "title": "Horarios",
           "description": "Líneas de horario que se muestran en contacto y en el pie.",
           "x-group": "Contacto",
-          "required": ["lines"],
+          "required": [
+            "lines"
+          ],
           "properties": {
             "lines": {
               "type": "array",
@@ -597,7 +661,12 @@
               "x-group": "Contacto",
               "x-widget": "hours-list",
               "x-exampleData": true,
-              "examples": [["Lun a Vie: 08:00 a 17:00 hs", "Sábados: 08:30 a 13:30 hs"]],
+              "examples": [
+                [
+                  "Lun a Vie: 08:00 a 17:00 hs",
+                  "Sábados: 08:30 a 13:30 hs"
+                ]
+              ],
               "items": {
                 "type": "string",
                 "title": "Línea de horario",
@@ -632,7 +701,11 @@
       "title": "Navegación",
       "description": "Enlaces del encabezado y textos de los botones.",
       "x-group": "Textos",
-      "required": ["links", "ctaButtonText", "ctaButtonTextMobile"],
+      "required": [
+        "links",
+        "ctaButtonText",
+        "ctaButtonTextMobile"
+      ],
       "properties": {
         "links": {
           "type": "array",
@@ -643,7 +716,10 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["label", "href"],
+            "required": [
+              "label",
+              "href"
+            ],
             "properties": {
               "label": {
                 "type": "string",
@@ -652,7 +728,9 @@
                 "x-group": "Textos",
                 "x-widget": "text",
                 "x-exampleData": true,
-                "examples": ["Nosotros"]
+                "examples": [
+                  "Nosotros"
+                ]
               },
               "href": {
                 "type": "string",
@@ -668,19 +746,15 @@
           "type": "string",
           "title": "Botón de contacto (escritorio)",
           "description": "Texto del botón de WhatsApp en pantallas grandes.",
-          "x-group": "Textos",
-          "x-widget": "text",
-          "x-exampleData": true,
-          "examples": ["Escribinos por WhatsApp"]
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
         },
         "ctaButtonTextMobile": {
           "type": "string",
           "title": "Botón de contacto (celular)",
           "description": "Texto corto del mismo botón en el celular.",
-          "x-group": "Textos",
-          "x-widget": "text",
-          "x-exampleData": true,
-          "examples": ["WhatsApp"]
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
         }
       }
     },
@@ -698,7 +772,11 @@
           "x-group": "Textos",
           "x-widget": "list",
           "x-exampleData": true,
-          "examples": [["Envíos a todo el país por expreso y correo"]],
+          "examples": [
+            [
+              "Envíos a todo el país por expreso y correo"
+            ]
+          ],
           "items": {
             "type": "string",
             "title": "Frase",
@@ -706,6 +784,13 @@
             "x-group": "Textos",
             "x-widget": "text"
           }
+        },
+        "showroomText": {
+          "type": "string",
+          "title": "Texto del showroom en la cinta",
+          "description": "Usa {address} para insertar la dirección. Dejalo vacío para no mostrar ese ítem.",
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
         }
       }
     },
@@ -715,7 +800,15 @@
       "title": "Portada",
       "description": "Textos, imagen y botones de la primera sección.",
       "x-group": "Textos",
-      "required": ["eyebrowBadge", "headline", "subheadline", "backgroundImage", "primaryCta", "secondaryCta", "trustBadges"],
+      "required": [
+        "eyebrowBadge",
+        "headline",
+        "subheadline",
+        "backgroundImage",
+        "primaryCta",
+        "secondaryCta",
+        "trustBadges"
+      ],
       "properties": {
         "eyebrowBadge": {
           "type": "string",
@@ -724,7 +817,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Nueva Temporada · Mayorista & Minorista"]
+          "examples": [
+            "Nueva Temporada · Mayorista & Minorista"
+          ]
         },
         "headline": {
           "type": "string",
@@ -733,7 +828,9 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Moda versátil que acompaña tu ritmo de vida"]
+          "examples": [
+            "Moda versátil que acompaña tu ritmo de vida"
+          ]
         },
         "subheadline": {
           "type": "string",
@@ -742,38 +839,43 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Prendas contemporáneas con excelente relación precio–calidad. Diseñadas para renovar tu guardarropa y potenciar tu negocio o estilo diario."]
+          "examples": [
+            "Prendas contemporáneas con excelente relación precio–calidad. Diseñadas para renovar tu guardarropa y potenciar tu negocio o estilo diario."
+          ]
         },
-        "backgroundImage": { "$ref": "#/definitions/heroImage" },
+        "backgroundImage": {
+          "$ref": "#/definitions/heroImage"
+        },
         "primaryCta": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["label"],
+          "required": [
+            "label"
+          ],
           "properties": {
             "label": {
               "type": "string",
               "title": "Botón principal",
               "description": "Texto del botón de WhatsApp en la portada.",
-              "x-group": "Textos",
-              "x-widget": "text",
-              "x-exampleData": true,
-              "examples": ["Escribinos por WhatsApp"]
+              "x-group": "Textos de interfaz",
+              "x-widget": "text"
             }
           }
         },
         "secondaryCta": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["label", "targetSectionId"],
+          "required": [
+            "label",
+            "targetSectionId"
+          ],
           "properties": {
             "label": {
               "type": "string",
               "title": "Botón secundario",
               "description": "Texto del segundo botón de la portada.",
-              "x-group": "Textos",
-              "x-widget": "text",
-              "x-exampleData": true,
-              "examples": ["Conocé la marca"]
+              "x-group": "Textos de interfaz",
+              "x-widget": "text"
             },
             "targetSectionId": {
               "type": "string",
@@ -793,7 +895,11 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["id", "iconType", "label"],
+            "required": [
+              "id",
+              "iconType",
+              "label"
+            ],
             "properties": {
               "id": {
                 "type": "string",
@@ -804,7 +910,11 @@
               },
               "iconType": {
                 "type": "string",
-                "enum": ["support", "shipping", "check"],
+                "enum": [
+                  "support",
+                  "shipping",
+                  "check"
+                ],
                 "title": "Ícono",
                 "description": "Dibujo del sello: atención, envío o tilde.",
                 "x-group": "Textos",
@@ -817,7 +927,9 @@
                 "x-group": "Textos",
                 "x-widget": "text",
                 "x-exampleData": true,
-                "examples": ["Atención personalizada"]
+                "examples": [
+                  "Atención personalizada"
+                ]
               }
             }
           }
@@ -830,7 +942,11 @@
       "title": "Franja mayorista",
       "description": "Barra entre la portada y la sección de la marca.",
       "x-group": "Comercial",
-      "required": ["title", "subtitle", "buttonText"],
+      "required": [
+        "title",
+        "subtitle",
+        "buttonText"
+      ],
       "properties": {
         "title": {
           "type": "string",
@@ -839,7 +955,9 @@
           "x-group": "Comercial",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Venta por mayor y por menor sin intermediarios"]
+          "examples": [
+            "Venta por mayor y por menor sin intermediarios"
+          ]
         },
         "subtitle": {
           "type": "string",
@@ -848,16 +966,24 @@
           "x-group": "Comercial",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Llevá curvas completas para tu comercio o tus prendas favoritas por unidad."]
+          "examples": [
+            "Llevá curvas completas para tu comercio o tus prendas favoritas por unidad."
+          ]
         },
         "buttonText": {
           "type": "string",
           "title": "Botón de la franja",
           "description": "Texto del botón que abre WhatsApp mayorista.",
-          "x-group": "Comercial",
-          "x-widget": "text",
-          "x-exampleData": true,
-          "examples": ["Pedir Lista Mayorista (PDF)"]
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "Mostrar la barra mayorista rápida",
+          "description": "Si se desactiva, la barra no se muestra.",
+          "x-group": "Secciones",
+          "x-widget": "boolean",
+          "default": true
         }
       }
     },
@@ -867,7 +993,14 @@
       "title": "Nuestra esencia",
       "description": "Textos, fotos y pilares de la marca.",
       "x-group": "Textos",
-      "required": ["eyebrow", "title", "description", "look1", "look2", "pillars"],
+      "required": [
+        "eyebrow",
+        "title",
+        "description",
+        "look1",
+        "look2",
+        "pillars"
+      ],
       "properties": {
         "eyebrow": {
           "type": "string",
@@ -876,7 +1009,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Nuestra Esencia"]
+          "examples": [
+            "Nuestra Esencia"
+          ]
         },
         "title": {
           "type": "string",
@@ -885,7 +1020,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Diseño actual para todos los días"]
+          "examples": [
+            "Diseño actual para todos los días"
+          ]
         },
         "description": {
           "type": "string",
@@ -894,10 +1031,16 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Creemos en una moda simple, auténtica y pensada para acompañar tu día a día. Creamos prendas actuales, cómodas y bien confeccionadas, con una buena relación entre calidad y precio, para que renovar tu guardarropa sea fácil y accesible."]
+          "examples": [
+            "Creemos en una moda simple, auténtica y pensada para acompañar tu día a día. Creamos prendas actuales, cómodas y bien confeccionadas, con una buena relación entre calidad y precio, para que renovar tu guardarropa sea fácil y accesible."
+          ]
         },
-        "look1": { "$ref": "#/definitions/lookImage" },
-        "look2": { "$ref": "#/definitions/lookImage" },
+        "look1": {
+          "$ref": "#/definitions/lookImage"
+        },
+        "look2": {
+          "$ref": "#/definitions/lookImage"
+        },
         "pillars": {
           "type": "array",
           "title": "Pilares",
@@ -907,7 +1050,12 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["id", "title", "description", "iconType"],
+            "required": [
+              "id",
+              "title",
+              "description",
+              "iconType"
+            ],
             "properties": {
               "id": {
                 "type": "string",
@@ -923,7 +1071,9 @@
                 "x-group": "Textos",
                 "x-widget": "text",
                 "x-exampleData": true,
-                "examples": ["Tendencias reales"]
+                "examples": [
+                  "Tendencias reales"
+                ]
               },
               "description": {
                 "type": "string",
@@ -932,11 +1082,17 @@
                 "x-group": "Textos",
                 "x-widget": "textarea",
                 "x-exampleData": true,
-                "examples": ["Siluetas modernas concebidas para la mujer real. Una fusión equilibrada entre elegancia casual, versatilidad diurna y comodidad total."]
+                "examples": [
+                  "Siluetas modernas concebidas para la mujer real. Una fusión equilibrada entre elegancia casual, versatilidad diurna y comodidad total."
+                ]
               },
               "iconType": {
                 "type": "string",
-                "enum": ["palette", "precision", "groups"],
+                "enum": [
+                  "palette",
+                  "precision",
+                  "groups"
+                ],
                 "title": "Ícono",
                 "description": "Dibujo del pilar.",
                 "x-group": "Textos",
@@ -953,7 +1109,12 @@
       "title": "Proceso de compra",
       "description": "Los tres pasos para comprar.",
       "x-group": "Textos",
-      "required": ["eyebrowBadge", "title", "subtitle", "steps"],
+      "required": [
+        "eyebrowBadge",
+        "title",
+        "subtitle",
+        "steps"
+      ],
       "properties": {
         "eyebrowBadge": {
           "type": "string",
@@ -962,7 +1123,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Experiencia Ágil"]
+          "examples": [
+            "Experiencia Ágil"
+          ]
         },
         "title": {
           "type": "string",
@@ -971,7 +1134,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Comprar en Misty es simple y directo"]
+          "examples": [
+            "Comprar en Misty es simple y directo"
+          ]
         },
         "subtitle": {
           "type": "string",
@@ -980,7 +1145,9 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Sin registros eternos ni procesos engorrosos. Coordinamos todo persona a persona."]
+          "examples": [
+            "Sin registros eternos ni procesos engorrosos. Coordinamos todo persona a persona."
+          ]
         },
         "steps": {
           "type": "array",
@@ -991,7 +1158,12 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["number", "title", "description", "iconType"],
+            "required": [
+              "number",
+              "title",
+              "description",
+              "iconType"
+            ],
             "properties": {
               "number": {
                 "type": "string",
@@ -1007,7 +1179,9 @@
                 "x-group": "Textos",
                 "x-widget": "text",
                 "x-exampleData": true,
-                "examples": ["Elegí tus prendas"]
+                "examples": [
+                  "Elegí tus prendas"
+                ]
               },
               "description": {
                 "type": "string",
@@ -1016,11 +1190,17 @@
                 "x-group": "Textos",
                 "x-widget": "textarea",
                 "x-exampleData": true,
-                "examples": ["Mirá nuestro lookbook y solicitá el catálogo digital con stock actualizado al instante en WhatsApp."]
+                "examples": [
+                  "Mirá nuestro lookbook y solicitá el catálogo digital con stock actualizado al instante en WhatsApp."
+                ]
               },
               "iconType": {
                 "type": "string",
-                "enum": ["book", "chat", "mail"],
+                "enum": [
+                  "book",
+                  "chat",
+                  "mail"
+                ],
                 "title": "Ícono",
                 "description": "Dibujo del paso.",
                 "x-group": "Textos",
@@ -1037,7 +1217,15 @@
       "title": "Sección de contacto",
       "description": "Textos de las tarjetas de WhatsApp, Instagram, showroom y mapa.",
       "x-group": "Textos",
-      "required": ["eyebrowBadge", "title", "subtitle", "whatsappCard", "instagramCard", "showroomCard", "mapCallout"],
+      "required": [
+        "eyebrowBadge",
+        "title",
+        "subtitle",
+        "whatsappCard",
+        "instagramCard",
+        "showroomCard",
+        "mapCallout"
+      ],
       "properties": {
         "eyebrowBadge": {
           "type": "string",
@@ -1046,7 +1234,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Canales de Atención"]
+          "examples": [
+            "Canales de Atención"
+          ]
         },
         "title": {
           "type": "string",
@@ -1055,7 +1245,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Estamos cerca tuyo"]
+          "examples": [
+            "Estamos cerca tuyo"
+          ]
         },
         "subtitle": {
           "type": "string",
@@ -1064,15 +1256,27 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Contactanos a través del medio que más cómodo te resulte. Estamos a un mensaje de distancia para resolver dudas, pasar presupuestos y tomar pedidos."]
+          "examples": [
+            "Contactanos a través del medio que más cómodo te resulte. Estamos a un mensaje de distancia para resolver dudas, pasar presupuestos y tomar pedidos."
+          ]
         },
-        "whatsappCard": { "$ref": "#/definitions/actionCard" },
-        "instagramCard": { "$ref": "#/definitions/instagramCard" },
-        "showroomCard": { "$ref": "#/definitions/showroomCard" },
+        "whatsappCard": {
+          "$ref": "#/definitions/actionCard"
+        },
+        "instagramCard": {
+          "$ref": "#/definitions/instagramCard"
+        },
+        "showroomCard": {
+          "$ref": "#/definitions/showroomCard"
+        },
         "mapCallout": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["eyebrow", "description", "buttonText"],
+          "required": [
+            "eyebrow",
+            "description",
+            "buttonText"
+          ],
           "properties": {
             "eyebrow": {
               "type": "string",
@@ -1081,7 +1285,9 @@
               "x-group": "Textos",
               "x-widget": "text",
               "x-exampleData": true,
-              "examples": ["Ubicación Estratégica"]
+              "examples": [
+                "Ubicación Estratégica"
+              ]
             },
             "description": {
               "type": "string",
@@ -1090,16 +1296,16 @@
               "x-group": "Textos",
               "x-widget": "textarea",
               "x-exampleData": true,
-              "examples": ["Fácil acceso en colectivos y subte Línea A. Estacionamiento comercial disponible en la zona."]
+              "examples": [
+                "Fácil acceso en colectivos y subte Línea A. Estacionamiento comercial disponible en la zona."
+              ]
             },
             "buttonText": {
               "type": "string",
               "title": "Botón del mapa",
               "description": "Texto del botón que abre Google Maps.",
-              "x-group": "Textos",
-              "x-widget": "text",
-              "x-exampleData": true,
-              "examples": ["Abrir en Google Maps"]
+              "x-group": "Textos de interfaz",
+              "x-widget": "text"
             }
           }
         },
@@ -1110,7 +1316,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Showroom en el corazón textil de Flores"]
+          "examples": [
+            "Showroom en el corazón textil de Flores"
+          ]
         }
       }
     },
@@ -1120,7 +1328,12 @@
       "title": "Llamado mayorista",
       "description": "Bloque final para comercios y revendedoras.",
       "x-group": "Comercial",
-      "required": ["badge", "title", "description", "buttonText"],
+      "required": [
+        "badge",
+        "title",
+        "description",
+        "buttonText"
+      ],
       "properties": {
         "badge": {
           "type": "string",
@@ -1129,7 +1342,9 @@
           "x-group": "Comercial",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Canal Exclusivo para Emprendedoras"]
+          "examples": [
+            "Canal Exclusivo para Emprendedoras"
+          ]
         },
         "title": {
           "type": "string",
@@ -1138,7 +1353,9 @@
           "x-group": "Comercial",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["¿Tenés local o vendés online?"]
+          "examples": [
+            "¿Tenés local o vendés online?"
+          ]
         },
         "description": {
           "type": "string",
@@ -1147,16 +1364,24 @@
           "x-group": "Comercial",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Consultá hoy mismo por WhatsApp para recibir la lista de precios mayorista actualizada, condiciones de compra mínima por bulto y el catálogo en PDF para empezar a vender de inmediato."]
+          "examples": [
+            "Consultá hoy mismo por WhatsApp para recibir la lista de precios mayorista actualizada, condiciones de compra mínima por bulto y el catálogo en PDF para empezar a vender de inmediato."
+          ]
         },
         "buttonText": {
           "type": "string",
           "title": "Botón",
           "description": "Texto del botón de catálogo mayorista.",
-          "x-group": "Comercial",
-          "x-widget": "text",
-          "x-exampleData": true,
-          "examples": ["Solicitar Catálogo Mayorista"]
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
+        },
+        "enabled": {
+          "type": "boolean",
+          "title": "Mostrar el llamado mayorista",
+          "description": "Si se desactiva, el bloque no se muestra.",
+          "x-group": "Secciones",
+          "x-widget": "boolean",
+          "default": true
         }
       }
     },
@@ -1174,7 +1399,8 @@
         "legalTitle",
         "legalNotice",
         "copyrightText",
-        "variantTag"
+        "variantTag",
+        "whatsappLabel"
       ],
       "properties": {
         "brandDescription": {
@@ -1184,7 +1410,9 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Indumentaria femenina con identidad contemporánea, disponible para pedidos por menor y curvas mayoristas."]
+          "examples": [
+            "Indumentaria femenina con identidad contemporánea, disponible para pedidos por menor y curvas mayoristas."
+          ]
         },
         "trustBadge": {
           "type": "string",
@@ -1193,34 +1421,30 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Canal Mayorista & Minorista"]
+          "examples": [
+            "Canal Mayorista & Minorista"
+          ]
         },
         "showroomTitle": {
           "type": "string",
           "title": "Título de showroom",
           "description": "Título de la columna de dirección y horarios.",
-          "x-group": "Textos",
-          "x-widget": "text",
-          "x-exampleData": true,
-          "examples": ["Atención & Showroom"]
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
         },
         "channelsTitle": {
           "type": "string",
           "title": "Título de canales",
           "description": "Título de la columna de Instagram, WhatsApp y correo.",
-          "x-group": "Textos",
-          "x-widget": "text",
-          "x-exampleData": true,
-          "examples": ["Contacto Directo"]
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
         },
         "legalTitle": {
           "type": "string",
           "title": "Título legal",
           "description": "Título de la columna legal.",
-          "x-group": "Textos",
-          "x-widget": "text",
-          "x-exampleData": true,
-          "examples": ["Información Legal"]
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
         },
         "legalNotice": {
           "type": "string",
@@ -1229,7 +1453,9 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Este sitio web corresponde a una demostración institucional con fines conceptuales y de portfolio. Toda marca y productos referenciados forman parte de un prototipo de diseño."]
+          "examples": [
+            "Este sitio web corresponde a una demostración institucional con fines conceptuales y de portfolio. Toda marca y productos referenciados forman parte de un prototipo de diseño."
+          ]
         },
         "copyrightText": {
           "type": "string",
@@ -1238,7 +1464,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["© 2026 Misty Indumentaria. Todos los derechos reservados."]
+          "examples": [
+            "© 2026 Misty Indumentaria. Todos los derechos reservados."
+          ]
         },
         "demonstrationDisclaimer": {
           "type": "string",
@@ -1247,7 +1475,9 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Marca, productos y precios de ejemplo — prototipo de demostración"]
+          "examples": [
+            "Marca, productos y precios de ejemplo — prototipo de demostración"
+          ]
         },
         "variantTag": {
           "type": "string",
@@ -1256,7 +1486,87 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Variante A · Editorial Lookbook · Diseño y Desarrollo de Arquitectura Web Frontend"]
+          "examples": [
+            "Variante A · Editorial Lookbook · Diseño y Desarrollo de Arquitectura Web Frontend"
+          ]
+        },
+        "whatsappLabel": {
+          "type": "string",
+          "title": "Texto del enlace de WhatsApp",
+          "description": "Dejalo vacío para ocultar el enlace de WhatsApp del pie.",
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Textos de interfaz y accesibilidad",
+      "description": "Textos que no pertenecen a una sección concreta: etiquetas accesibles y el botón flotante de WhatsApp.",
+      "x-group": "Textos de interfaz",
+      "required": [
+        "menuLabel",
+        "logoLabel",
+        "whatsappFloating"
+      ],
+      "properties": {
+        "menuLabel": {
+          "type": "string",
+          "title": "Etiqueta accesible del botón de menú",
+          "description": "Lo leen los lectores de pantalla en el botón de menú del celular.",
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
+        },
+        "logoLabel": {
+          "type": "string",
+          "title": "Etiqueta accesible del logo",
+          "description": "Usa {name} para insertar el nombre de la marca.",
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
+        },
+        "whatsappFloating": {
+          "type": "object",
+          "additionalProperties": false,
+          "title": "Botón flotante de WhatsApp",
+          "description": "Botón fijo en la esquina inferior derecha.",
+          "x-group": "Textos de interfaz",
+          "required": [
+            "tooltip",
+            "closeTooltipLabel",
+            "buttonLabel"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "title": "Mostrar el botón flotante",
+              "description": "Si se desactiva, el botón no se muestra.",
+              "x-group": "Textos de interfaz",
+              "x-widget": "boolean",
+              "default": true
+            },
+            "tooltip": {
+              "type": "string",
+              "title": "Mensaje junto al botón",
+              "description": "Dejalo vacío para no mostrar el mensaje.",
+              "x-group": "Textos de interfaz",
+              "x-widget": "text"
+            },
+            "closeTooltipLabel": {
+              "type": "string",
+              "title": "Etiqueta accesible para cerrar el mensaje",
+              "description": "Lo leen los lectores de pantalla.",
+              "x-group": "Textos de interfaz",
+              "x-widget": "text"
+            },
+            "buttonLabel": {
+              "type": "string",
+              "title": "Etiqueta accesible del botón",
+              "description": "Lo leen los lectores de pantalla.",
+              "x-group": "Textos de interfaz",
+              "x-widget": "text"
+            }
+          }
         }
       }
     }
@@ -1267,7 +1577,12 @@
       "additionalProperties": false,
       "title": "Imagen de portada",
       "description": "Foto de fondo de la primera pantalla.",
-      "required": ["src", "alt", "width", "height"],
+      "required": [
+        "src",
+        "alt",
+        "width",
+        "height"
+      ],
       "properties": {
         "src": {
           "type": "string",
@@ -1275,12 +1590,10 @@
           "description": "Foto horizontal de al menos 1280 px de ancho.",
           "x-group": "Imágenes",
           "x-widget": "image",
-          "x-exampleData": true,
-          "examples": ["/assets/hero/hero-1.jpg"],
           "x-asset": {
             "path": "public/assets/hero/hero-1.jpg",
             "minWidth": 1280,
-            "ratio": "1376:768",
+            "ratio": 1.792,
             "maxKB": 250
           }
         },
@@ -1298,7 +1611,9 @@
           "x-group": "Imágenes",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Editorial lookbook de campaña con modelos en showroom contemporáneo"]
+          "examples": [
+            "Editorial lookbook de campaña con modelos en showroom contemporáneo"
+          ]
         },
         "width": {
           "type": "integer",
@@ -1321,7 +1636,12 @@
       "additionalProperties": false,
       "title": "Foto de look",
       "description": "Retrato vertical de la sección de esencia. Mínimo 800 px de ancho.",
-      "required": ["src", "alt", "width", "height"],
+      "required": [
+        "src",
+        "alt",
+        "width",
+        "height"
+      ],
       "properties": {
         "src": {
           "type": "string",
@@ -1329,12 +1649,10 @@
           "description": "Retrato vertical de al menos 800 px de ancho.",
           "x-group": "Imágenes",
           "x-widget": "image",
-          "x-exampleData": true,
-          "examples": ["/assets/misc/sobre-marca-1.jpg"],
           "x-asset": {
             "path": "public/assets/misc/sobre-marca-1.jpg",
             "minWidth": 800,
-            "ratio": "896:1200",
+            "ratio": 0.747,
             "maxKB": 180
           }
         },
@@ -1352,7 +1670,9 @@
           "x-group": "Imágenes",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Modelo luciendo blazer terracota elegante y top neutro"]
+          "examples": [
+            "Modelo luciendo blazer terracota elegante y top neutro"
+          ]
         },
         "width": {
           "type": "integer",
@@ -1375,7 +1695,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Look 01 · Sastrería Relajada"]
+          "examples": [
+            "Look 01 · Sastrería Relajada"
+          ]
         },
         "badgeTitle": {
           "type": "string",
@@ -1384,14 +1706,21 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Lino & Gabardina Premium"]
+          "examples": [
+            "Lino & Gabardina Premium"
+          ]
         }
       }
     },
     "actionCard": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["badge", "title", "description", "buttonText"],
+      "required": [
+        "badge",
+        "title",
+        "description",
+        "buttonText"
+      ],
       "properties": {
         "badge": {
           "type": "string",
@@ -1400,7 +1729,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Canal Principal"]
+          "examples": [
+            "Canal Principal"
+          ]
         },
         "title": {
           "type": "string",
@@ -1409,7 +1740,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["WhatsApp Directo"]
+          "examples": [
+            "WhatsApp Directo"
+          ]
         },
         "description": {
           "type": "string",
@@ -1418,23 +1751,25 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Atención inmediata para listas de precios, consultas mayoristas y pedidos minoristas."]
+          "examples": [
+            "Atención inmediata para listas de precios, consultas mayoristas y pedidos minoristas."
+          ]
         },
         "buttonText": {
           "type": "string",
           "title": "Botón de la tarjeta",
           "description": "Texto del botón de WhatsApp.",
-          "x-group": "Textos",
-          "x-widget": "text",
-          "x-exampleData": true,
-          "examples": ["Chatear con asesoras"]
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
         }
       }
     },
     "instagramCard": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["title"],
+      "required": [
+        "title"
+      ],
       "properties": {
         "title": {
           "type": "string",
@@ -1443,7 +1778,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Instagram Oficial"]
+          "examples": [
+            "Instagram Oficial"
+          ]
         },
         "badge": {
           "type": "string",
@@ -1452,7 +1789,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Comunidad Activa"]
+          "examples": [
+            "Comunidad Activa"
+          ]
         },
         "description": {
           "type": "string",
@@ -1461,23 +1800,27 @@
           "x-group": "Textos",
           "x-widget": "textarea",
           "x-exampleData": true,
-          "examples": ["Mirá las prendas en movimiento, looks cotidianos, reviews de clientas y novedades semanales."]
+          "examples": [
+            "Mirá las prendas en movimiento, looks cotidianos, reviews de clientas y novedades semanales."
+          ]
         },
         "buttonText": {
           "type": "string",
           "title": "Botón de Instagram",
           "description": "Texto del botón que abre Instagram.",
-          "x-group": "Textos",
-          "x-widget": "text",
-          "x-exampleData": true,
-          "examples": ["Ver comunidad & novedades"]
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
         }
       }
     },
     "showroomCard": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["title", "hoursLabel"],
+      "required": [
+        "title",
+        "hoursLabel",
+        "mapLabel"
+      ],
       "properties": {
         "title": {
           "type": "string",
@@ -1486,7 +1829,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Showroom Comercial"]
+          "examples": [
+            "Showroom Comercial"
+          ]
         },
         "hoursLabel": {
           "type": "string",
@@ -1495,7 +1840,9 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Horarios de Atención:"]
+          "examples": [
+            "Horarios de Atención:"
+          ]
         },
         "badge": {
           "type": "string",
@@ -1504,16 +1851,23 @@
           "x-group": "Textos",
           "x-widget": "text",
           "x-exampleData": true,
-          "examples": ["Punto de Venta"]
+          "examples": [
+            "Punto de Venta"
+          ]
         },
         "buttonText": {
           "type": "string",
           "title": "Botón de cómo llegar",
           "description": "Texto del botón de la tarjeta de showroom.",
-          "x-group": "Textos",
-          "x-widget": "text",
-          "x-exampleData": true,
-          "examples": ["Cómo llegar"]
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
+        },
+        "mapLabel": {
+          "type": "string",
+          "title": "Descripción accesible del mapa",
+          "description": "Usa {name} para insertar el nombre de la marca.",
+          "x-group": "Textos de interfaz",
+          "x-widget": "text"
         }
       }
     }
