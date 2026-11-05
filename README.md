@@ -112,6 +112,10 @@ El SVG del logo es opcional: hoy no existe public/assets/logo/logo.svg y el siti
 
 ## Datos, validación y pruebas
 
+### Anotación x-role
+
+`x-role` identifica el campo que el editor debe reemplazar al cambiar la marca: `brandName` es obligatorio y único; `brandShortName` y `legalName` son opcionales y únicos. El campo debe ser `type: string`, estar fuera de arrays, tener `x-exampleData: true` y `examples` con el nombre del prototipo.
+
 ### Formato de x-asset
 
 `x-asset` describe el archivo que el editor web puede recortar, comprimir y guardar.

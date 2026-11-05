@@ -77,6 +77,7 @@
           "description": "Nombre que se muestra en el logo, el título de la página y los avisos.",
           "x-group": "Marca",
           "x-widget": "text",
+          "x-role": "brandName",
           "x-exampleData": true,
           "examples": [
             "Misty"

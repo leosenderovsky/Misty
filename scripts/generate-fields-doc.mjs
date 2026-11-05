@@ -63,6 +63,7 @@ function traverse(node, currentPath = '') {
               title: prop.title || '',
               description: prop.description || '',
               widget: prop['x-widget'] || 'list',
+              role: prop['x-role'] || '',
               asset: formatAsset(prop['x-asset']),
               example: formatExample(prop.examples?.[0]),
             });
@@ -73,6 +74,7 @@ function traverse(node, currentPath = '') {
             title: prop.title || '',
             description: prop.description || '',
             widget: prop['x-widget'] || 'list',
+            role: prop['x-role'] || '',
             asset: formatAsset(prop['x-asset']),
             example: formatExample(prop.examples?.[0]),
           });
@@ -88,6 +90,7 @@ function traverse(node, currentPath = '') {
           title: prop.title || '',
           description: prop.description || '',
           widget: prop['x-widget'] || (prop.type === 'boolean' ? 'boolean' : prop.type === 'number' || prop.type === 'integer' ? 'number' : 'text'),
+          role: prop['x-role'] || '',
           asset: formatAsset(prop['x-asset']),
           example: formatExample(prop.examples?.[0]),
         });
@@ -100,14 +103,14 @@ traverse(schema);
 
 let md = '# Diccionario de Campos Editables\n\n';
 md += 'Este documento lista todos los campos editables del archivo `src/data/brand.json` definidos en `src/data/brand.schema.json`.\n\n';
-md += '| Ruta | Título | Descripción | Widget | Asset | Ejemplo |\n';
-md += '|---|---|---|---|---|---|\n';
+md += '| Ruta | Título | Descripción | Widget | Rol | Asset | Ejemplo |\n';
+md += '|---|---|---|---|---|---|---|\n';
 
 for (const row of rows) {
   const safeDesc = row.description.replaceAll('|', '\\|').replaceAll('\n', ' ');
   const safeTitle = row.title.replaceAll('|', '\\|').replaceAll('\n', ' ');
   const safeAsset = row.asset.replaceAll('|', '\\|');
-  md += `| \`${row.path}\` | ${safeTitle} | ${safeDesc} | \`${row.widget}\` | ${safeAsset} | ${row.example} |\n`;
+  md += `| \`${row.path}\` | ${safeTitle} | ${safeDesc} | \`${row.widget}\` | ${row.role ? `\`${row.role}\`` : ''} | ${safeAsset} | ${row.example} |\n`;
 }
 
 await writeFile(outputPath, md, 'utf8');

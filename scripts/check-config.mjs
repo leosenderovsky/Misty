@@ -28,6 +28,9 @@ function contrastRatio(hex1, hex2) {
 
 const errors = [];
 const warnings = [];
+const validRoles = new Set(['brandName', 'brandShortName', 'legalName']);
+const roleCounts = new Map();
+const roleFields = [];
 const validAssetKeys = new Set(['path', 'minWidth', 'maxWidth', 'ratio', 'ratios', 'ratioTolerance', 'maxKB']);
 const ratioPattern = /^\d+:\d+$/;
 const cropRequiredPaths = new Set([
@@ -70,6 +73,27 @@ function validateAsset(asset, schemaLabel, fieldPath) {
   if (cropRequiredPaths.has(fieldPath) && !('ratio' in asset) && !('ratios' in asset)) errors.push(`${prefix}: falta ratio o ratios para una imagen recortable`);
 }
 
+function inspectRoles(node, schemaLabel, currentPath = '', insideArray = false) {
+  if (!node || typeof node !== 'object') return;
+  if (Object.hasOwn(node, 'x-role')) {
+    const role = node['x-role'];
+    const prefix = `${schemaLabel} ${currentPath || '/'}`;
+    if (!validRoles.has(role)) {
+      errors.push(`${prefix}: x-role inválido '${role}' (valores permitidos: brandName, brandShortName, legalName)`);
+    } else {
+      roleCounts.set(role, (roleCounts.get(role) || 0) + 1);
+      roleFields.push({ role, schemaLabel, fieldPath: currentPath || '/', node });
+      if (node.type !== 'string') errors.push(`${prefix}: un campo con x-role requiere type string`);
+      if (insideArray) errors.push(`${prefix}: x-role no puede estar dentro de un array`);
+      if (node['x-exampleData'] !== true) errors.push(`${prefix}: un campo con x-role requiere x-exampleData: true`);
+      if (!Array.isArray(node.examples) || node.examples.length === 0 || typeof node.examples[0] !== 'string' || !node.examples[0]) errors.push(`${prefix}: un campo con x-role requiere examples con el nombre del prototipo`);
+    }
+  }
+  for (const [key, child] of Object.entries(node.properties || {})) inspectRoles(child, schemaLabel, currentPath ? `${currentPath}.${key}` : key, insideArray);
+  if (node.definitions && currentPath === '') for (const [name, definition] of Object.entries(node.definitions)) inspectRoles(definition, schemaLabel, `definitions.${name}`, insideArray);
+  if (node.items) inspectRoles(node.items, schemaLabel, `${currentPath}[]`, true);
+}
+
 function inspectSchema(node, schemaLabel, currentPath = '') {
   if (!node || typeof node !== 'object') return;
   if (Object.hasOwn(node, 'x-asset')) validateAsset(node['x-asset'], schemaLabel, currentPath || '/');
@@ -90,9 +114,28 @@ const jsonFiles = files.filter((f) => f.endsWith('.json') && !f.endsWith('.schem
 const schemaFiles = await findSchemaFiles(dataDir);
 for (const schemaFile of schemaFiles) {
   try {
-    inspectSchema(JSON.parse(await readFile(schemaFile.absolutePath, 'utf8')), `src/data/${schemaFile.relativePath}`);
+    const schema = JSON.parse(await readFile(schemaFile.absolutePath, 'utf8'));
+    const schemaLabel = `src/data/${schemaFile.relativePath}`;
+    inspectSchema(schema, schemaLabel);
+    inspectRoles(schema, schemaLabel);
+    if (/^(catalog|size-guide)\.schema\.json$/.test(path.basename(schemaFile.relativePath))) {
+      for (const roleField of roleFields.filter(({ schemaLabel: fieldSchema }) => fieldSchema === schemaLabel)) errors.push(`${schemaLabel} ${roleField.fieldPath}: x-role no está permitido en este esquema`);
+    }
   } catch (err) {
     errors.push(`${schemaFile.relativePath}: no se pudo validar x-asset: ${err.message}`);
+  }
+}
+
+for (const role of ['brandName', 'brandShortName', 'legalName']) {
+  const count = roleCounts.get(role) || 0;
+  if (role === 'brandName' && count === 0) errors.push('src/data: falta exactamente un campo con x-role brandName');
+  if (count > 1) errors.push(`src/data: x-role ${role} aparece ${count} veces; solo se permite una`);
+}
+
+const brandNameExample = roleFields.find(({ role }) => role === 'brandName')?.node?.examples?.[0];
+if (typeof brandNameExample === 'string' && brandNameExample) {
+  for (const { role, schemaLabel, fieldPath, node } of roleFields) {
+    if ((role === 'brandShortName' || role === 'legalName') && node.examples?.[0]?.toLowerCase().includes(brandNameExample.toLowerCase()) && node['x-exampleData'] !== true) errors.push(`${schemaLabel} ${fieldPath}: contiene el nombre del prototipo y requiere x-exampleData: true`);
   }
 }
 
