@@ -36,9 +36,21 @@ export type IconoApple = string;
  * Descripción breve del logo para accesibilidad. Suele ser el nombre de la marca.
  */
 export type TextoAlternativoDelLogo = string;
+/**
+ * Distancia desde el borde izquierdo del logo original hasta el inicio del recorte, en píxeles.
+ */
 export type Izquierda = number;
+/**
+ * Distancia desde el borde superior del logo original hasta el inicio del recorte, en píxeles.
+ */
 export type Arriba = number;
+/**
+ * Ancho del recorte dentro del logo original, medido en píxeles.
+ */
 export type Ancho = number;
+/**
+ * Alto del recorte dentro del logo original, medido en píxeles.
+ */
 export type Alto = number;
 /**
  * Texto que acompaña al nombre de la marca en la pestaña del navegador y en redes.
