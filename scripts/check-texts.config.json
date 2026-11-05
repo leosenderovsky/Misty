@@ -1,0 +1,48 @@
+{
+  "excludeFiles": [
+    "src/demoBanner.config.ts",
+    "src/generated/brand.types.ts"
+  ],
+  "usedByTooling": [
+    {
+      "path": "identity.name",
+      "reason": "vite.config.ts usa el nombre para construir el título compilado y los valores de entorno de demostración."
+    },
+    {
+      "path": "seo.titleSuffix",
+      "reason": "vite.config.ts agrega este sufijo al título del documento durante la compilación."
+    },
+    {
+      "path": "seo.description",
+      "reason": "vite.config.ts inserta esta descripción en los metadatos HTML durante la compilación."
+    },
+    {
+      "path": "seo.socialImage",
+      "reason": "vite.config.ts usa esta imagen para las etiquetas sociales del index.html."
+    },
+    {
+      "path": "logo.favicon32",
+      "reason": "vite.config.ts e index.html usan este favicon."
+    },
+    {
+      "path": "logo.appleTouchIcon",
+      "reason": "vite.config.ts e index.html usan este ícono de Apple."
+    },
+    {
+      "path": "logo.src",
+      "reason": "scripts/make-icons.mjs y scripts/check-icons.mjs consumen el logo original."
+    },
+    {
+      "path": "theme.surface",
+      "reason": "scripts/make-icons.mjs y scripts/check-icons.mjs usan el color de fondo para generar y validar íconos."
+    },
+    {
+      "path": "typography.stylesheetUrl",
+      "reason": "vite.config.ts e index.html usan la hoja de tipografías."
+    },
+    {
+      "path": "hero.backgroundImage.src",
+      "reason": "vite.config.ts usa la imagen de portada como respaldo de los metadatos sociales."
+    }
+  ]
+}
