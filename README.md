@@ -112,6 +112,21 @@ El SVG del logo es opcional: hoy no existe public/assets/logo/logo.svg y el siti
 
 ## Datos, validación y pruebas
 
+### Formato de x-asset
+
+`x-asset` describe el archivo que el editor web puede recortar, comprimir y guardar.
+
+| Clave | Tipo | Uso |
+|---|---|---|
+| `path` | texto | Ruta de destino obligatoria; admite `{id}`. |
+| `minWidth`, `maxWidth` | número | Ancho mínimo y máximo en píxeles. |
+| `ratio` | `W:H` | Proporción única con enteros. |
+| `ratios` | lista de `W:H` | Proporciones alternativas. |
+| `ratioTolerance` | número | Diferencia absoluta admitida; por defecto `0.02`. |
+| `maxKB` | número | Peso máximo en KB. |
+
+`ratio` y `ratios` son excluyentes. Las imágenes que el editor deba recortar deben declarar una de las dos; si la proporción es libre, se omite la clave.
+
 | Comando | Para qué sirve |
 |---|---|
 | `npm run generate:types` | Genera `src/generated/brand.types.ts` desde `brand.schema.json` (corre solo en `dev` y `build`; el archivo se commitea). |

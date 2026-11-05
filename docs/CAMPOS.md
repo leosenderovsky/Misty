@@ -10,16 +10,16 @@ Este documento lista todos los campos editables del archivo `src/data/brand.json
 | `identity.name` | Nombre de la marca | Nombre que se muestra en el logo, el título de la página y los avisos. | `text` |  | Misty |
 | `identity.niche` | Rubro | Frase corta que describe el negocio (por ejemplo, venta mayorista y minorista). | `text` |  | Venta Mayorista y Minorista |
 | `logo.src` | Archivo del logo | Ruta pública del logo en PNG con fondo transparente. | `image` | path: public/assets/logo/logo.png, minWidth: 190px, maxKB: 120KB |  |
-| `logo.favicon32` | Favicon | Ícono de 32 × 32 píxeles que aparece en la pestaña del navegador. | `image` | path: public/assets/logo/favicon-32.png, minWidth: 32px, ratio: 1, maxKB: 20KB |  |
-| `logo.appleTouchIcon` | Ícono Apple | Ícono de 180 × 180 píxeles, opaco, para dispositivos Apple. | `image` | path: public/assets/logo/apple-touch-icon.png, minWidth: 180px, ratio: 1, maxKB: 40KB |  |
+| `logo.favicon32` | Favicon | Ícono de 32 × 32 píxeles que aparece en la pestaña del navegador. | `image` | path: public/assets/logo/favicon-32.png, minWidth: 32px, ratio: 1:1, maxKB: 20KB |  |
+| `logo.appleTouchIcon` | Ícono Apple | Ícono de 180 × 180 píxeles, opaco, para dispositivos Apple. | `image` | path: public/assets/logo/apple-touch-icon.png, minWidth: 180px, ratio: 1:1, maxKB: 40KB |  |
 | `logo.alt` | Texto alternativo del logo | Descripción breve del logo para accesibilidad. Suele ser el nombre de la marca. | `text` |  | Misty |
-| `logo.iconCrop.left` | Izquierda |  | `number` |  |  |
-| `logo.iconCrop.top` | Arriba |  | `number` |  |  |
-| `logo.iconCrop.width` | Ancho |  | `number` |  |  |
-| `logo.iconCrop.height` | Alto |  | `number` |  |  |
+| `logo.iconCrop.left` | Izquierda | Distancia desde el borde izquierdo del logo original hasta el inicio del recorte, en píxeles. | `number` |  |  |
+| `logo.iconCrop.top` | Arriba | Distancia desde el borde superior del logo original hasta el inicio del recorte, en píxeles. | `number` |  |  |
+| `logo.iconCrop.width` | Ancho | Ancho del recorte dentro del logo original, medido en píxeles. | `number` |  |  |
+| `logo.iconCrop.height` | Alto | Alto del recorte dentro del logo original, medido en píxeles. | `number` |  |  |
 | `seo.titleSuffix` | Sufijo del título | Texto que acompaña al nombre de la marca en la pestaña del navegador y en redes. | `text` |  | Indumentaria Femenina & Showroom |
 | `seo.description` | Descripción | Resumen que aparece en buscadores y al compartir el enlace. | `textarea` |  | Prendas modernas diseñadas para acompañar tu rutina con telas de excelente textura, confección minuciosa y la calidez de un trato persona a persona. Showroom Flores y envíos a todo el país. |
-| `seo.socialImage` | Imagen para redes | Imagen de 1200 × 630 píxeles que se muestra al compartir el sitio. | `image` | path: public/assets/misc/og-image.jpg, minWidth: 1200px, ratio: 1.905, maxKB: 200KB |  |
+| `seo.socialImage` | Imagen para redes | Imagen de 1200 × 630 píxeles que se muestra al compartir el sitio. | `image` | path: public/assets/misc/og-image.jpg, minWidth: 1200px, ratio: 1200:630, maxKB: 200KB |  |
 | `typography.headingFont` | Fuente de títulos | Familia tipográfica para títulos (por ejemplo, Playfair Display, serif). | `text` |  |  |
 | `typography.bodyFont` | Fuente de texto | Familia tipográfica para párrafos y botones. | `text` |  |  |
 | `typography.stylesheetUrl` | Hoja de fuentes | URL de Google Fonts u otra hoja que carga las tipografías. | `url` |  |  |
@@ -63,7 +63,7 @@ Este documento lista todos los campos editables del archivo `src/data/brand.json
 | `hero.eyebrowBadge` | Etiqueta superior | Texto chico encima del título de la portada. | `text` |  | Nueva Temporada · Mayorista & Minorista |
 | `hero.headline` | Título de portada | Título principal de la primera pantalla. | `textarea` |  | Moda versátil que acompaña tu ritmo de vida |
 | `hero.subheadline` | Bajada de portada | Párrafo de apoyo debajo del título. | `textarea` |  | Prendas contemporáneas con excelente relación precio–calidad. Diseñadas para renovar tu guardarropa y potenciar tu negocio o estilo diario. |
-| `hero.backgroundImage.src` | Archivo de portada | Foto horizontal de al menos 1280 px de ancho. | `image` | path: public/assets/hero/hero-1.jpg, minWidth: 1280px, ratio: 1.792, maxKB: 250KB |  |
+| `hero.backgroundImage.src` | Archivo de portada | Foto horizontal de al menos 1280 px de ancho. | `image` | path: public/assets/hero/hero-1.jpg, minWidth: 1280px, ratio: 16:9, maxKB: 250KB |  |
 | `hero.backgroundImage.fallback` | Imagen de respaldo | Foto alternativa si no carga la de portada. | `image` |  |  |
 | `hero.backgroundImage.alt` | Texto alternativo | Descripción de la foto de portada. | `text` |  | Editorial lookbook de campaña con modelos en showroom contemporáneo |
 | `hero.backgroundImage.width` | Ancho en píxeles | Ancho real del archivo, para que la página reserve el espacio. | `number` |  |  |
@@ -81,14 +81,14 @@ Este documento lista todos los campos editables del archivo `src/data/brand.json
 | `essenceSection.eyebrow` | Etiqueta de la sección | Texto chico encima del título. | `text` |  | Nuestra Esencia |
 | `essenceSection.title` | Título de la sección | Título de la presentación de la marca. | `text` |  | Diseño actual para todos los días |
 | `essenceSection.description` | Descripción | Párrafo que presenta a la marca. | `textarea` |  | Creemos en una moda simple, auténtica y pensada para acompañar tu día a día. Creamos prendas actuales, cómodas y bien confeccionadas, con una buena relación entre calidad y precio, para que renovar tu guardarropa sea fácil y accesible. |
-| `essenceSection.look1.src` | Archivo de la foto | Retrato vertical de al menos 800 px de ancho. | `image` | path: public/assets/misc/sobre-marca-1.jpg, minWidth: 800px, ratio: 0.747, maxKB: 180KB |  |
+| `essenceSection.look1.src` | Archivo de la foto | Retrato vertical de al menos 800 px de ancho. | `image` | path: public/assets/misc/sobre-marca-1.jpg, minWidth: 800px, ratio: 3:4, maxKB: 180KB |  |
 | `essenceSection.look1.fallback` | Imagen de respaldo | Foto alternativa si no carga la principal. | `image` |  |  |
 | `essenceSection.look1.alt` | Texto alternativo | Descripción de la foto. | `text` |  | Modelo luciendo blazer terracota elegante y top neutro |
 | `essenceSection.look1.width` | Ancho en píxeles | Ancho real del archivo. | `number` |  |  |
 | `essenceSection.look1.height` | Alto en píxeles | Alto real del archivo. | `number` |  |  |
 | `essenceSection.look1.badgeCategory` | Etiqueta sobre la foto | Texto chico superpuesto (categoría del look). | `text` |  | Look 01 · Sastrería Relajada |
 | `essenceSection.look1.badgeTitle` | Título sobre la foto | Texto superpuesto más destacado. | `text` |  | Lino & Gabardina Premium |
-| `essenceSection.look2.src` | Archivo de la foto | Retrato vertical de al menos 800 px de ancho. | `image` | path: public/assets/misc/sobre-marca-1.jpg, minWidth: 800px, ratio: 0.747, maxKB: 180KB |  |
+| `essenceSection.look2.src` | Archivo de la foto | Retrato vertical de al menos 800 px de ancho. | `image` | path: public/assets/misc/sobre-marca-1.jpg, minWidth: 800px, ratio: 3:4, maxKB: 180KB |  |
 | `essenceSection.look2.fallback` | Imagen de respaldo | Foto alternativa si no carga la principal. | `image` |  |  |
 | `essenceSection.look2.alt` | Texto alternativo | Descripción de la foto. | `text` |  | Modelo luciendo blazer terracota elegante y top neutro |
 | `essenceSection.look2.width` | Ancho en píxeles | Ancho real del archivo. | `number` |  |  |

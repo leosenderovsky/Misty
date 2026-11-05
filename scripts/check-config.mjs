@@ -28,6 +28,55 @@ function contrastRatio(hex1, hex2) {
 
 const errors = [];
 const warnings = [];
+const validAssetKeys = new Set(['path', 'minWidth', 'maxWidth', 'ratio', 'ratios', 'ratioTolerance', 'maxKB']);
+const ratioPattern = /^\d+:\d+$/;
+const cropRequiredPaths = new Set([
+  'logo.favicon32',
+  'logo.appleTouchIcon',
+  'seo.socialImage',
+  'definitions.heroImage.src',
+  'definitions.lookImage.src',
+]);
+
+async function findSchemaFiles(directory, relativeDirectory = '') {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const result = [];
+  for (const entry of entries) {
+    const absolutePath = path.join(directory, entry.name);
+    const relativePath = path.join(relativeDirectory, entry.name);
+    if (entry.isDirectory()) result.push(...(await findSchemaFiles(absolutePath, relativePath)));
+    else if (entry.isFile() && entry.name.endsWith('.schema.json')) result.push({ absolutePath, relativePath: relativePath.replaceAll('\\', '/') });
+  }
+  return result;
+}
+
+function validateAsset(asset, schemaLabel, fieldPath) {
+  const prefix = `${schemaLabel} ${fieldPath}`;
+  if (!asset || typeof asset !== 'object' || Array.isArray(asset)) {
+    errors.push(`${prefix}: x-asset debe ser un objeto`);
+    return;
+  }
+  for (const key of Object.keys(asset)) {
+    if (!validAssetKeys.has(key)) errors.push(`${prefix}: clave x-asset no permitida '${key}'`);
+  }
+  if (typeof asset.path !== 'string' || asset.path.length === 0) errors.push(`${prefix}: falta path obligatorio`);
+  if ('ratio' in asset && (typeof asset.ratio !== 'string' || !ratioPattern.test(asset.ratio))) errors.push(`${prefix}.ratio: debe ser texto con formato W:H (por ejemplo, 16:9)`);
+  if ('ratios' in asset && (!Array.isArray(asset.ratios) || asset.ratios.some((ratio) => typeof ratio !== 'string' || !ratioPattern.test(ratio)))) errors.push(`${prefix}.ratios: debe ser una lista de proporciones con formato W:H`);
+  if ('ratio' in asset && 'ratios' in asset) errors.push(`${prefix}: ratio y ratios son excluyentes`);
+  if ('ratioTolerance' in asset && (typeof asset.ratioTolerance !== 'number' || !Number.isFinite(asset.ratioTolerance) || asset.ratioTolerance < 0)) errors.push(`${prefix}.ratioTolerance: debe ser un número mayor o igual que 0`);
+  for (const key of ['minWidth', 'maxWidth', 'maxKB']) {
+    if (key in asset && (typeof asset[key] !== 'number' || !Number.isFinite(asset[key]))) errors.push(`${prefix}.${key}: debe ser un número`);
+  }
+  if (cropRequiredPaths.has(fieldPath) && !('ratio' in asset) && !('ratios' in asset)) errors.push(`${prefix}: falta ratio o ratios para una imagen recortable`);
+}
+
+function inspectSchema(node, schemaLabel, currentPath = '') {
+  if (!node || typeof node !== 'object') return;
+  if (Object.hasOwn(node, 'x-asset')) validateAsset(node['x-asset'], schemaLabel, currentPath || '/');
+  for (const [key, child] of Object.entries(node.properties || {})) inspectSchema(child, schemaLabel, currentPath ? `${currentPath}.${key}` : key);
+  if (node.definitions && currentPath === '') for (const [name, definition] of Object.entries(node.definitions)) inspectSchema(definition, schemaLabel, `definitions.${name}`);
+  if (node.items) inspectSchema(node.items, schemaLabel, `${currentPath}[]`);
+}
 
 const ajv = new Ajv({ allErrors: true, strict: false });
 addFormats(ajv);
@@ -37,6 +86,15 @@ const markers = JSON.parse(markersRaw);
 
 const files = await readdir(dataDir);
 const jsonFiles = files.filter((f) => f.endsWith('.json') && !f.endsWith('.schema.json') && f !== 'prototype-markers.json');
+
+const schemaFiles = await findSchemaFiles(dataDir);
+for (const schemaFile of schemaFiles) {
+  try {
+    inspectSchema(JSON.parse(await readFile(schemaFile.absolutePath, 'utf8')), `src/data/${schemaFile.relativePath}`);
+  } catch (err) {
+    errors.push(`${schemaFile.relativePath}: no se pudo validar x-asset: ${err.message}`);
+  }
+}
 
 for (const file of jsonFiles) {
   const schemaFile = file.replace(/\.json$/, '.schema.json');
