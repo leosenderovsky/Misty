@@ -129,7 +129,10 @@ for (const schemaFile of schemaFiles) {
 for (const role of ['brandName', 'brandShortName', 'legalName']) {
   const count = roleCounts.get(role) || 0;
   if (role === 'brandName' && count === 0) errors.push('src/data: falta exactamente un campo con x-role brandName');
-  if (count > 1) errors.push(`src/data: x-role ${role} aparece ${count} veces; solo se permite una`);
+  if (count > 1) {
+    const paths = roleFields.filter((field) => field.role === role).map((field) => `${field.schemaLabel} ${field.fieldPath}`).join(', ');
+    errors.push(`src/data: x-role ${role} aparece ${count} veces; solo se permite una. Campos: ${paths}`);
+  }
 }
 
 const brandNameExample = roleFields.find(({ role }) => role === 'brandName')?.node?.examples?.[0];
