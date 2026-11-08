@@ -138,14 +138,18 @@ function collectBrandReferences(root, rel) {
       const reference = getBrandReference(node, aliases);
       if (reference !== undefined) {
         const normalized = normalizeBrandReference(reference);
-        addBrandReference(normalized, node, rel, isWholeObjectContext(node, parent, grandParent) && isObjectReference(normalized));
+        const complete = isWholeObjectContext(node, parent, grandParent) && isObjectReference(normalized);
+        if (!(rel === 'src/brand.config.ts' && complete)) addBrandReference(normalized, node, rel, complete);
         return;
       }
     } else if (node.type === 'Identifier') {
       const reference = getBrandReference(node, aliases);
       if (reference !== undefined && !((parent?.type === 'MemberExpression' || parent?.type === 'OptionalMemberExpression') && parent.property === node && !parent.computed)) {
         const complete = isWholeObjectContext(node, parent, grandParent) && isObjectReference(reference);
-        if (!['brandConfig', 'brandJson'].includes(node.name) || complete) addBrandReference(reference, node, rel, complete);
+        if (
+          (!['brandConfig', 'brandJson'].includes(node.name) || complete)
+          && !(rel === 'src/brand.config.ts' && complete)
+        ) addBrandReference(reference, node, rel, complete);
         return;
       }
     }

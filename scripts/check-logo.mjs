@@ -1,8 +1,10 @@
 import { readFile, stat } from 'node:fs/promises';
 import sharp from 'sharp';
 import { fileURLToPath } from 'node:url';
+import { brandConfig } from '../src/brand.config.ts';
+import { publicAssetPath } from './public-asset-path.mjs';
 
-const logoPath = fileURLToPath(new URL('../public/assets/logo/logo.svg', import.meta.url));
+const logoPath = publicAssetPath(brandConfig.logo.src.replace(/\.png$/i, '.svg'));
 const MAX_FILE_SIZE = 30 * 1024;
 const TEAL_REFERENCES = [
   { name: '#386878', rgb: [0x38, 0x68, 0x78] },

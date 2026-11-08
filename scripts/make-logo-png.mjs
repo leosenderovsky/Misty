@@ -1,9 +1,11 @@
 import { stat } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import sharp from 'sharp';
-import { fileURLToPath } from 'node:url';
+import { brandConfig } from '../src/brand.config.ts';
+import { publicAssetPath } from './public-asset-path.mjs';
 
-const svgPath = fileURLToPath(new URL('../public/assets/logo/logo.svg', import.meta.url));
+const logoPath = brandConfig.logo.src;
+const svgPath = publicAssetPath(logoPath.replace(/\.png$/i, '.svg'));
 try {
   await stat(svgPath);
 } catch (error) {
@@ -22,7 +24,7 @@ if (check.status !== 0) {
   process.exit(check.status ?? 1);
 }
 
-const pngPath = fileURLToPath(new URL('../public/assets/logo/logo.png', import.meta.url));
+const pngPath = publicAssetPath(logoPath);
 await sharp(svgPath)
   .resize(1600, 406, { fit: 'fill' })
   .png()

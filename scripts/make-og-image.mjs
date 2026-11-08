@@ -1,11 +1,11 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
-import { fileURLToPath } from 'node:url';
+import { brandConfig } from '../src/brand.config.ts';
+import { publicAssetPath } from './public-asset-path.mjs';
 
-const projectRoot = fileURLToPath(new URL('../', import.meta.url));
-const sourcePath = path.join(projectRoot, 'public/assets/hero/hero-1.jpg');
-const outputPath = path.join(projectRoot, 'public/assets/misc/og-image.jpg');
+const sourcePath = publicAssetPath(brandConfig.hero.backgroundImage.src);
+const outputPath = publicAssetPath(brandConfig.seo.socialImage);
 const maxBytes = 200 * 1024;
 await mkdir(path.dirname(outputPath), { recursive: true });
 

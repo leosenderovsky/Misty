@@ -2,11 +2,14 @@ import { copyFile, mkdir, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { brandConfig } from '../src/brand.config.ts';
+import { publicAssetPath } from './public-asset-path.mjs';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
-const relativePath = 'public/assets/logo/logo.png';
-const logoPath = path.join(projectRoot, relativePath);
-const originalPath = path.join(projectRoot, '.image-originals/assets/logo/logo.png');
+const assetPath = brandConfig.logo.src;
+const relativePath = path.join('public', assetPath.slice(1));
+const logoPath = publicAssetPath(assetPath);
+const originalPath = path.join(projectRoot, '.image-originals', assetPath.slice('/assets/'.length));
 const maxBytes = 120 * 1024;
 const maxWidth = 800;
 

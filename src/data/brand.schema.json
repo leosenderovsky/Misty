@@ -116,7 +116,7 @@
           "x-group": "Imágenes",
           "x-widget": "image",
           "x-asset": {
-            "path": "public/assets/logo/logo.png",
+            "path": "/assets/logo/logo.png",
             "minWidth": 190,
             "maxKB": 120
           }
@@ -128,7 +128,7 @@
           "x-group": "Imágenes",
           "x-widget": "image",
           "x-asset": {
-            "path": "public/assets/logo/favicon-32.png",
+            "path": "/assets/logo/favicon-32.png",
             "minWidth": 32,
             "ratio": "1:1",
             "maxKB": 20
@@ -141,7 +141,7 @@
           "x-group": "Imágenes",
           "x-widget": "image",
           "x-asset": {
-            "path": "public/assets/logo/apple-touch-icon.png",
+            "path": "/assets/logo/apple-touch-icon.png",
             "minWidth": 180,
             "ratio": "1:1",
             "maxKB": 40
@@ -248,7 +248,7 @@
           "x-group": "Imágenes",
           "x-widget": "image",
           "x-asset": {
-            "path": "public/assets/misc/og-image.jpg",
+            "path": "/assets/misc/og-image.jpg",
             "minWidth": 1200,
             "ratio": "1200:630",
             "maxKB": 200
@@ -1595,7 +1595,7 @@
           "x-group": "Imágenes",
           "x-widget": "image",
           "x-asset": {
-            "path": "public/assets/hero/hero-1.jpg",
+            "path": "/assets/hero/hero-1.jpg",
             "minWidth": 1280,
             "ratio": "16:9",
             "maxKB": 250
@@ -1654,7 +1654,7 @@
           "x-group": "Imágenes",
           "x-widget": "image",
           "x-asset": {
-            "path": "public/assets/misc/sobre-marca-1.jpg",
+            "path": "/assets/misc/{id}.jpg",
             "minWidth": 800,
             "ratio": "3:4",
             "maxKB": 180

@@ -1,11 +1,14 @@
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { fileURLToPath } from 'node:url';
 import { brandConfig } from '../src/brand.config.ts';
 import { generateIcons } from './make-icons.mjs';
+import { publicAssetPath } from './public-asset-path.mjs';
 
-const logoDirectory = new URL('../public/assets/logo/', import.meta.url);
-const logoPath = fileURLToPath(new URL('logo.png', logoDirectory));
+const logoPath = publicAssetPath(brandConfig.logo.src);
+const iconAssets = {
+  'favicon-32.png': brandConfig.logo.favicon32,
+  'apple-touch-icon.png': brandConfig.logo.appleTouchIcon,
+};
 const generatedIcons = await generateIcons();
 const backgroundMatch = /^#([0-9a-f]{6})$/i.exec(brandConfig.theme.surface);
 if (!backgroundMatch) {
@@ -15,7 +18,7 @@ const backgroundRgb = backgroundMatch[1].match(/.{2}/g).map((channel) => Number.
 let outdated = false;
 
 for (const [filename, generated] of Object.entries(generatedIcons)) {
-  const current = await readFile(fileURLToPath(new URL(filename, logoDirectory)));
+  const current = await readFile(publicAssetPath(iconAssets[filename]));
   if (!current.equals(generated)) outdated = true;
 }
 
@@ -140,7 +143,7 @@ async function validateManualIconCrop() {
 }
 
 async function validateIcon(filename, expectedSize, { requireOpaque = false } = {}) {
-  const iconPath = fileURLToPath(new URL(filename, logoDirectory));
+  const iconPath = publicAssetPath(iconAssets[filename]);
   const icon = sharp(iconPath);
   const metadata = await icon.metadata();
   if (metadata.width !== expectedSize || metadata.height !== expectedSize) {

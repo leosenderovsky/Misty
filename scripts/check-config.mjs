@@ -3,10 +3,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import { publicAssetPath } from './public-asset-path.mjs';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const dataDir = path.join(projectRoot, 'src/data');
-const publicDir = path.join(projectRoot, 'public');
 const strict = process.argv.includes('--strict');
 
 function relativeLuminance(hex) {
@@ -62,7 +62,11 @@ function validateAsset(asset, schemaLabel, fieldPath) {
   for (const key of Object.keys(asset)) {
     if (!validAssetKeys.has(key)) errors.push(`${prefix}: clave x-asset no permitida '${key}'`);
   }
-  if (typeof asset.path !== 'string' || asset.path.length === 0) errors.push(`${prefix}: falta path obligatorio`);
+  if (typeof asset.path !== 'string' || asset.path.length === 0) {
+    errors.push(`${prefix}: falta path obligatorio`);
+  } else if (!asset.path.startsWith('/') || asset.path.startsWith('/public/') || asset.path.startsWith('public/')) {
+    errors.push(`${prefix}.path: debe empezar con "/" y no con "public/": "${asset.path}"`);
+  }
   if ('ratio' in asset && (typeof asset.ratio !== 'string' || !ratioPattern.test(asset.ratio))) errors.push(`${prefix}.ratio: debe ser texto con formato W:H (por ejemplo, 16:9)`);
   if ('ratios' in asset && (!Array.isArray(asset.ratios) || asset.ratios.some((ratio) => typeof ratio !== 'string' || !ratioPattern.test(ratio)))) errors.push(`${prefix}.ratios: debe ser una lista de proporciones con formato W:H`);
   if ('ratio' in asset && 'ratios' in asset) errors.push(`${prefix}: ratio y ratios son excluyentes`);
@@ -165,16 +169,83 @@ for (const file of jsonFiles) {
     }
   }
 
+  async function checkAssets(schemaNode, dataNode, currentPath = '') {
+    if (!schemaNode || typeof schemaNode !== 'object') return;
+    if (schemaNode.$ref?.startsWith('#/definitions/')) {
+      const definition = schema.definitions?.[schemaNode.$ref.slice('#/definitions/'.length)];
+      await checkAssets(definition, dataNode, currentPath);
+      return;
+    }
+
+    const asset = schemaNode['x-asset'];
+    if (asset) {
+      const fieldPath = currentPath || '(raíz)';
+      const assetPath = asset.path;
+      if (
+        typeof assetPath !== 'string' ||
+        !assetPath.startsWith('/') ||
+        assetPath.startsWith('/public/') ||
+        assetPath.startsWith('public/')
+      ) {
+        errors.push(`${file} ${fieldPath}: x-asset.path debe empezar con "/" y no con "public/": "${assetPath}"`);
+        return;
+      }
+
+      const hasValue = typeof dataNode === 'string' && dataNode.trim() !== '';
+      if (hasValue) {
+        if (!assetPath.includes('{id}') && dataNode !== assetPath) {
+          errors.push(`${file} ${fieldPath}: el valor "${dataNode}" debe ser exactamente igual al path "${assetPath}"`);
+        }
+
+        const fileAssetPath = assetPath.includes('{id}') ? dataNode : assetPath;
+        if (!fileAssetPath.startsWith('/') || fileAssetPath.startsWith('/public/') || fileAssetPath.startsWith('public/')) {
+          errors.push(`${file} ${fieldPath}: la ruta del recurso debe empezar con "/" y no con "public/": "${fileAssetPath}"`);
+          return;
+        }
+        try {
+          const fileInfo = await stat(publicAssetPath(fileAssetPath));
+          if (!fileInfo.isFile()) {
+            errors.push(`${file} ${fieldPath}: no existe un archivo en public + "${fileAssetPath}"`);
+            return;
+          }
+          if (typeof asset.maxKB === 'number' && fileInfo.size > asset.maxKB * 1024) {
+            warnings.push(
+              `${file} ${fieldPath}: el archivo "${fileAssetPath}" pesa ${(fileInfo.size / 1024).toFixed(1)} KB `
+              + `(máximo recomendado: ${asset.maxKB} KB)`,
+            );
+          }
+        } catch (error) {
+          if (error.code !== 'ENOENT') throw error;
+          errors.push(`${file} ${fieldPath}: no existe el archivo en public + "${fileAssetPath}"`);
+        }
+      }
+      return;
+    }
+
+    if (Array.isArray(dataNode)) {
+      for (const [index, value] of dataNode.entries()) {
+        await checkAssets(schemaNode.items, value, `${currentPath}[${index}]`);
+      }
+      return;
+    }
+
+    if (!dataNode || typeof dataNode !== 'object') return;
+    for (const [key, childSchema] of Object.entries(schemaNode.properties || {})) {
+      await checkAssets(childSchema, dataNode[key], currentPath ? `${currentPath}.${key}` : key);
+    }
+  }
+  await checkAssets(schema, data);
+
   // Verificar imágenes referenciadas en public/
   async function checkImages(node, currentPath = '') {
     if (!node || typeof node !== 'object') return;
     for (const [key, value] of Object.entries(node)) {
       const fieldPath = currentPath ? `${currentPath}.${key}` : key;
       if (typeof value === 'string' && (value.startsWith('/assets/') || /\.(png|jpe?g|svg|webp|avif)$/i.test(value))) {
-        const publicPath = path.join(publicDir, value.startsWith('/') ? value.slice(1) : value);
         try {
-          await stat(publicPath);
-        } catch {
+          await stat(publicAssetPath(value.startsWith('/') ? value : `/${value}`));
+        } catch (error) {
+          if (error.code !== 'ENOENT') throw error;
           errors.push(`${file} ${fieldPath}: imagen no existe en public/: ${value}`);
         }
       } else if (typeof value === 'object' && value !== null) {

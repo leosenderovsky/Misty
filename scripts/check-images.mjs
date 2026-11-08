@@ -1,9 +1,9 @@
 import { readdir } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { publicAssetPath } from './public-asset-path.mjs';
 
-const assetsDirectory = fileURLToPath(new URL('../public/assets/', import.meta.url));
+const assetsDirectory = publicAssetPath('/assets');
 const strict = process.argv.includes('--strict');
 const imageExtensions = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif']);
 // The image generator delivers up to ~1376 px; a higher minimum requires upscaling.
